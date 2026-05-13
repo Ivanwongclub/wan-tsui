@@ -44,7 +44,7 @@ function Hero() {
               ].map(({ icon, label }) => (
                 <span
                   key={label}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 text-white text-[12px] font-semibold tracking-wide"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 text-white text-[12px] font-semibold tracking-[0.05em]"
                   style={{
                     background: "rgba(255,255,255,0.15)",
                     backdropFilter: "blur(8px)",
@@ -60,8 +60,8 @@ function Hero() {
 
             {/* H1 */}
             <h1
-              className="font-heading font-bold text-white mb-6 tracking-tight"
-              style={{ fontSize: "clamp(38px, 5.5vw, 64px)", lineHeight: 1.15 }}
+              className="font-heading font-bold text-white mb-6"
+              style={{ fontSize: "clamp(38px, 5.5vw, 64px)", lineHeight: 1.15, letterSpacing: "-0.01em" }}
             >
               家庭醫療
               <br />
@@ -88,8 +88,13 @@ function Hero() {
               </a>
               <a
                 href={`https://wa.me/${CLINIC.whatsapp}`}
-                className="text-white font-medium border-b border-white pb-0.5"
-                style={{ fontSize: "15px", textDecoration: "none" }}
+                className="inline-flex items-center text-white font-medium"
+                style={{
+                  fontSize: "15px",
+                  textDecoration: "none",
+                  padding: "14px 28px",
+                  borderBottom: "1px solid white",
+                }}
               >
                 WhatsApp 6801 5968
               </a>
@@ -205,7 +210,7 @@ function AboutPreview() {
         </div>
         <p
           className="font-heading leading-[1.55] text-brand-ink font-medium"
-          style={{ fontSize: "clamp(24px, 3vw, 32px)" }}
+          style={{ fontSize: "clamp(24px, 3vw, 32px)", letterSpacing: "0.01em" }}
         >
           服務柴灣街坊近<span className="text-brand-accent font-bold">二十年</span>。
           <br />
@@ -647,7 +652,7 @@ function PaymentCTA() {
         </div>
         <a
           href="/services"
-          className="bg-brand-accent text-white rounded-full inline-flex items-center gap-2 font-semibold whitespace-nowrap"
+          className="bg-brand-accent text-white rounded-full inline-flex items-center gap-3 font-semibold whitespace-nowrap"
           style={{ padding: "14px 28px", fontSize: "15px", textDecoration: "none" }}
         >
           查看接受卡別
