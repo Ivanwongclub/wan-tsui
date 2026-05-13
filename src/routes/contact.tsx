@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle, CreditCard, ShieldCheck } from "lucide-react";
-import { CLINIC, SCHEDULE } from "../content/wanTsui";
+import { CLINIC, SCHEDULE, UI_LABELS, type ContactRow } from "../content/wanTsui";
 import { PageHero } from "../components/PageHero";
 
 export const Route = createFileRoute("/contact")({
@@ -18,13 +18,6 @@ const DAY_INDEX_MAP: Record<string, number> = {
 };
 
 // ─── Contact Info ─────────────────────────────────────────────────────────────
-
-type ContactRow = {
-  label: string;
-  value: string;
-  href?: string;
-  whitespace?: boolean;
-};
 
 function ContactInfo() {
   const rows: ContactRow[] = [
@@ -58,7 +51,7 @@ function ContactInfo() {
             marginBottom: '32px',
           }}
         >
-          聯絡方式
+          {UI_LABELS.contact.infoEyebrow}
         </div>
 
         <div className="flex flex-col" style={{ gap: '24px', fontSize: '15px' }}>
@@ -112,7 +105,7 @@ function ContactInfo() {
             style={{ gap: '10px', padding: '16px 32px', fontSize: '15px', textDecoration: 'none' }}
           >
             <Phone size={16} />
-            立即致電
+            {UI_LABELS.cta.callNow}
           </a>
           <a
             href={`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent('你好，我想預約診症')}`}
@@ -125,7 +118,7 @@ function ContactInfo() {
             }}
           >
             <MessageCircle size={16} />
-            WhatsApp 預約
+            {UI_LABELS.cta.whatsapp}
           </a>
         </div>
       </div>
@@ -151,13 +144,13 @@ function HoursTable() {
             marginBottom: '24px',
           }}
         >
-          營業時間
+          {UI_LABELS.schedule.hoursEyebrow}
         </div>
         <h2
           className="font-heading font-bold text-brand-ink"
           style={{ fontSize: '24px', marginBottom: '32px' }}
         >
-          每週應診時間
+          {UI_LABELS.schedule.hoursHeading}
         </h2>
 
         <div className="overflow-x-auto">
@@ -167,7 +160,7 @@ function HoursTable() {
           >
             <thead>
               <tr className="bg-brand-primary-light">
-                {['日期', '上午 09:00–13:00', '下午 15:00–19:00'].map((col) => (
+                {[UI_LABELS.schedule.colDate, UI_LABELS.schedule.colAM, UI_LABELS.schedule.colPM].map((col) => (
                   <th
                     key={col}
                     className="text-left text-[11px] font-semibold text-brand-primary tracking-[0.15em] uppercase border-b border-brand-primary"
@@ -203,7 +196,7 @@ function HoursTable() {
                             verticalAlign: 'middle',
                           }}
                         >
-                          今日
+                          {UI_LABELS.schedule.todayBadge}
                         </span>
                       )}
                       {row.day}
@@ -228,7 +221,7 @@ function HoursTable() {
         </div>
 
         <p className="text-brand-body" style={{ marginTop: '16px', fontSize: '13px' }}>
-          午膳 13:00–15:00 暫停服務・星期日及公眾假期休診
+          {UI_LABELS.schedule.footerNote}
         </p>
       </div>
     </section>
@@ -244,15 +237,19 @@ function PaymentReminder() {
         <div className="flex justify-center items-center flex-wrap" style={{ gap: '32px' }}>
           <div className="flex items-center" style={{ gap: '8px' }}>
             <CreditCard size={20} className="text-brand-primary" />
-            <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>接受醫療卡</span>
+            <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
+              {UI_LABELS.trust.insurance}
+            </span>
           </div>
           <div className="flex items-center" style={{ gap: '8px' }}>
             <ShieldCheck size={20} className="text-brand-accent" />
-            <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>長者醫療券</span>
+            <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
+              {UI_LABELS.trust.voucher}
+            </span>
           </div>
         </div>
         <p className="text-brand-body" style={{ marginTop: '16px', fontSize: '15px' }}>
-          歡迎致電查詢接受之醫療卡種類及醫療券使用詳情
+          {UI_LABELS.contact.paymentDesc}
         </p>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CLINIC, DOCTORS, type Doctor } from "../content/wanTsui";
+import { CLINIC, DOCTORS, UI_LABELS, type Doctor } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
@@ -26,13 +26,13 @@ function ClinicIntro() {
             marginBottom: '24px',
           }}
         >
-          診所簡介
+          {UI_LABELS.about.introEyebrow}
         </div>
         <h2
           className="font-heading font-bold text-brand-ink leading-[1.2]"
           style={{ fontSize: 'clamp(32px, 4vw, 44px)', marginBottom: '32px' }}
         >
-          植根<span className="text-brand-accent">{CLINIC.tagline_tc}</span>
+          <span className="text-brand-accent">{CLINIC.tagline_tc}</span>
         </h2>
         <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8, marginBottom: '24px' }}>
           {CLINIC.intro[0]}
@@ -63,7 +63,7 @@ function DoctorProfiles() {
               marginBottom: '16px',
             }}
           >
-            醫生團隊
+            {UI_LABELS.doctors.eyebrow}
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2]"
@@ -73,10 +73,10 @@ function DoctorProfiles() {
               marginBottom: '16px',
             }}
           >
-            兩位普通科醫生
+            {UI_LABELS.doctors.headingAbout}
           </h2>
           <p className="text-brand-body" style={{ fontSize: '16px', lineHeight: 1.75 }}>
-            熟悉柴灣社區，與街坊建立長期醫患關係。
+            {UI_LABELS.doctors.tagline}
           </p>
         </div>
 
@@ -147,7 +147,7 @@ function DoctorProfiles() {
                         marginBottom: '4px',
                       }}
                     >
-                      學歷
+                      {UI_LABELS.doctors.fieldCreds}
                     </div>
                     <div>{doctor.creds}</div>
                   </div>
@@ -162,7 +162,7 @@ function DoctorProfiles() {
                         marginBottom: '4px',
                       }}
                     >
-                      專業範疇
+                      {UI_LABELS.doctors.fieldSpecialty}
                     </div>
                     <div>{doctor.specialty}</div>
                   </div>
@@ -177,7 +177,7 @@ function DoctorProfiles() {
                         marginBottom: '4px',
                       }}
                     >
-                      當值時段
+                      {UI_LABELS.doctors.fieldSchedule}
                     </div>
                     <div>{doctor.schedule_tc}</div>
                   </div>
@@ -212,7 +212,7 @@ function About() {
       <PageHero
         eyebrow="ABOUT US"
         title="關於我們"
-        subtitle="植根柴灣・服務社區"
+        subtitle={`${CLINIC.tagline_tc}・服務社區`}
       />
       <ClinicIntro />
       <DoctorProfiles />

@@ -25,6 +25,7 @@ export const CLINIC = {
   tagline_tc: '植根柴灣',
   hero_headline: ['家庭醫療', '植根柴灣'] as const,
   hero_subtitle: '由兩位註冊普通科醫生主理・三項政府資助計劃・接受多種醫療卡及長者醫療券。',
+  voucher_amount: 'HK$2,000',
   intro: [
     '環翠綜合醫務中心紮根柴灣近二十年，由兩位資深普通科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。',
     '本診所致力以專業、親切的態度服務社區，並積極參與政府各項醫療資助計劃，讓街坊能以可負擔的費用獲得優質醫療照顧。',
@@ -126,3 +127,92 @@ export const FOOTER_NAV = {
 export type Doctor = typeof DOCTORS[number];
 export type Service = typeof SERVICES[number];
 export type ScheduleRow = typeof SCHEDULE[number];
+
+export type ContactRow = {
+  label: string;
+  value: string;
+  href?: string;
+  whitespace?: boolean;
+};
+
+export const UI_LABELS = {
+  trust: {
+    insurance: '接受醫療卡',
+    voucher: '長者醫療券',
+    govScheme: '政府資助',
+    seniorOnly: '長者專享',
+    footerText: '三項政府資助計劃・歡迎街坊查詢',
+  },
+  trustBar: {
+    insuranceEyebrow: '醫療保險',
+    insuranceHeading: '接受醫療卡直付',
+    insuranceDesc: '本診所接受多種私營醫療保險公司之醫療卡直付，免除你即場墊支麻煩。',
+    insuranceTrail: '及其他公司・致電查詢',
+    voucherEyebrow: '政府資助',
+    voucherHeading: '長者醫療券抵扣',
+    voucherDescPre: '65歲或以上香港居民每年可獲',
+    voucherDescPost: '醫療券資助，可用於本診所所有服務。',
+    voucherCta: '了解使用方法',
+  },
+  cta: {
+    call: '致電預約',
+    callNow: '立即致電',
+    whatsapp: 'WhatsApp 預約',
+    viewDetails: '查看詳情 →',
+    viewCards: '查看接受卡別',
+  },
+  doctors: {
+    eyebrow: '醫生團隊',
+    heading: '認識我們的醫生',
+    headingAbout: '兩位普通科醫生',
+    tagline: '熟悉柴灣社區，與街坊建立長期醫患關係。',
+    fieldCreds: '學歷',
+    fieldSpecialty: '專業範疇',
+    fieldSchedule: '當值時段',
+  },
+  schedule: {
+    eyebrow: '本週值班',
+    heading: '醫生當值時間表',
+    hoursEyebrow: '營業時間',
+    hoursHeading: '每週應診時間',
+    colDate: '日期',
+    colAM: '上午 09:00–13:00',
+    colPM: '下午 15:00–19:00',
+    todayBadge: '今日',
+    lunchLabel: '午膳：',
+    lunchDetail: `每日 ${CLINIC.lunch_break} 暫停服務`,
+    adjustNote: '如有調動，致電查詢為準',
+    footerNote: `午膳 ${CLINIC.lunch_break} 暫停服務・星期日及公眾假期休診`,
+  },
+  home: {
+    aboutEyebrow: '關於環翠',
+    pullQuote: [
+      '服務柴灣街坊近',
+      '二十年',
+      '由兩位註冊普通科醫生主理日常診症及皮膚問題診治，',
+      '並提供三項政府資助計劃，讓街坊安心就醫。',
+    ] as const,
+    servicesEyebrow: '診所服務 / Services',
+    servicesHeading: '我們提供的服務',
+    servicesSubtitle: '兩個專科服務・三項政府資助計劃・接受長者醫療券。',
+    locationEyebrow: '到訪我們',
+    locationHeading: ['就在環翠邨', '港鐵站旁'] as const,
+    paymentEyebrow: '付款方式',
+    paymentHeading: ['接受醫療卡及長者醫療券', '免除墊支麻煩'] as const,
+  },
+  about: {
+    introEyebrow: '診所簡介',
+  },
+  services: {
+    ctaHeading: '歡迎致電預約・無須轉介',
+    ctaBody: '建議於就診前致電預約，以節省輪候時間。',
+  },
+  contact: {
+    infoEyebrow: '聯絡方式',
+    paymentDesc: '歡迎致電查詢接受之醫療卡種類及醫療券使用詳情',
+  },
+  footer: {
+    emergency: '緊急情況請致電',
+    emergencyNumber: '999',
+  },
+} as const;

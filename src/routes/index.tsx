@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CreditCard, ShieldCheck, ArrowRight, MapPin, Clock } from "lucide-react";
-import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, type Doctor, type Service } from "../content/wanTsui";
+import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, UI_LABELS, type Doctor, type Service, type ContactRow } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { ScheduleTable } from "../components/ScheduleTable";
 
@@ -45,8 +45,8 @@ function Hero() {
             {/* Trust badges */}
             <div className="flex gap-2.5 mb-8 flex-wrap">
               {[
-                { icon: <CreditCard size={14} />, label: "接受醫療卡" },
-                { icon: <ShieldCheck size={14} />, label: "長者醫療券" },
+                { icon: <CreditCard size={14} />, label: UI_LABELS.trust.insurance },
+                { icon: <ShieldCheck size={14} />, label: UI_LABELS.trust.voucher },
               ].map(({ icon, label }) => (
                 <span
                   key={label}
@@ -89,7 +89,7 @@ function Hero() {
                 className="bg-brand-primary text-white rounded-full inline-flex items-center gap-2.5 font-semibold"
                 style={{ padding: "16px 32px", fontSize: "15px", textDecoration: "none" }}
               >
-                致電預約
+                {UI_LABELS.cta.call}
                 <ArrowRight size={16} />
               </a>
               <a
@@ -147,15 +147,15 @@ function TrustBar() {
               <CreditCard size={28} className="text-brand-primary flex-shrink-0" />
               <div>
                 <div className="text-[11px] text-brand-primary tracking-[0.22em] uppercase font-semibold">
-                  醫療保險
+                  {UI_LABELS.trustBar.insuranceEyebrow}
                 </div>
                 <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1 leading-[1.2]">
-                  接受醫療卡直付
+                  {UI_LABELS.trustBar.insuranceHeading}
                 </h3>
               </div>
             </div>
             <p className="text-[15px] text-brand-body leading-[1.7] mb-5">
-              本診所接受多種私營醫療保險公司之醫療卡直付，免除你即場墊支麻煩。
+              {UI_LABELS.trustBar.insuranceDesc}
             </p>
             <div className="flex flex-wrap gap-2">
               {INSURANCE_PARTNERS.map((name) => (
@@ -167,7 +167,7 @@ function TrustBar() {
                 </span>
               ))}
               <span className="text-[12px] text-brand-muted py-1.5 px-1 italic">
-                及其他公司・致電查詢
+                {UI_LABELS.trustBar.insuranceTrail}
               </span>
             </div>
           </div>
@@ -178,24 +178,24 @@ function TrustBar() {
               <ShieldCheck size={28} className="text-brand-accent flex-shrink-0" />
               <div>
                 <div className="text-[11px] text-brand-accent tracking-[0.22em] uppercase font-semibold">
-                  政府資助
+                  {UI_LABELS.trustBar.voucherEyebrow}
                 </div>
                 <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1 leading-[1.2]">
-                  長者醫療券抵扣
+                  {UI_LABELS.trustBar.voucherHeading}
                 </h3>
               </div>
             </div>
             <p className="text-[15px] text-brand-body leading-[1.7] mb-5">
-              65歲或以上香港居民每年可獲
-              <strong className="text-brand-accent">HK$2,000</strong>
-              醫療券資助，可用於本診所所有服務。
+              {UI_LABELS.trustBar.voucherDescPre}
+              <strong className="text-brand-accent">{CLINIC.voucher_amount}</strong>
+              {UI_LABELS.trustBar.voucherDescPost}
             </p>
             <a
               href="#"
               className="inline-flex items-center gap-2 text-[13px] text-brand-primary font-semibold border-b border-brand-primary pb-1"
               style={{ textDecoration: "none" }}
             >
-              了解使用方法
+              {UI_LABELS.trustBar.voucherCta}
               <ArrowRight size={14} />
             </a>
           </div>
@@ -212,18 +212,18 @@ function AboutPreview() {
     <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
       <div className="max-w-[900px] mx-auto">
         <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-6">
-          關於環翠
+          {UI_LABELS.home.aboutEyebrow}
         </div>
         <p
           className="font-heading leading-[1.55] text-brand-ink font-medium"
           style={{ fontSize: "clamp(24px, 3vw, 32px)", letterSpacing: "0.01em" }}
         >
-          服務柴灣街坊近<span className="text-brand-accent font-bold">二十年</span>。
+          {UI_LABELS.home.pullQuote[0]}<span className="text-brand-accent font-bold">{UI_LABELS.home.pullQuote[1]}</span>。
           <br />
-          由兩位註冊普通科醫生主理日常診症及皮膚問題診治，
+          {UI_LABELS.home.pullQuote[2]}
           <br />
           <span className="text-brand-primary">
-            並提供三項政府資助計劃，讓街坊安心就醫。
+            {UI_LABELS.home.pullQuote[3]}
           </span>
         </p>
       </div>
@@ -241,16 +241,16 @@ function ServicesGrid() {
         <div className="flex justify-between items-end flex-wrap gap-6 mb-16">
           <div>
             <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
-              診所服務 / Services
+              {UI_LABELS.home.servicesEyebrow}
             </div>
             <h2
               className="font-heading font-bold text-brand-ink leading-[1.2]"
               style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
             >
-              我們提供的服務
+              {UI_LABELS.home.servicesHeading}
             </h2>
             <p className="text-[15px] text-brand-body leading-[1.75] mt-4 max-w-[520px]">
-              兩個專科服務・三項政府資助計劃・接受長者醫療券。
+              {UI_LABELS.home.servicesSubtitle}
             </p>
           </div>
           <Link
@@ -258,7 +258,7 @@ function ServicesGrid() {
             className="text-[14px] font-medium text-brand-ink border-b border-brand-ink pb-1"
             style={{ textDecoration: "none" }}
           >
-            查看詳情 →
+            {UI_LABELS.cta.viewDetails}
           </Link>
         </div>
 
@@ -292,7 +292,7 @@ function ServicesGrid() {
                     className="absolute bg-brand-primary text-white text-[10px] font-semibold tracking-[0.15em] uppercase"
                     style={{ top: "14px", left: "14px", padding: "5px 10px" }}
                   >
-                    政府資助
+                    {UI_LABELS.trust.govScheme}
                   </span>
                 )}
                 {service.voucher && (
@@ -300,7 +300,7 @@ function ServicesGrid() {
                     className="absolute bg-brand-accent text-white text-[10px] font-semibold tracking-[0.15em] uppercase"
                     style={{ top: "14px", left: "14px", padding: "5px 10px" }}
                   >
-                    長者專享
+                    {UI_LABELS.trust.seniorOnly}
                   </span>
                 )}
 
@@ -362,16 +362,16 @@ function Doctors() {
       <div className="max-w-[1320px] mx-auto">
         <div className="mb-16 max-w-[600px]">
           <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
-            醫生團隊
+            {UI_LABELS.doctors.eyebrow}
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2] mb-4"
             style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
           >
-            認識我們的醫生
+            {UI_LABELS.doctors.heading}
           </h2>
           <p className="text-[16px] text-brand-body leading-[1.75]">
-            熟悉柴灣社區，與街坊建立長期醫患關係。
+            {UI_LABELS.doctors.tagline}
           </p>
         </div>
 
@@ -418,19 +418,19 @@ function Doctors() {
                 <div className="flex flex-col gap-4 text-[14px] text-brand-body leading-[1.7]">
                   <div className="border-b border-brand-border pb-3.5">
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
-                      學歷
+                      {UI_LABELS.doctors.fieldCreds}
                     </div>
                     <div>{doctor.creds}</div>
                   </div>
                   <div className="border-b border-brand-border pb-3.5">
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
-                      專業範疇
+                      {UI_LABELS.doctors.fieldSpecialty}
                     </div>
                     <div>{doctor.specialty}</div>
                   </div>
                   <div>
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
-                      當值時段
+                      {UI_LABELS.doctors.fieldSchedule}
                     </div>
                     <div>{doctor.schedule_tc}</div>
                   </div>
@@ -447,13 +447,6 @@ function Doctors() {
 // ─── Section 6: Schedule Table (shared component) ────────────────────────────
 
 // ─── Section 7: Location ─────────────────────────────────────────────────────
-
-type ContactRow = {
-  label: string;
-  value: string;
-  href?: string;
-  whitespace?: boolean;
-};
 
 function Location() {
   const contactRows: ContactRow[] = [
@@ -474,15 +467,15 @@ function Location() {
         {/* Left — contact */}
         <div className="py-[120px] px-6 md:px-10 w-full md:max-w-[600px] md:justify-self-end">
           <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
-            到訪我們
+            {UI_LABELS.home.locationEyebrow}
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2] mb-8"
             style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
           >
-            就在<span className="text-brand-accent">環翠邨</span>
+            <span className="text-brand-accent">{UI_LABELS.home.locationHeading[0]}</span>
             <br />
-            港鐵站旁
+            {UI_LABELS.home.locationHeading[1]}
           </h2>
 
           <div className="flex flex-col gap-6 text-[15px]">
@@ -560,15 +553,15 @@ function PaymentCTA() {
             className="text-[12px] tracking-[0.22em] uppercase mb-5 inline-flex items-center gap-2.5 font-medium text-white/70"
           >
             <span className="text-brand-terra-light">●</span>
-            付款方式
+            {UI_LABELS.home.paymentEyebrow}
           </div>
           <h2
             className="font-heading font-bold text-white leading-[1.3]"
             style={{ fontSize: "clamp(28px, 3.5vw, 40px)", letterSpacing: "-0.01em" }}
           >
-            接受醫療卡及長者醫療券
+            {UI_LABELS.home.paymentHeading[0]}
             <br />
-            <span style={{ opacity: 0.7 }}>免除墊支麻煩</span>
+            <span style={{ opacity: 0.7 }}>{UI_LABELS.home.paymentHeading[1]}</span>
           </h2>
         </div>
         <a
@@ -576,7 +569,7 @@ function PaymentCTA() {
           className="bg-brand-accent text-white rounded-full inline-flex items-center gap-3 font-semibold whitespace-nowrap"
           style={{ padding: "14px 28px", fontSize: "15px", textDecoration: "none" }}
         >
-          查看接受卡別
+          {UI_LABELS.cta.viewCards}
           <ArrowRight size={16} />
         </a>
       </div>

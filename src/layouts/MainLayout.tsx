@@ -8,7 +8,7 @@ import {
   CreditCard,
   ShieldCheck,
 } from 'lucide-react';
-import { CLINIC, ANNOUNCEMENT, FOOTER_NAV } from '../content/wanTsui';
+import { CLINIC, ANNOUNCEMENT, FOOTER_NAV, UI_LABELS } from '../content/wanTsui';
 import { DS } from '../styles/designSystem';
 
 // ─── TopStrip ────────────────────────────────────────────────────────────────
@@ -293,19 +293,19 @@ function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <CreditCard size={20} className="text-brand-primary" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
-            接受醫療卡
+            {UI_LABELS.trust.insurance}
           </span>
         </div>
         <div className="h-5 w-px bg-brand-border" />
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <ShieldCheck size={20} className="text-brand-accent" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
-            長者醫療券
+            {UI_LABELS.trust.voucher}
           </span>
         </div>
         <div className="h-5 w-px bg-brand-border" />
         <span className="text-brand-body" style={{ fontSize: '13px' }}>
-          三項政府資助計劃・歡迎街坊查詢
+          {UI_LABELS.trust.footerText}
         </span>
       </div>
 
@@ -370,7 +370,7 @@ function Footer() {
             © {new Date().getFullYear()} {CLINIC.name_tc} {CLINIC.name_en}
           </span>
           <span className="text-brand-muted" style={{ fontSize: '12.5px' }}>
-            緊急情況請致電 <strong className="text-brand-accent">999</strong>
+            {UI_LABELS.footer.emergency} <strong className="text-brand-accent">{UI_LABELS.footer.emergencyNumber}</strong>
           </span>
         </div>
       </div>

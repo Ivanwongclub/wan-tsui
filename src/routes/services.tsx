@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle } from "lucide-react";
-import { CLINIC, SERVICES } from "../content/wanTsui";
+import { CLINIC, SERVICES, UI_LABELS, type Service } from "../content/wanTsui";
 import { IMAGES, ImageMeta, placeholderSvg } from "../lib/imageHelpers";
 import { PageHero } from "../components/PageHero";
 
@@ -15,7 +15,7 @@ function ServiceSection({
   index,
   image,
 }: {
-  service: typeof SERVICES[number];
+  service: Service;
   index: number;
   image: ImageMeta;
 }) {
@@ -52,7 +52,7 @@ function ServiceSection({
             textTransform: 'uppercase',
           }}
         >
-          政府資助
+          {UI_LABELS.trust.govScheme}
         </span>
       )}
       {service.voucher && (
@@ -68,7 +68,7 @@ function ServiceSection({
             textTransform: 'uppercase',
           }}
         >
-          長者專享
+          {UI_LABELS.trust.seniorOnly}
         </span>
       )}
       <div
@@ -176,10 +176,10 @@ function CTABand() {
           className="font-heading font-bold text-white"
           style={{ fontSize: '24px', marginBottom: '16px' }}
         >
-          歡迎致電預約・無須轉介
+          {UI_LABELS.services.ctaHeading}
         </h2>
         <p style={{ fontSize: '15px', opacity: 0.8, marginBottom: '32px' }}>
-          建議於就診前致電預約，以節省輪候時間。
+          {UI_LABELS.services.ctaBody}
         </p>
         <div className="flex justify-center flex-wrap" style={{ gap: '16px' }}>
           <a
@@ -201,7 +201,7 @@ function CTABand() {
             }}
           >
             <MessageCircle size={16} />
-            WhatsApp 預約
+            {UI_LABELS.cta.whatsapp}
           </a>
         </div>
       </div>
