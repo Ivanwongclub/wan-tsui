@@ -180,7 +180,7 @@ function HoursTable() {
                   <th
                     key={col}
                     className="text-left text-[11px] font-semibold text-brand-primary tracking-[0.15em] uppercase border-b border-brand-primary"
-                    style={{ padding: '20px 24px', textAlign: 'left' }}
+                    style={{ padding: '20px 24px' }}
                   >
                     {col}
                   </th>
