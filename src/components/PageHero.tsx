@@ -6,8 +6,19 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, subtitle }: PageHeroProps) {
   return (
-    <section className="bg-brand-primary text-white py-16 md:py-20 px-6 md:px-10">
-      <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
+    <section className="relative overflow-hidden bg-brand-primary text-white py-16 md:py-20 px-6 md:px-10">
+      {/* Dot pattern overlay */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)',
+          backgroundSize: '20px 20px',
+          pointerEvents: 'none',
+        }}
+      />
+      <div style={{ maxWidth: '1320px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div
           style={{
             fontSize: '12px',

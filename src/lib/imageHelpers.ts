@@ -6,7 +6,7 @@ export function placeholderSvg(label: string, color1 = '#065F46', color2 = '#044
         <stop offset="100%" stop-color="${color2}"/>
       </linearGradient>
       <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.15)"/>
+        <circle cx="2" cy="2" r="1" fill="white" fill-opacity="0.15"/>
       </pattern>
     </defs>
     <rect width="800" height="600" fill="url(#g)"/>
