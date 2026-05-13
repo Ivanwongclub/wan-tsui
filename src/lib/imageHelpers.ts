@@ -17,16 +17,16 @@ export function placeholderSvg(label: string, color1 = '#065F46', color2 = '#044
 }
 
 export const IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=1920&q=80',
-  doctor1: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80',
-  doctor2: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80',
-  location: 'https://images.unsplash.com/photo-1610847499832-918a1c3c6811?w=1200&q=80',
+  hero: '/images/hero-clinic.jpg',
+  doctor1: '/images/doctor-mak.jpg',
+  doctor2: '/images/doctor-lam.jpg',
+  location: '/images/location-chai-wan.jpg',
   services: [
-    'https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=800&q=80',
-    'https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=800&q=80',
-    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80',
-    'https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&q=80',
-    'https://images.unsplash.com/photo-1632053002780-3c5cd7be1d97?w=800&q=80',
-    'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&q=80',
+    '/images/service-general-practice.jpg',
+    '/images/service-dermatology.jpg',
+    '/images/service-colorectal-screening.jpg',
+    '/images/service-chronic-disease.jpg',
+    '/images/service-flu-vaccine.jpg',
+    '/images/service-voucher.jpg',
   ],
 };
