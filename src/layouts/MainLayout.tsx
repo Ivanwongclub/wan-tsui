@@ -69,7 +69,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         <Link to="/" style={{ textDecoration: 'none' }}>
           <div
             className="font-heading font-bold text-brand-ink"
-            style={{ fontSize: '20px', lineHeight: 1.2 }}
+            style={{ fontSize: '20px', lineHeight: 1, letterSpacing: '0.02em' }}
           >
             {CLINIC.name_tc}
           </div>
@@ -113,10 +113,11 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '10px',
               padding: '10px 20px',
               fontSize: '14px',
               fontWeight: 600,
+              letterSpacing: '0.02em',
               textDecoration: 'none',
             }}
           >
@@ -290,14 +291,14 @@ function Footer() {
           alignItems: 'center',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <CreditCard size={20} className="text-brand-primary" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
             接受醫療卡
           </span>
         </div>
         <div style={{ height: '20px', width: '1px', backgroundColor: '#E7E5E4' }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <ShieldCheck size={20} className="text-brand-accent" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
             長者醫療券

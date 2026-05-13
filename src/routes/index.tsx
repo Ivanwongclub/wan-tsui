@@ -70,8 +70,8 @@ function Hero() {
 
             {/* Subtitle */}
             <p
-              className="leading-relaxed mb-10 max-w-[480px]"
-              style={{ fontSize: "17px", color: "rgba(255,255,255,0.9)" }}
+              className="mb-10 max-w-[480px]"
+              style={{ fontSize: "17px", lineHeight: 1.75, color: "white", opacity: 0.92 }}
             >
               由兩位註冊普通科醫生主理・三項政府資助計劃・接受多種醫療卡及長者醫療券。
             </p>
@@ -80,7 +80,7 @@ function Hero() {
             <div className="flex gap-4 items-center flex-wrap">
               <a
                 href={`tel:${CLINIC.phone_tel}`}
-                className="bg-brand-primary text-white rounded-full inline-flex items-center gap-2 font-semibold"
+                className="bg-brand-primary text-white rounded-full inline-flex items-center gap-2.5 font-semibold"
                 style={{ padding: "16px 32px", fontSize: "15px", textDecoration: "none" }}
               >
                 致電預約
@@ -112,12 +112,12 @@ function Hero() {
             borderTop: "1px solid rgba(255,255,255,0.2)",
           }}
         >
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center items-start gap-2 md:gap-0 px-5 md:px-10 py-3.5 md:py-5 text-white text-[12px] md:text-[13px] tracking-wide">
-            <span className="inline-flex items-center gap-2" style={{ opacity: 0.9 }}>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center items-start gap-2 md:gap-0 px-5 md:px-10 py-3.5 md:py-5 text-white text-[12px] md:text-[13px] tracking-[0.05em]">
+            <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
               <MapPin size={14} />
               柴灣環翠邨環翠商場1樓109號舖
             </span>
-            <span className="inline-flex items-center gap-2" style={{ opacity: 0.9 }}>
+            <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
               <Clock size={14} />
               星期一至六 09:00–19:00
             </span>
@@ -143,12 +143,12 @@ function TrustBar() {
                 <div className="text-[11px] text-brand-primary tracking-[0.22em] uppercase font-semibold">
                   醫療保險
                 </div>
-                <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1">
+                <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1 leading-[1.2]">
                   接受醫療卡直付
                 </h3>
               </div>
             </div>
-            <p className="text-[15px] text-brand-body leading-relaxed mb-5">
+            <p className="text-[15px] text-brand-body leading-[1.7] mb-5">
               本診所接受多種私營醫療保險公司之醫療卡直付，免除你即場墊支麻煩。
             </p>
             <div className="flex flex-wrap gap-2">
@@ -174,12 +174,12 @@ function TrustBar() {
                 <div className="text-[11px] text-brand-accent tracking-[0.22em] uppercase font-semibold">
                   政府資助
                 </div>
-                <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1">
+                <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1 leading-[1.2]">
                   長者醫療券抵扣
                 </h3>
               </div>
             </div>
-            <p className="text-[15px] text-brand-body leading-relaxed mb-5">
+            <p className="text-[15px] text-brand-body leading-[1.7] mb-5">
               65歲或以上香港居民每年可獲
               <strong className="text-brand-accent">HK$2,000</strong>
               醫療券資助，可用於本診所所有服務。
@@ -239,7 +239,7 @@ function ServicesGrid() {
             </div>
             <h2
               className="font-heading font-bold text-brand-ink leading-[1.2]"
-              style={{ fontSize: "clamp(32px, 4vw, 44px)" }}
+              style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
             >
               我們提供的服務
             </h2>
@@ -249,7 +249,7 @@ function ServicesGrid() {
           </div>
           <Link
             to="/services"
-            className="text-[14px] text-brand-ink border-b border-brand-ink pb-1"
+            className="text-[14px] font-medium text-brand-ink border-b border-brand-ink pb-1"
             style={{ textDecoration: "none" }}
           >
             查看詳情 →
@@ -355,7 +355,7 @@ function Doctors() {
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2] mb-4"
-            style={{ fontSize: "clamp(32px, 4vw, 44px)" }}
+            style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
           >
             認識我們的醫生
           </h2>
@@ -382,7 +382,7 @@ function Doctors() {
                 />
                 <div
                   className="absolute bottom-4 left-4 font-heading font-bold italic leading-none select-none"
-                  style={{ fontSize: "36px", mixBlendMode: "overlay", opacity: 0.9 }}
+                  style={{ fontSize: "36px" }}
                 >
                   <span style={{ color: "#F4A57A" }}>0{i + 1}</span>
                 </div>
@@ -560,7 +560,7 @@ function Location() {
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2] mb-8"
-            style={{ fontSize: "clamp(32px, 4vw, 44px)" }}
+            style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
           >
             就在<span className="text-brand-accent">環翠邨</span>
             <br />
@@ -643,7 +643,7 @@ function PaymentCTA() {
           </div>
           <h2
             className="font-heading font-bold text-white leading-[1.3]"
-            style={{ fontSize: "clamp(28px, 3.5vw, 40px)" }}
+            style={{ fontSize: "clamp(28px, 3.5vw, 40px)", letterSpacing: "-0.01em" }}
           >
             接受醫療卡及長者醫療券
             <br />
