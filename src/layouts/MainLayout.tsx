@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { Link, useRouterState } from '@tanstack/react-router';
 import {
   Phone,
@@ -246,7 +246,7 @@ const FOOTER_SERVICES = ['普通科', '皮膚問題診治', '大腸癌篩查', '
 const FOOTER_PAYMENT = ['醫療卡列表', '長者醫療券', '收費表', '政府資助'];
 const FOOTER_INFO = ['醫生團隊', '預約須知', '私隱政策', '使用條款'];
 
-function FooterColumnTitle({ children }: { children: React.ReactNode }) {
+function FooterColumnTitle({ children }: { children: ReactNode }) {
   return (
     <div
       className="text-brand-primary"
@@ -447,7 +447,7 @@ function ScrollToTop() {
 // ─── MainLayout ───────────────────────────────────────────────────────────────
 
 interface MainLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
@@ -458,7 +458,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <TopStrip />
       <Header onMenuClick={() => setMenuOpen(true)} />
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <main style={{ paddingBottom: '64px' }} className="md:pb-0">
+      <main className="pb-16 md:pb-0">
         {children}
       </main>
       <Footer />
