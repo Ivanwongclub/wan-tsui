@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle } from "lucide-react";
 import { CLINIC, SERVICES } from "../content/wanTsui";
-import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
+import { IMAGES, ImageMeta, placeholderSvg } from "../lib/imageHelpers";
 import { PageHero } from "../components/PageHero";
 
 export const Route = createFileRoute("/services")({
@@ -17,7 +17,7 @@ function ServiceSection({
 }: {
   service: typeof SERVICES[number];
   index: number;
-  image: string;
+  image: ImageMeta;
 }) {
   const isOdd = index % 2 === 0; // 0-indexed: 0,2,4 → image LEFT; 1,3,5 → image RIGHT
   const isLast = index === SERVICES.length - 1;
@@ -28,21 +28,24 @@ function ServiceSection({
       style={{ aspectRatio: '4 / 3' }}
     >
       <img
-        src={image}
+        src={image.src}
+        width={image.width}
+        height={image.height}
         alt={service.title_tc}
         className="w-full h-full object-cover block"
+        loading="lazy"
+        decoding="async"
         onError={(e) => {
           (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
         }}
       />
       {service.govScheme && (
         <span
-          className="absolute text-white"
+          className="absolute bg-brand-primary text-white"
           style={{
             top: '14px',
             left: '14px',
             padding: '5px 10px',
-            backgroundColor: '#065F46',
             fontSize: '10px',
             fontWeight: 600,
             letterSpacing: '0.15em',
@@ -54,12 +57,11 @@ function ServiceSection({
       )}
       {service.voucher && (
         <span
-          className="absolute text-white"
+          className="absolute bg-brand-accent text-white"
           style={{
             top: '14px',
             left: '14px',
             padding: '5px 10px',
-            backgroundColor: '#9F3A1A',
             fontSize: '10px',
             fontWeight: 600,
             letterSpacing: '0.15em',
@@ -88,9 +90,9 @@ function ServiceSection({
     <div>
       <div className="flex items-baseline" style={{ gap: '10px', marginBottom: '12px' }}>
         <span
+          className="text-brand-accent"
           style={{
             fontSize: '11px',
-            color: '#9F3A1A',
             fontWeight: 700,
             letterSpacing: '0.18em',
           }}
@@ -98,9 +100,9 @@ function ServiceSection({
           {service.num}
         </span>
         <span
+          className="text-brand-muted"
           style={{
             fontSize: '11px',
-            color: '#A8A29E',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
           }}
@@ -114,23 +116,21 @@ function ServiceSection({
       >
         {service.title_tc}
       </h2>
-      <p style={{ fontSize: '15px', color: '#57534E', lineHeight: 1.7, marginBottom: '16px' }}>
+      <p className="text-brand-body" style={{ fontSize: '15px', lineHeight: 1.7, marginBottom: '16px' }}>
         {service.desc}
       </p>
-      <p style={{ fontSize: '14px', color: '#57534E', lineHeight: 1.7, marginBottom: '24px' }}>
+      <p className="text-brand-body" style={{ fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}>
         {service.detail}
       </p>
       <div className="flex flex-wrap" style={{ gap: '8px' }}>
         {service.tags.map((tag) => (
           <span
             key={tag}
+            className="text-brand-primary bg-brand-primary-light font-semibold"
             style={{
               fontSize: '11px',
-              color: '#065F46',
-              backgroundColor: '#ECFDF5',
               padding: '6px 12px',
               letterSpacing: '0.08em',
-              fontWeight: 600,
             }}
           >
             {tag}
@@ -142,8 +142,7 @@ function ServiceSection({
 
   return (
     <section
-      className="py-16 md:py-20 px-6 md:px-10"
-      style={{ borderBottom: isLast ? 'none' : '1px solid #E7E5E4' }}
+      className={`py-16 md:py-20 px-6 md:px-10${isLast ? '' : ' border-b border-brand-border'}`}
     >
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         <div
@@ -193,10 +192,9 @@ function CTABand() {
           </a>
           <a
             href={`https://wa.me/${CLINIC.whatsapp}`}
-            className="inline-flex items-center rounded-full text-white font-semibold"
+            className="inline-flex items-center rounded-full text-white font-semibold border border-white"
             style={{
               gap: '10px',
-              border: '1px solid #FFFFFF',
               padding: '16px 32px',
               fontSize: '15px',
               textDecoration: 'none',

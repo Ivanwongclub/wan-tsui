@@ -45,6 +45,7 @@
   --color-brand-surface: #FFFFFF;
   --color-brand-border: #E7E5E4;
   --color-brand-border-strong: #D6D3D1;
+  --color-brand-terra-light: #F4A57A;
 
   /* Brand fonts */
   --font-heading: "Noto Serif TC", "PingFang TC", Georgia, serif;
@@ -167,9 +168,9 @@
   }
 
   body {
-    font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Plus Jakarta Sans', Inter, sans-serif;
-    background-color: #FAFAF9;
-    color: #1C1917;
+    font-family: var(--font-body);
+    background-color: var(--color-brand-paper);
+    color: var(--color-brand-ink);
     letter-spacing: 0.02em;
     line-height: 1.75;
   }

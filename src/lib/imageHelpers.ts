@@ -16,17 +16,19 @@ export function placeholderSvg(label: string, color1 = '#065F46', color2 = '#044
   return `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svg)))}`;
 }
 
+export type ImageMeta = { src: string; width: number; height: number };
+
 export const IMAGES = {
-  hero: '/images/hero-clinic.jpg',
-  doctor1: '/images/doctor-mak.jpg',
-  doctor2: '/images/doctor-lam.jpg',
-  location: '/images/location-chai-wan.jpg',
+  hero: { src: '/images/hero-clinic.jpg', width: 1920, height: 1080 },
+  doctor1: { src: '/images/doctor-mak.jpg', width: 800, height: 1000 },
+  doctor2: { src: '/images/doctor-lam.jpg', width: 800, height: 1000 },
+  location: { src: '/images/location-chai-wan.jpg', width: 1200, height: 900 },
   services: [
-    '/images/service-general-practice.jpg',
-    '/images/service-dermatology.jpg',
-    '/images/service-colorectal-screening.jpg',
-    '/images/service-chronic-disease.jpg',
-    '/images/service-flu-vaccine.jpg',
-    '/images/service-voucher.jpg',
+    { src: '/images/service-general-practice.jpg', width: 800, height: 600 },
+    { src: '/images/service-dermatology.jpg', width: 800, height: 600 },
+    { src: '/images/service-colorectal-screening.jpg', width: 800, height: 600 },
+    { src: '/images/service-chronic-disease.jpg', width: 800, height: 600 },
+    { src: '/images/service-flu-vaccine.jpg', width: 800, height: 600 },
+    { src: '/images/service-voucher.jpg', width: 800, height: 600 },
   ],
 };

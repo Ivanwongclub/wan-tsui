@@ -17,9 +17,14 @@ function Hero() {
         className="h-[70vh] md:h-[min(78vh,720px)] relative bg-brand-primary"
       >
         <img
-          src={IMAGES.hero}
+          src={IMAGES.hero.src}
+          width={IMAGES.hero.width}
+          height={IMAGES.hero.height}
           alt="環翠醫務中心診所實景"
           className="absolute inset-0 object-cover w-full h-full"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           onError={(e) => {
             (e.target as HTMLImageElement).src = placeholderSvg("診所實景");
           }}
@@ -263,15 +268,20 @@ function ServicesGrid() {
             <Link
               key={service.num}
               to="/services"
+              preload="intent"
               className="group block"
               style={{ textDecoration: "none" }}
             >
               {/* Photo */}
               <div className="aspect-[4/3] mb-6 overflow-hidden relative bg-brand-primary">
                 <img
-                  src={IMAGES.services[i]}
+                  src={IMAGES.services[i].src}
+                  width={IMAGES.services[i].width}
+                  height={IMAGES.services[i].height}
                   alt={service.title_tc}
                   className="object-cover w-full h-full transition-transform duration-[600ms] ease-in-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
                   }}
@@ -345,7 +355,7 @@ function ServicesGrid() {
 // ─── Section 5: Doctors ──────────────────────────────────────────────────────
 
 function Doctors() {
-  const doctorImages = [IMAGES.doctor1, IMAGES.doctor2];
+  const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
 
   return (
     <section className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border">
@@ -374,9 +384,13 @@ function Doctors() {
               {/* Photo */}
               <div className="aspect-[4/5] bg-brand-primary overflow-hidden relative">
                 <img
-                  src={doctorImages[i]}
+                  src={doctorImages[i].src}
+                  width={doctorImages[i].width}
+                  height={doctorImages[i].height}
                   alt={doctor.name_en}
                   className="object-cover w-full h-full"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(doctor.name_en);
                   }}
@@ -385,7 +399,7 @@ function Doctors() {
                   className="absolute bottom-4 left-4 font-heading font-bold italic leading-none select-none"
                   style={{ fontSize: "36px" }}
                 >
-                  <span style={{ color: "#F4A57A" }}>0{i + 1}</span>
+                  <span className="text-brand-terra-light">0{i + 1}</span>
                 </div>
               </div>
 
@@ -509,9 +523,13 @@ function Location() {
         {/* Right — photo */}
         <div className="min-h-[320px] md:min-h-[600px] bg-brand-primary overflow-hidden relative">
           <img
-            src={IMAGES.location}
+            src={IMAGES.location.src}
+            width={IMAGES.location.width}
+            height={IMAGES.location.height}
             alt="環翠邨位置"
             className="object-cover w-full h-full absolute inset-0"
+            loading="lazy"
+            decoding="async"
             onError={(e) => {
               (e.target as HTMLImageElement).src = placeholderSvg("柴灣・環翠邨");
             }}
@@ -542,7 +560,7 @@ function PaymentCTA() {
             className="text-[12px] tracking-[0.22em] uppercase mb-5 inline-flex items-center gap-2.5 font-medium"
             style={{ color: "rgba(255,255,255,0.7)" }}
           >
-            <span style={{ color: "#F4A57A" }}>●</span>
+            <span className="text-brand-terra-light">●</span>
             付款方式
           </div>
           <h2

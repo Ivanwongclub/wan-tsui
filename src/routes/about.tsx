@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
-const doctorImages = [IMAGES.doctor1, IMAGES.doctor2];
+const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
 
 // ─── Clinic Intro ─────────────────────────────────────────────────────────────
 
@@ -17,10 +17,10 @@ function ClinicIntro() {
     <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div
+          className="text-brand-primary"
           style={{
             fontSize: '12px',
             fontWeight: 600,
-            color: '#065F46',
             letterSpacing: '0.22em',
             textTransform: 'uppercase' as const,
             marginBottom: '24px',
@@ -32,12 +32,12 @@ function ClinicIntro() {
           className="font-heading font-bold text-brand-ink leading-[1.2]"
           style={{ fontSize: 'clamp(32px, 4vw, 44px)', marginBottom: '32px' }}
         >
-          植根<span style={{ color: '#9F3A1A' }}>柴灣</span>
+          植根<span className="text-brand-accent">柴灣</span>
         </h2>
-        <p style={{ fontSize: '17px', color: '#57534E', lineHeight: 1.8, marginBottom: '24px' }}>
+        <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8, marginBottom: '24px' }}>
           環翠綜合醫務中心紮根柴灣近二十年，由兩位資深普通科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。
         </p>
-        <p style={{ fontSize: '17px', color: '#57534E', lineHeight: 1.8 }}>
+        <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8 }}>
           本診所致力以專業、親切的態度服務社區，並積極參與政府各項醫療資助計劃，讓街坊能以可負擔的費用獲得優質醫療照顧。
         </p>
       </div>
@@ -54,10 +54,10 @@ function DoctorProfiles() {
         {/* Section header */}
         <div style={{ marginBottom: '64px', maxWidth: '600px' }}>
           <div
+            className="text-brand-primary"
             style={{
               fontSize: '12px',
               fontWeight: 600,
-              color: '#065F46',
               letterSpacing: '0.22em',
               textTransform: 'uppercase' as const,
               marginBottom: '16px',
@@ -75,7 +75,7 @@ function DoctorProfiles() {
           >
             兩位普通科醫生
           </h2>
-          <p style={{ fontSize: '16px', color: '#57534E', lineHeight: 1.75 }}>
+          <p className="text-brand-body" style={{ fontSize: '16px', lineHeight: 1.75 }}>
             熟悉柴灣社區，與街坊建立長期醫患關係。
           </p>
         </div>
@@ -94,9 +94,13 @@ function DoctorProfiles() {
                 style={{ aspectRatio: '4 / 5' }}
               >
                 <img
-                  src={doctorImages[i]}
+                  src={doctorImages[i].src}
+                  width={doctorImages[i].width}
+                  height={doctorImages[i].height}
                   alt={doctor.name_en}
                   className="w-full h-full object-cover block"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(doctor.name_en);
                   }}
@@ -105,7 +109,7 @@ function DoctorProfiles() {
                   className="absolute font-heading font-bold italic leading-none select-none"
                   style={{ bottom: '16px', left: '16px', fontSize: '36px' }}
                 >
-                  <span style={{ color: '#F4A57A' }}>0{i + 1}</span>
+                  <span className="text-brand-terra-light">0{i + 1}</span>
                 </div>
               </div>
 
@@ -118,9 +122,9 @@ function DoctorProfiles() {
                   {doctor.name_tc}
                 </div>
                 <div
+                  className="text-brand-muted"
                   style={{
                     fontSize: '12px',
-                    color: '#A8A29E',
                     letterSpacing: '0.1em',
                     marginBottom: '24px',
                   }}
@@ -129,14 +133,14 @@ function DoctorProfiles() {
                 </div>
 
                 <div
-                  className="flex flex-col"
-                  style={{ gap: '16px', fontSize: '14px', color: '#57534E', lineHeight: 1.7 }}
+                  className="flex flex-col text-brand-body"
+                  style={{ gap: '16px', fontSize: '14px', lineHeight: 1.7 }}
                 >
-                  <div style={{ paddingBottom: '14px', borderBottom: '1px solid #E7E5E4' }}>
+                  <div className="border-b border-brand-border" style={{ paddingBottom: '14px' }}>
                     <div
+                      className="text-brand-primary"
                       style={{
                         fontSize: '11px',
-                        color: '#065F46',
                         letterSpacing: '0.15em',
                         textTransform: 'uppercase' as const,
                         fontWeight: 600,
@@ -147,11 +151,11 @@ function DoctorProfiles() {
                     </div>
                     <div>{doctor.creds}</div>
                   </div>
-                  <div style={{ paddingBottom: '14px', borderBottom: '1px solid #E7E5E4' }}>
+                  <div className="border-b border-brand-border" style={{ paddingBottom: '14px' }}>
                     <div
+                      className="text-brand-primary"
                       style={{
                         fontSize: '11px',
-                        color: '#065F46',
                         letterSpacing: '0.15em',
                         textTransform: 'uppercase' as const,
                         fontWeight: 600,
@@ -164,9 +168,9 @@ function DoctorProfiles() {
                   </div>
                   <div style={{ paddingBottom: '14px' }}>
                     <div
+                      className="text-brand-primary"
                       style={{
                         fontSize: '11px',
-                        color: '#065F46',
                         letterSpacing: '0.15em',
                         textTransform: 'uppercase' as const,
                         fontWeight: 600,
@@ -181,10 +185,10 @@ function DoctorProfiles() {
 
                 {/* Bio paragraph — About page only */}
                 <p
+                  className="text-brand-body"
                   style={{
                     marginTop: '24px',
                     fontSize: '14px',
-                    color: '#57534E',
                     lineHeight: 1.7,
                     fontStyle: 'italic',
                   }}

@@ -73,16 +73,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Wan Tsui" },
-      { name: "description", content: "A starter React project for building a medical center website, pre-configured with essential tools." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Wan Tsui" },
-      { property: "og:description", content: "A starter React project for building a medical center website, pre-configured with essential tools." },
+      { title: "環翠綜合醫務中心 | 柴灣家庭醫療" },
+      { name: "description", content: "柴灣環翠邨環翠綜合醫務中心，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：2337 8999" },
+      { name: "author", content: "環翠綜合醫務中心" },
+      { property: "og:title", content: "環翠綜合醫務中心 | 柴灣家庭醫療" },
+      { property: "og:description", content: "柴灣環翠邨環翠綜合醫務中心，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：2337 8999" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Wan Tsui" },
-      { name: "twitter:description", content: "A starter React project for building a medical center website, pre-configured with essential tools." },
+      { name: "twitter:title", content: "環翠綜合醫務中心 | 柴灣家庭醫療" },
+      { name: "twitter:description", content: "柴灣環翠邨環翠綜合醫務中心，由兩位資深普通科醫生駐診，接受醫療卡及長者醫療券。電話：2337 8999" },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
     ],
@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="zh-HK">
       <head>
         <HeadContent />
       </head>

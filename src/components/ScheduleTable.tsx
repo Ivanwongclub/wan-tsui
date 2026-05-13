@@ -51,8 +51,7 @@ export function ScheduleTable() {
                 return (
                   <tr
                     key={row.day}
-                    className="border-b border-brand-border"
-                    style={isToday ? { backgroundColor: '#FBE9DE' } : undefined}
+                    className={`border-b border-brand-border${isToday ? ' bg-brand-accent-light' : ''}`}
                   >
                     <td className="px-6 py-[18px] text-[15px] font-semibold text-brand-ink">
                       {isToday && (

@@ -9,6 +9,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { CLINIC } from '../content/wanTsui';
+import { DS } from '../styles/designSystem';
 
 // ─── TopStrip ────────────────────────────────────────────────────────────────
 
@@ -49,10 +50,11 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         top: 0,
         zIndex: 40,
         transition: 'all 240ms ease',
+        willChange: 'backdrop-filter, opacity',
         backgroundColor: scrolled ? 'rgba(255,255,255,0.92)' : 'white',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid #E7E5E4' : '1px solid transparent',
+        borderBottom: scrolled ? `1px solid ${DS.colors.border}` : '1px solid transparent',
         padding: scrolled ? '14px 40px' : '20px 40px',
       }}
     >
@@ -87,6 +89,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             <Link
               key={to}
               to={to}
+              preload="intent"
               className="text-brand-ink"
               style={{ fontSize: '14.5px', fontWeight: 500, textDecoration: 'none', paddingBottom: '4px' }}
               activeProps={{
@@ -95,7 +98,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
                   fontWeight: 500,
                   textDecoration: 'none',
                   paddingBottom: '4px',
-                  borderBottom: '1px solid #9F3A1A',
+                  borderBottom: `1px solid ${DS.colors.accent}`,
                 },
               }}
               activeOptions={{ exact: to === '/' }}
@@ -220,7 +223,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         </a>
         <a
           href={`https://wa.me/${CLINIC.whatsapp}`}
-          className="bg-brand-surface text-brand-ink rounded-button"
+          className="bg-brand-surface text-brand-ink rounded-button border border-brand-border"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -230,7 +233,6 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
             fontSize: '15px',
             fontWeight: 600,
             textDecoration: 'none',
-            border: '1px solid #E7E5E4',
           }}
         >
           <MessageCircle size={18} />
@@ -297,14 +299,14 @@ function Footer() {
             接受醫療卡
           </span>
         </div>
-        <div style={{ height: '20px', width: '1px', backgroundColor: '#E7E5E4' }} />
+        <div className="h-5 w-px bg-brand-border" />
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <ShieldCheck size={20} className="text-brand-accent" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
             長者醫療券
           </span>
         </div>
-        <div style={{ height: '20px', width: '1px', backgroundColor: '#E7E5E4' }} />
+        <div className="h-5 w-px bg-brand-border" />
         <span className="text-brand-body" style={{ fontSize: '13px' }}>
           三項政府資助計劃・歡迎街坊查詢
         </span>
@@ -384,16 +386,7 @@ function Footer() {
 function MobileStickyBar() {
   return (
     <div
-      className="flex md:hidden"
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        height: '64px',
-        borderTop: '1px solid #E7E5E4',
-      }}
+      className="flex md:hidden fixed bottom-0 left-0 right-0 z-50 h-16 border-t border-brand-border"
     >
       <a
         href={`tel:${CLINIC.phone_tel}`}
@@ -414,7 +407,7 @@ function MobileStickyBar() {
       </a>
       <a
         href={`https://wa.me/${CLINIC.whatsapp}`}
-        className="bg-brand-surface text-brand-ink"
+        className="bg-brand-surface text-brand-ink border-l border-brand-border"
         style={{
           flex: 1,
           display: 'flex',
@@ -424,7 +417,6 @@ function MobileStickyBar() {
           fontSize: '15px',
           fontWeight: 600,
           textDecoration: 'none',
-          borderLeft: '1px solid #E7E5E4',
         }}
       >
         <MessageCircle size={18} />

@@ -49,10 +49,10 @@ function ContactInfo() {
     <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <div
+          className="text-brand-primary"
           style={{
             fontSize: '12px',
             fontWeight: 600,
-            color: '#065F46',
             letterSpacing: '0.22em',
             textTransform: 'uppercase' as const,
             marginBottom: '32px',
@@ -65,18 +65,17 @@ function ContactInfo() {
           {rows.map((row, i) => (
             <div
               key={row.label}
-              className="grid"
+              className={`grid${i < rows.length - 1 ? ' border-b border-brand-border' : ''}`}
               style={{
                 gridTemplateColumns: '100px 1fr',
                 gap: '20px',
                 paddingBottom: '20px',
-                borderBottom: i < rows.length - 1 ? '1px solid #E7E5E4' : 'none',
               }}
             >
               <span
+                className="text-brand-primary"
                 style={{
                   fontSize: '11px',
-                  color: '#065F46',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase' as const,
                   fontWeight: 600,
@@ -88,22 +87,15 @@ function ContactInfo() {
               {row.href ? (
                 <a
                   href={row.href}
-                  style={{
-                    color: '#1C1917',
-                    textDecoration: 'none',
-                    fontWeight: 500,
-                    lineHeight: 1.7,
-                  }}
+                  className="text-brand-ink font-medium leading-[1.7]"
+                  style={{ textDecoration: 'none' }}
                 >
                   {row.value}
                 </a>
               ) : (
                 <span
-                  style={{
-                    color: '#57534E',
-                    lineHeight: 1.7,
-                    whiteSpace: row.whitespace ? 'pre-line' : undefined,
-                  }}
+                  className="text-brand-body leading-[1.7]"
+                  style={row.whitespace ? { whiteSpace: 'pre-line' } : undefined}
                 >
                   {row.value}
                 </span>
@@ -124,10 +116,9 @@ function ContactInfo() {
           </a>
           <a
             href={`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent('你好，我想預約診症')}`}
-            className="inline-flex items-center rounded-full bg-brand-surface text-brand-ink font-semibold"
+            className="inline-flex items-center rounded-full bg-brand-surface text-brand-ink font-semibold border border-brand-border"
             style={{
               gap: '10px',
-              border: '1px solid #E7E5E4',
               padding: '16px 32px',
               fontSize: '15px',
               textDecoration: 'none',
@@ -151,10 +142,10 @@ function HoursTable() {
     <section className="py-16 px-6 md:px-10 bg-brand-surface border-t border-brand-border">
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <div
+          className="text-brand-primary"
           style={{
             fontSize: '12px',
             fontWeight: 600,
-            color: '#065F46',
             letterSpacing: '0.22em',
             textTransform: 'uppercase' as const,
             marginBottom: '24px',
@@ -195,8 +186,7 @@ function HoursTable() {
                 return (
                   <tr
                     key={row.day}
-                    className="border-b border-brand-border"
-                    style={isToday ? { backgroundColor: '#FBE9DE' } : undefined}
+                    className={`border-b border-brand-border${isToday ? ' bg-brand-accent-light' : ''}`}
                   >
                     <td
                       className="text-[15px] font-semibold text-brand-ink"
@@ -219,22 +209,14 @@ function HoursTable() {
                       {row.day}
                     </td>
                     <td
-                      className="text-[15px]"
-                      style={{
-                        padding: '18px 24px',
-                        color: amIsOff ? '#A8A29E' : '#065F46',
-                        fontWeight: amIsOff ? undefined : 500,
-                      }}
+                      className={`text-[15px]${amIsOff ? ' text-brand-muted' : ' text-brand-primary font-medium'}`}
+                      style={{ padding: '18px 24px' }}
                     >
                       {amIsOff ? row.am : '應診'}
                     </td>
                     <td
-                      className="text-[15px]"
-                      style={{
-                        padding: '18px 24px',
-                        color: pmIsOff ? '#A8A29E' : '#065F46',
-                        fontWeight: pmIsOff ? undefined : 500,
-                      }}
+                      className={`text-[15px]${pmIsOff ? ' text-brand-muted' : ' text-brand-primary font-medium'}`}
+                      style={{ padding: '18px 24px' }}
                     >
                       {pmIsOff ? row.pm : '應診'}
                     </td>
@@ -245,7 +227,7 @@ function HoursTable() {
           </table>
         </div>
 
-        <p style={{ marginTop: '16px', fontSize: '13px', color: '#57534E' }}>
+        <p className="text-brand-body" style={{ marginTop: '16px', fontSize: '13px' }}>
           午膳 13:00–15:00 暫停服務・星期日及公眾假期休診
         </p>
       </div>
@@ -262,14 +244,14 @@ function PaymentReminder() {
         <div className="flex justify-center items-center flex-wrap" style={{ gap: '32px' }}>
           <div className="flex items-center" style={{ gap: '8px' }}>
             <CreditCard size={20} className="text-brand-primary" />
-            <span style={{ fontSize: '14px', fontWeight: 600, color: '#1C1917' }}>接受醫療卡</span>
+            <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>接受醫療卡</span>
           </div>
           <div className="flex items-center" style={{ gap: '8px' }}>
             <ShieldCheck size={20} className="text-brand-accent" />
-            <span style={{ fontSize: '14px', fontWeight: 600, color: '#1C1917' }}>長者醫療券</span>
+            <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>長者醫療券</span>
           </div>
         </div>
-        <p style={{ marginTop: '16px', fontSize: '15px', color: '#57534E' }}>
+        <p className="text-brand-body" style={{ marginTop: '16px', fontSize: '15px' }}>
           歡迎致電查詢接受之醫療卡種類及醫療券使用詳情
         </p>
       </div>
