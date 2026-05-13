@@ -160,7 +160,7 @@ function TrustBar() {
                   {name}
                 </span>
               ))}
-              <span className="text-[12px] text-brand-muted px-1 italic self-center">
+              <span className="text-[12px] text-brand-muted py-1.5 px-1 italic">
                 及其他公司・致電查詢
               </span>
             </div>
@@ -243,7 +243,7 @@ function ServicesGrid() {
             >
               我們提供的服務
             </h2>
-            <p className="text-[15px] text-brand-body leading-relaxed mt-4 max-w-[520px]">
+            <p className="text-[15px] text-brand-body leading-[1.75] mt-4 max-w-[520px]">
               兩個專科服務・三項政府資助計劃・接受長者醫療券。
             </p>
           </div>
@@ -313,12 +313,12 @@ function ServicesGrid() {
               </div>
               <h3
                 className="font-heading font-semibold text-brand-ink mb-2.5 leading-[1.3]"
-                style={{ fontSize: "22px" }}
+                style={{ fontSize: "22px", letterSpacing: 0 }}
               >
                 {service.title_tc}
               </h3>
               <p
-                className="leading-relaxed text-brand-body mb-3.5"
+                className="leading-[1.7] text-brand-body mb-3.5"
                 style={{ fontSize: "14.5px" }}
               >
                 {service.desc}
@@ -327,7 +327,7 @@ function ServicesGrid() {
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10.5px] text-brand-primary bg-brand-primary-light px-2.5 py-1 font-semibold tracking-[0.08em]"
+                    className="text-[10.5px] text-brand-primary bg-brand-primary-light px-[9px] py-1 font-semibold tracking-[0.08em]"
                   >
                     {tag}
                   </span>
@@ -359,7 +359,7 @@ function Doctors() {
           >
             認識我們的醫生
           </h2>
-          <p className="text-[16px] text-brand-body leading-relaxed">
+          <p className="text-[16px] text-brand-body leading-[1.75]">
             熟悉柴灣社區，與街坊建立長期醫患關係。
           </p>
         </div>
@@ -392,7 +392,7 @@ function Doctors() {
               <div className="pt-2">
                 <div
                   className="font-heading font-bold text-brand-ink mb-1"
-                  style={{ fontSize: "28px" }}
+                  style={{ fontSize: "28px", letterSpacing: "0.01em" }}
                 >
                   {doctor.name_tc}
                 </div>
@@ -400,7 +400,7 @@ function Doctors() {
                   {doctor.name_en}
                 </div>
 
-                <div className="flex flex-col gap-4 text-[14px] text-brand-body leading-relaxed">
+                <div className="flex flex-col gap-4 text-[14px] text-brand-body leading-[1.7]">
                   <div className="border-b border-brand-border pb-3.5">
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
                       學歷
@@ -591,7 +591,7 @@ function Location() {
                   </a>
                 ) : (
                   <span
-                    className="text-brand-body leading-relaxed"
+                    className="text-brand-body leading-[1.7]"
                     style={row.whitespace ? { whiteSpace: "pre-line" } : undefined}
                   >
                     {row.value}

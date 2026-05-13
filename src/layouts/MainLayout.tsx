@@ -75,26 +75,26 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
           </div>
           <div
             className="text-brand-muted"
-            style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '2px' }}
+            style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
           >
             WAN TSUI MEDICAL CENTRE · CHAI WAN
           </div>
         </Link>
 
         {/* Center nav — desktop only */}
-        <nav className="hidden md:flex" style={{ gap: '32px' }}>
+        <nav className="hidden md:flex" style={{ gap: '40px' }}>
           {NAV_LINKS.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
               className="text-brand-ink"
-              style={{ fontSize: '14.5px', fontWeight: 500, textDecoration: 'none', paddingBottom: '2px' }}
+              style={{ fontSize: '14.5px', fontWeight: 500, textDecoration: 'none', paddingBottom: '4px' }}
               activeProps={{
                 style: {
                   fontSize: '14.5px',
                   fontWeight: 500,
                   textDecoration: 'none',
-                  paddingBottom: '2px',
+                  paddingBottom: '4px',
                   borderBottom: '1px solid #9F3A1A',
                 },
               }}
@@ -255,7 +255,7 @@ function FooterColumnTitle({ children }: { children: ReactNode }) {
         fontSize: '11px',
         textTransform: 'uppercase',
         letterSpacing: '0.18em',
-        fontWeight: 500,
+        fontWeight: 600,
         marginBottom: '20px',
       }}
     >
@@ -319,20 +319,20 @@ function Footer() {
           <div>
             <div
               className="font-heading font-bold text-brand-ink"
-              style={{ fontSize: '18px', lineHeight: 1.3 }}
+              style={{ fontSize: '18px', marginBottom: '4px' }}
             >
               {CLINIC.name_tc}
             </div>
             <div
               className="text-brand-muted"
-              style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
+              style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginBottom: '20px' }}
             >
               WAN TSUI MEDICAL CENTRE
             </div>
-            <div className="text-brand-body" style={{ fontSize: '14px', marginTop: '16px', lineHeight: 1.75 }}>
+            <div className="text-brand-body" style={{ fontSize: '14px', lineHeight: 1.75 }}>
               {CLINIC.address_tc}
             </div>
-            <div className="text-brand-body" style={{ fontSize: '14px', marginTop: '8px' }}>
+            <div className="text-brand-body" style={{ fontSize: '14px', lineHeight: 1.75 }}>
               {CLINIC.hours_tc}
             </div>
           </div>
@@ -362,6 +362,7 @@ function Footer() {
             paddingTop: '32px',
             display: 'flex',
             justifyContent: 'space-between',
+            alignItems: 'center',
             flexWrap: 'wrap',
             gap: '16px',
           }}
