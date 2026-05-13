@@ -8,7 +8,7 @@ import {
   CreditCard,
   ShieldCheck,
 } from 'lucide-react';
-import { CLINIC } from '../content/wanTsui';
+import { CLINIC, ANNOUNCEMENT, FOOTER_NAV } from '../content/wanTsui';
 import { DS } from '../styles/designSystem';
 
 // ─── TopStrip ────────────────────────────────────────────────────────────────
@@ -19,8 +19,8 @@ function TopStrip() {
       className="bg-brand-accent text-white text-center"
       style={{ padding: '9px 16px', fontSize: '12.5px', fontWeight: 500, letterSpacing: '0.08em' }}
     >
-      <span className="text-brand-accent-light mr-2">新</span>
-      2026年流感疫苗開始預約・歡迎致電查詢
+      <span className="text-brand-accent-light mr-2">{ANNOUNCEMENT.badge}</span>
+      {ANNOUNCEMENT.text}
     </div>
   );
 }
@@ -79,7 +79,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             className="text-brand-muted"
             style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
           >
-            WAN TSUI MEDICAL CENTRE · CHAI WAN
+            {CLINIC.name_en_short.toUpperCase()} · CHAI WAN
           </div>
         </Link>
 
@@ -125,7 +125,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             }}
           >
             <Phone size={14} />
-            2337 8999
+            {CLINIC.phone_short}
           </a>
           <button
             className="md:hidden text-brand-ink"
@@ -245,9 +245,6 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
-const FOOTER_SERVICES = ['普通科', '皮膚問題診治', '大腸癌篩查', '慢性病共治', '流感疫苗'];
-const FOOTER_PAYMENT = ['醫療卡列表', '長者醫療券', '收費表', '政府資助'];
-const FOOTER_INFO = ['醫生團隊', '預約須知', '私隱政策', '使用條款'];
 
 function FooterColumnTitle({ children }: { children: ReactNode }) {
   return (
@@ -329,7 +326,7 @@ function Footer() {
               className="text-brand-muted"
               style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginBottom: '20px' }}
             >
-              WAN TSUI MEDICAL CENTRE
+              {CLINIC.name_en_short.toUpperCase()}
             </div>
             <div className="text-brand-body" style={{ fontSize: '14px', lineHeight: 1.75 }}>
               {CLINIC.address_tc}
@@ -342,19 +339,19 @@ function Footer() {
           {/* Col 2 — services */}
           <div>
             <FooterColumnTitle>服務</FooterColumnTitle>
-            <FooterLinks items={FOOTER_SERVICES} />
+            <FooterLinks items={FOOTER_NAV.services} />
           </div>
 
           {/* Col 3 — payment */}
           <div>
             <FooterColumnTitle>付款</FooterColumnTitle>
-            <FooterLinks items={FOOTER_PAYMENT} />
+            <FooterLinks items={FOOTER_NAV.payment} />
           </div>
 
           {/* Col 4 — info */}
           <div>
             <FooterColumnTitle>資訊</FooterColumnTitle>
-            <FooterLinks items={FOOTER_INFO} />
+            <FooterLinks items={FOOTER_NAV.info} />
           </div>
         </div>
 
@@ -370,7 +367,7 @@ function Footer() {
           }}
         >
           <span className="text-brand-muted" style={{ fontSize: '12.5px' }}>
-            © 2026 環翠綜合醫務中心 Wan Tsui Integrated Medical Centre
+            © {new Date().getFullYear()} {CLINIC.name_tc} {CLINIC.name_en}
           </span>
           <span className="text-brand-muted" style={{ fontSize: '12.5px' }}>
             緊急情況請致電 <strong className="text-brand-accent">999</strong>

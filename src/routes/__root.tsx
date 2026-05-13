@@ -8,8 +8,13 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { MainLayout } from "../layouts/MainLayout";
+import { CLINIC } from "../content/wanTsui";
 
 import appCss from "../styles.css?url";
+
+const META_TITLE = `${CLINIC.name_tc} | 柴灣家庭醫療`;
+const META_DESC = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_DESC_SHORT = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
 
 function NotFoundComponent() {
   return (
@@ -73,16 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "環翠綜合醫務中心 | 柴灣家庭醫療" },
-      { name: "description", content: "柴灣環翠邨環翠綜合醫務中心，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：2337 8999" },
-      { name: "author", content: "環翠綜合醫務中心" },
-      { property: "og:title", content: "環翠綜合醫務中心 | 柴灣家庭醫療" },
-      { property: "og:description", content: "柴灣環翠邨環翠綜合醫務中心，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：2337 8999" },
+      { title: META_TITLE },
+      { name: "description", content: META_DESC },
+      { name: "author", content: CLINIC.name_tc },
+      { property: "og:title", content: META_TITLE },
+      { property: "og:description", content: META_DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "環翠綜合醫務中心 | 柴灣家庭醫療" },
-      { name: "twitter:description", content: "柴灣環翠邨環翠綜合醫務中心，由兩位資深普通科醫生駐診，接受醫療卡及長者醫療券。電話：2337 8999" },
+      { name: "twitter:title", content: META_TITLE },
+      { name: "twitter:description", content: META_DESC_SHORT },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
     ],

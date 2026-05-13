@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DOCTORS } from "../content/wanTsui";
+import { CLINIC, DOCTORS, type Doctor } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
@@ -32,13 +32,13 @@ function ClinicIntro() {
           className="font-heading font-bold text-brand-ink leading-[1.2]"
           style={{ fontSize: 'clamp(32px, 4vw, 44px)', marginBottom: '32px' }}
         >
-          植根<span className="text-brand-accent">柴灣</span>
+          植根<span className="text-brand-accent">{CLINIC.tagline_tc}</span>
         </h2>
         <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8, marginBottom: '24px' }}>
-          環翠綜合醫務中心紮根柴灣近二十年，由兩位資深普通科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。
+          {CLINIC.intro[0]}
         </p>
         <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8 }}>
-          本診所致力以專業、親切的態度服務社區，並積極參與政府各項醫療資助計劃，讓街坊能以可負擔的費用獲得優質醫療照顧。
+          {CLINIC.intro[1]}
         </p>
       </div>
     </section>
@@ -82,7 +82,7 @@ function DoctorProfiles() {
 
         {/* Doctor cards */}
         <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '64px' }}>
-          {DOCTORS.map((doctor, i) => (
+          {(DOCTORS as Doctor[]).map((doctor, i) => (
             <div
               key={doctor.name_en}
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] items-start"

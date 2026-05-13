@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CreditCard, ShieldCheck, ArrowRight, MapPin, Clock } from "lucide-react";
-import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS } from "../content/wanTsui";
+import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, type Doctor, type Service } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { ScheduleTable } from "../components/ScheduleTable";
 
@@ -69,17 +69,17 @@ function Hero() {
               className="font-heading font-bold text-white mb-6"
               style={{ fontSize: "clamp(38px, 5.5vw, 64px)", lineHeight: 1.15, letterSpacing: "-0.01em" }}
             >
-              家庭醫療
+              {CLINIC.hero_headline[0]}
               <br />
-              植根柴灣
+              {CLINIC.hero_headline[1]}
             </h1>
 
             {/* Subtitle */}
             <p
               className="mb-10 max-w-[480px]"
-              style={{ fontSize: "17px", lineHeight: 1.75, color: "white", opacity: 0.92 }}
+              style={{ fontSize: "17px", lineHeight: 1.75, opacity: 0.92 }}
             >
-              由兩位註冊普通科醫生主理・三項政府資助計劃・接受多種醫療卡及長者醫療券。
+              {CLINIC.hero_subtitle}
             </p>
 
             {/* CTAs */}
@@ -102,7 +102,7 @@ function Hero() {
                   borderBottom: "1px solid white",
                 }}
               >
-                WhatsApp 6801 5968
+                WhatsApp {CLINIC.mobile}
               </a>
             </div>
           </div>
@@ -121,11 +121,11 @@ function Hero() {
           <div className="flex flex-col md:flex-row md:justify-between md:items-center items-start gap-2 md:gap-0 px-5 md:px-10 py-3.5 md:py-5 text-white text-[12px] md:text-[13px] tracking-[0.05em]">
             <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
               <MapPin size={14} />
-              柴灣環翠邨環翠商場1樓109號舖
+              {CLINIC.address_tc}
             </span>
             <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
               <Clock size={14} />
-              星期一至六 09:00–19:00
+              {CLINIC.hours_short_tc}
             </span>
           </div>
         </div>
@@ -264,7 +264,7 @@ function ServicesGrid() {
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES.map((service, i) => (
+          {(SERVICES as Service[]).map((service, i) => (
             <Link
               key={service.num}
               to="/services"
@@ -376,7 +376,7 @@ function Doctors() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {DOCTORS.map((doctor, i) => (
+          {(DOCTORS as Doctor[]).map((doctor, i) => (
             <div
               key={doctor.name_en}
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-start"
@@ -540,7 +540,7 @@ function Location() {
               style={{ padding: "14px 20px" }}
             >
               <MapPin size={14} />
-              港鐵柴灣站 B 出口
+              {CLINIC.mtr_exit}
             </span>
           </div>
         </div>
@@ -557,8 +557,7 @@ function PaymentCTA() {
       <div className="max-w-[1320px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10 flex-wrap">
         <div className="max-w-[700px]">
           <div
-            className="text-[12px] tracking-[0.22em] uppercase mb-5 inline-flex items-center gap-2.5 font-medium"
-            style={{ color: "rgba(255,255,255,0.7)" }}
+            className="text-[12px] tracking-[0.22em] uppercase mb-5 inline-flex items-center gap-2.5 font-medium text-white/70"
           >
             <span className="text-brand-terra-light">●</span>
             付款方式

@@ -1,4 +1,4 @@
-import { SCHEDULE } from '../content/wanTsui';
+import { SCHEDULE, type ScheduleRow } from '../content/wanTsui';
 
 const DAY_INDEX_MAP: Record<string, number> = {
   星期一: 1,
@@ -10,7 +10,7 @@ const DAY_INDEX_MAP: Record<string, number> = {
   星期日及公眾假期: 0,
 };
 
-export function ScheduleTable() {
+export function ScheduleTable({ schedule = SCHEDULE }: { schedule?: ScheduleRow[] }) {
   const todayIndex = new Date().getDay();
 
   return (
@@ -46,7 +46,7 @@ export function ScheduleTable() {
               </tr>
             </thead>
             <tbody>
-              {SCHEDULE.map((row) => {
+              {schedule.map((row) => {
                 const isToday = DAY_INDEX_MAP[row.day] === todayIndex;
                 return (
                   <tr

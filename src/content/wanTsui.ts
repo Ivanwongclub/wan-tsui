@@ -1,18 +1,34 @@
+export const ANNOUNCEMENT = {
+  badge: '新',
+  text: '2026年流感疫苗開始預約・歡迎致電查詢',
+};
+
 export const CLINIC = {
   name_tc: '環翠綜合醫務中心',
   name_en: 'Wan Tsui Integrated Medical Centre',
+  name_en_short: 'Wan Tsui Medical Centre',
   address_tc: '香港柴灣環翠邨環翠商場1樓109號舖',
   address_en: 'Shop 109, 1/F, Wan Tsui Commercial Centre, Wan Tsui Estate, Chai Wan, Hong Kong',
   phone: '(852) 2337 8999',
+  phone_short: '2337 8999',
   phone_tel: '+85223378999',
   mobile: '(852) 6801 5968',
   mobile_tel: '+85268015968',
   email: 'reception@wt-medical.com',
   whatsapp: '85268015968',
   hours_tc: '星期一至六 09:00–13:00, 15:00–19:00',
+  hours_short_tc: '星期一至六 09:00–19:00',
   lunch_break: '13:00–15:00',
   mtr: '港鐵柴灣站 B 出口・步行3分鐘',
+  mtr_exit: '港鐵柴灣站 B 出口',
   bus: '巴士 8H, 8X, 82, 82X・小巴 56',
+  tagline_tc: '植根柴灣',
+  hero_headline: ['家庭醫療', '植根柴灣'] as const,
+  hero_subtitle: '由兩位註冊普通科醫生主理・三項政府資助計劃・接受多種醫療卡及長者醫療券。',
+  intro: [
+    '環翠綜合醫務中心紮根柴灣近二十年，由兩位資深普通科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。',
+    '本診所致力以專業、親切的態度服務社區，並積極參與政府各項醫療資助計劃，讓街坊能以可負擔的費用獲得優質醫療照顧。',
+  ] as const,
 };
 
 export const DOCTORS = [
@@ -100,3 +116,13 @@ export const SCHEDULE = [
   { day: '星期六', am: '林慧美醫生', pm: '— 休診' },
   { day: '星期日及公眾假期', am: '— 休診', pm: '— 休診' },
 ];
+
+export const FOOTER_NAV = {
+  services: ['普通科', '皮膚問題診治', '大腸癌篩查', '慢性病共治', '流感疫苗'],
+  payment: ['醫療卡列表', '長者醫療券', '收費表', '政府資助'],
+  info: ['醫生團隊', '預約須知', '私隱政策', '使用條款'],
+};
+
+export type Doctor = typeof DOCTORS[number];
+export type Service = typeof SERVICES[number];
+export type ScheduleRow = typeof SCHEDULE[number];
