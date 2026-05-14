@@ -35,6 +35,27 @@ export type ImageMeta = OptimizedImage;
 
 // ─── getImage helper ──────────────────────────────────────────────────────────
 
+<<<<<<< HEAD
+=======
+// Lazily import generated data so the file compiles before the script has run.
+// loadImageData() is eagerly called at module init so IMAGE_DATA is populated
+// before any component renders.
+let IMAGE_DATA: Record<string, { widths: number[]; aspectRatio: number; lqip: string }> | null =
+  null;
+
+async function loadImageData() {
+  if (IMAGE_DATA) return;
+  try {
+    const mod = await import('./generated-image-data');
+    IMAGE_DATA = mod.IMAGE_DATA as unknown as typeof IMAGE_DATA;
+  } catch {
+    IMAGE_DATA = {};
+  }
+}
+
+loadImageData();
+
+>>>>>>> 73c9b53b0e39223f4d846e398a436a53c8b789e3
 export function getImage(
   key: keyof typeof IMAGE_DATA,
   sizesAttr = '(max-width: 768px) 100vw, 50vw',

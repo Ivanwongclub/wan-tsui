@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CLINIC, DOCTORS, UI_LABELS, type Doctor } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
+import { Image } from "../components/Image";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -103,14 +104,10 @@ function DoctorProfiles() {
                 className="overflow-hidden bg-brand-primary relative"
                 style={{ aspectRatio: '4 / 5' }}
               >
-                <img
-                  src={doctorImages[i].src}
-                  width={doctorImages[i].width}
-                  height={doctorImages[i].height}
+                <Image
+                  image={doctorImages[i]}
                   alt={doctor.name_en}
                   className="w-full h-full object-cover block"
-                  loading="lazy"
-                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(doctor.name_en);
                   }}
