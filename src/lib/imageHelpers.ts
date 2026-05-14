@@ -1,3 +1,5 @@
+import { IMAGE_DATA } from './generated-image-data';
+
 export function placeholderSvg(label: string, color1 = '#065F46', color2 = '#044E3B'): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
     <defs>
@@ -33,32 +35,14 @@ export type ImageMeta = OptimizedImage;
 
 // ─── getImage helper ──────────────────────────────────────────────────────────
 
-// Lazily import generated data so the file compiles before the script has run.
-// loadImageData() is eagerly called at module init so IMAGE_DATA is populated
-// before any component renders.
-let IMAGE_DATA: Record<string, { widths: number[]; aspectRatio: number; lqip: string }> | null =
-  null;
-
-async function loadImageData() {
-  if (IMAGE_DATA) return;
-  try {
-    const mod = await import('./generated-image-data');
-    IMAGE_DATA = mod.IMAGE_DATA as typeof IMAGE_DATA;
-  } catch {
-    IMAGE_DATA = {};
-  }
-}
-
-loadImageData();
-
 export function getImage(
-  key: string,
+  key: keyof typeof IMAGE_DATA,
   sizesAttr = '(max-width: 768px) 100vw, 50vw',
 ): OptimizedImage {
-  const data = IMAGE_DATA?.[key];
-  const widths = data?.widths ?? [400, 800, 1200];
+  const data = IMAGE_DATA[key];
+  const widths = [...data.widths];
   const largest = Math.max(...widths);
-  const height = data ? Math.round(largest / data.aspectRatio) : largest;
+  const height = Math.round(largest / data.aspectRatio);
 
   return {
     src: `/images/${key}-${largest}.jpg`,
@@ -67,7 +51,7 @@ export function getImage(
     sizes: sizesAttr,
     width: largest,
     height,
-    lqip: data?.lqip ?? '',
+    lqip: data.lqip,
   };
 }
 
