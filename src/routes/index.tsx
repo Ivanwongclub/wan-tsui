@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CreditCard, ShieldCheck, ArrowRight, MapPin, Clock } from "lucide-react";
 import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, UI_LABELS, type Doctor, type Service, type ContactRow } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
+import { Image } from "../components/Image";
 import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { DS } from "../styles/designSystem";
