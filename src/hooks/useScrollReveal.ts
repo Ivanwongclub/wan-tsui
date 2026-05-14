@@ -3,25 +3,24 @@ import { DS } from '../styles/designSystem';
 
 export function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  // Start visible — handles SSR and reduced-motion correctly without flash
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setIsVisible(true);
-      return;
+      return; // already visible, do nothing
     }
     const el = ref.current;
     if (!el) return;
 
-    // Already in viewport at mount — reveal immediately (handles SSR hydration case)
+    // If element is already in viewport, leave it visible — no animation needed
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
-      const frame1 = requestAnimationFrame(() => {
-        const frame2 = requestAnimationFrame(() => setIsVisible(true));
-        return () => cancelAnimationFrame(frame2);
-      });
-      return () => cancelAnimationFrame(frame1);
+      return;
     }
+
+    // Below the fold — hide it now, then animate in when it scrolls into view
+    setIsVisible(false);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
