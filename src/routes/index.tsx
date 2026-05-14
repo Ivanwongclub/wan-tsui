@@ -25,15 +25,11 @@ function Hero() {
       <div
         className="h-[70vh] md:h-[min(78vh,720px)] relative bg-brand-primary"
       >
-        <img
-          src={IMAGES.hero.src}
-          width={IMAGES.hero.width}
-          height={IMAGES.hero.height}
+        <Image
+          image={IMAGES.hero}
           alt="環翠醫務中心診所實景"
           className="absolute inset-0 object-cover w-full h-full"
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
+          priority={true}
           onError={(e) => {
             (e.target as HTMLImageElement).src = placeholderSvg("診所實景");
           }}
