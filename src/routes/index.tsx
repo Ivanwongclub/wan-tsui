@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CreditCard, ShieldCheck, ArrowRight, MapPin, Clock } from "lucide-react";
 import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, UI_LABELS, type Doctor, type Service, type ContactRow } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
+import { Image } from "../components/Image";
 import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { DS } from "../styles/designSystem";
@@ -24,15 +25,11 @@ function Hero() {
       <div
         className="h-[70vh] md:h-[min(78vh,720px)] relative bg-brand-primary"
       >
-        <img
-          src={IMAGES.hero.src}
-          width={IMAGES.hero.width}
-          height={IMAGES.hero.height}
+        <Image
+          image={IMAGES.hero}
           alt="環翠醫務中心診所實景"
           className="absolute inset-0 object-cover w-full h-full"
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
+          priority={true}
           onError={(e) => {
             (e.target as HTMLImageElement).src = placeholderSvg("診所實景");
           }}
@@ -297,14 +294,10 @@ function ServicesGrid() {
             >
               {/* Photo */}
               <div className="aspect-[4/3] mb-6 overflow-hidden relative bg-brand-primary">
-                <img
-                  src={IMAGES.services[i].src}
-                  width={IMAGES.services[i].width}
-                  height={IMAGES.services[i].height}
+                <Image
+                  image={IMAGES.services[i]}
                   alt={service.title_tc}
                   className="object-cover w-full h-full transition-transform duration-[var(--duration-image)] ease-in-out group-hover:scale-[1.04]"
-                  loading="lazy"
-                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
                   }}
@@ -411,14 +404,10 @@ function Doctors() {
             >
               {/* Photo */}
               <div className="aspect-[4/5] bg-brand-primary overflow-hidden relative">
-                <img
-                  src={doctorImages[i].src}
-                  width={doctorImages[i].width}
-                  height={doctorImages[i].height}
+                <Image
+                  image={doctorImages[i]}
                   alt={doctor.name_en}
                   className="object-cover w-full h-full"
-                  loading="lazy"
-                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(doctor.name_en);
                   }}
@@ -549,14 +538,10 @@ function Location() {
 
         {/* Right — photo */}
         <div className="min-h-[320px] md:min-h-[600px] bg-brand-primary overflow-hidden relative">
-          <img
-            src={IMAGES.location.src}
-            width={IMAGES.location.width}
-            height={IMAGES.location.height}
+          <Image
+            image={IMAGES.location}
             alt="環翠邨位置"
             className="object-cover w-full h-full absolute inset-0"
-            loading="lazy"
-            decoding="async"
             onError={(e) => {
               (e.target as HTMLImageElement).src = placeholderSvg("柴灣・環翠邨");
             }}

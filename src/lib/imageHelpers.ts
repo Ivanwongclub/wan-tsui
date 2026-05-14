@@ -43,7 +43,7 @@ async function loadImageData() {
   if (IMAGE_DATA) return;
   try {
     const mod = await import('./generated-image-data');
-    IMAGE_DATA = mod.IMAGE_DATA as typeof IMAGE_DATA;
+    IMAGE_DATA = mod.IMAGE_DATA as unknown as typeof IMAGE_DATA;
   } catch {
     IMAGE_DATA = {};
   }
