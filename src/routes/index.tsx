@@ -294,14 +294,10 @@ function ServicesGrid() {
             >
               {/* Photo */}
               <div className="aspect-[4/3] mb-6 overflow-hidden relative bg-brand-primary">
-                <img
-                  src={IMAGES.services[i].src}
-                  width={IMAGES.services[i].width}
-                  height={IMAGES.services[i].height}
+                <Image
+                  image={IMAGES.services[i]}
                   alt={service.title_tc}
                   className="object-cover w-full h-full transition-transform duration-[var(--duration-image)] ease-in-out group-hover:scale-[1.04]"
-                  loading="lazy"
-                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
                   }}
