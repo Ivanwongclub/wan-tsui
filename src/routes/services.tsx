@@ -37,14 +37,10 @@ function ServiceSection({
       className="relative overflow-hidden bg-brand-primary"
       style={{ aspectRatio: '4 / 3' }}
     >
-      <img
-        src={image.src}
-        width={image.width}
-        height={image.height}
+      <Image
+        image={image}
         alt={service.title_tc}
         className="w-full h-full object-cover block"
-        loading="lazy"
-        decoding="async"
         onError={(e) => {
           (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
         }}
