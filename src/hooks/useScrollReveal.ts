@@ -16,8 +16,11 @@ export function useScrollReveal() {
     // Already in viewport at mount — reveal immediately (handles SSR hydration case)
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setIsVisible(true);
-      return;
+      const frame1 = requestAnimationFrame(() => {
+        const frame2 = requestAnimationFrame(() => setIsVisible(true));
+        return () => cancelAnimationFrame(frame2);
+      });
+      return () => cancelAnimationFrame(frame1);
     }
 
     const observer = new IntersectionObserver(
