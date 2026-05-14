@@ -3,9 +3,17 @@ import { CreditCard, ShieldCheck, ArrowRight, MapPin, Clock } from "lucide-react
 import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, UI_LABELS, type Doctor, type Service, type ContactRow } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { ScheduleTable } from "../components/ScheduleTable";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import { DS } from "../styles/designSystem";
 
 export const Route = createFileRoute("/")({
   component: Home,
+});
+
+const reveal = (isVisible: boolean) => ({
+  opacity: isVisible ? 1 : 0,
+  transform: isVisible ? 'translateY(0)' : `translateY(${DS.animation.scroll.translateY})`,
+  transition: `opacity ${DS.animation.duration.slow} ${DS.animation.ease.out}, transform ${DS.animation.duration.slow} ${DS.animation.ease.out}`,
 });
 
 // ─── Section 1: Hero ──────────────────────────────────────────────────────────
@@ -137,8 +145,13 @@ function Hero() {
 // ─── Section 2: TrustBar ─────────────────────────────────────────────────────
 
 function TrustBar() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="bg-brand-primary-light py-16 px-6 md:px-10 border-b border-brand-border">
+    <section
+      ref={ref}
+      className="bg-brand-primary-light py-16 px-6 md:px-10 border-b border-brand-border"
+      style={reveal(isVisible)}
+    >
       <div className="max-w-[1320px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           {/* Left — insurance cards */}
@@ -208,8 +221,13 @@ function TrustBar() {
 // ─── Section 3: About Preview ────────────────────────────────────────────────
 
 function AboutPreview() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
+    <section
+      ref={ref}
+      className="py-[120px] px-6 md:px-10 bg-brand-paper"
+      style={reveal(isVisible)}
+    >
       <div className="max-w-[900px] mx-auto">
         <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-6">
           {UI_LABELS.home.aboutEyebrow}
@@ -234,8 +252,13 @@ function AboutPreview() {
 // ─── Section 4: Services Grid ────────────────────────────────────────────────
 
 function ServicesGrid() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="pt-10 pb-[120px] px-6 md:px-10 bg-brand-paper">
+    <section
+      ref={ref}
+      className="pt-10 pb-[120px] px-6 md:px-10 bg-brand-paper"
+      style={reveal(isVisible)}
+    >
       <div className="max-w-[1320px] mx-auto">
         {/* Header */}
         <div className="flex justify-between items-end flex-wrap gap-6 mb-16">
@@ -269,7 +292,7 @@ function ServicesGrid() {
               key={service.num}
               to="/services"
               preload="intent"
-              className="group block"
+              className={`group block${isVisible ? ` animate-fade-in-up animate-stagger-${(i % 5) + 1}` : ' opacity-0'}`}
               style={{ textDecoration: "none" }}
             >
               {/* Photo */}
@@ -279,7 +302,7 @@ function ServicesGrid() {
                   width={IMAGES.services[i].width}
                   height={IMAGES.services[i].height}
                   alt={service.title_tc}
-                  className="object-cover w-full h-full transition-transform duration-[600ms] ease-in-out group-hover:scale-[1.04]"
+                  className="object-cover w-full h-full transition-transform duration-[var(--duration-image)] ease-in-out group-hover:scale-[1.04]"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
@@ -355,10 +378,15 @@ function ServicesGrid() {
 // ─── Section 5: Doctors ──────────────────────────────────────────────────────
 
 function Doctors() {
+  const { ref, isVisible } = useScrollReveal();
   const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
 
   return (
-    <section className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border">
+    <section
+      ref={ref}
+      className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border"
+      style={reveal(isVisible)}
+    >
       <div className="max-w-[1320px] mx-auto">
         <div className="mb-16 max-w-[600px]">
           <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
@@ -449,6 +477,8 @@ function Doctors() {
 // ─── Section 7: Location ─────────────────────────────────────────────────────
 
 function Location() {
+  const { ref, isVisible } = useScrollReveal();
+
   const contactRows: ContactRow[] = [
     { label: "地址", value: CLINIC.address_tc },
     {
@@ -462,7 +492,11 @@ function Location() {
   ];
 
   return (
-    <section className="bg-brand-surface border-t border-brand-border">
+    <section
+      ref={ref}
+      className="bg-brand-surface border-t border-brand-border"
+      style={reveal(isVisible)}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Left — contact */}
         <div className="py-[120px] px-6 md:px-10 w-full md:max-w-[600px] md:justify-self-end">
@@ -545,8 +579,13 @@ function Location() {
 // ─── Section 8: Payment CTA Strip ────────────────────────────────────────────
 
 function PaymentCTA() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="py-20 px-6 md:px-10 bg-brand-primary text-white">
+    <section
+      ref={ref}
+      className="py-20 px-6 md:px-10 bg-brand-primary text-white"
+      style={reveal(isVisible)}
+    >
       <div className="max-w-[1320px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10 flex-wrap">
         <div className="max-w-[700px]">
           <div

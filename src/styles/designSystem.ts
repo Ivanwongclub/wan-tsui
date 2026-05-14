@@ -19,4 +19,13 @@ export const DS = {
     heading: "'Noto Serif TC', 'PingFang TC', Georgia, serif",
     body: "'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Plus Jakarta Sans', Inter, sans-serif",
   },
+  animation: {
+    duration: { fast: '150ms', base: '240ms', slow: '400ms', image: '600ms' },
+    ease: {
+      default: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      out: 'cubic-bezier(0, 0, 0.2, 1)',
+      spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+    },
+    scroll: { threshold: 0.15, rootMargin: '0px 0px -40px 0px', translateY: '16px' },
+  },
 } as const;

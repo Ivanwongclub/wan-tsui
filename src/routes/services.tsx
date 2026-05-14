@@ -3,6 +3,14 @@ import { Phone, MessageCircle } from "lucide-react";
 import { CLINIC, SERVICES, UI_LABELS, type Service } from "../content/wanTsui";
 import { IMAGES, ImageMeta, placeholderSvg } from "../lib/imageHelpers";
 import { PageHero } from "../components/PageHero";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import { DS } from "../styles/designSystem";
+
+const reveal = (isVisible: boolean) => ({
+  opacity: isVisible ? 1 : 0,
+  transform: isVisible ? 'translateY(0)' : `translateY(${DS.animation.scroll.translateY})`,
+  transition: `opacity ${DS.animation.duration.slow} ${DS.animation.ease.out}, transform ${DS.animation.duration.slow} ${DS.animation.ease.out}`,
+});
 
 export const Route = createFileRoute("/services")({
   component: Services,
@@ -19,6 +27,7 @@ function ServiceSection({
   index: number;
   image: ImageMeta;
 }) {
+  const { ref, isVisible } = useScrollReveal();
   const isOdd = index % 2 === 0; // 0-indexed: 0,2,4 → image LEFT; 1,3,5 → image RIGHT
   const isLast = index === SERVICES.length - 1;
 
@@ -142,7 +151,9 @@ function ServiceSection({
 
   return (
     <section
+      ref={ref}
       className={`py-16 md:py-20 px-6 md:px-10${isLast ? '' : ' border-b border-brand-border'}`}
+      style={reveal(isVisible)}
     >
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         <div
@@ -169,8 +180,9 @@ function ServiceSection({
 // ─── CTA Band ─────────────────────────────────────────────────────────────────
 
 function CTABand() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="bg-brand-primary text-white text-center py-16 px-6 md:px-10">
+    <section ref={ref} className="bg-brand-primary text-white text-center py-16 px-6 md:px-10" style={reveal(isVisible)}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
         <h2
           className="font-heading font-bold text-white"

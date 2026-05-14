@@ -1,4 +1,12 @@
 import { SCHEDULE, UI_LABELS, type ScheduleRow } from '../content/wanTsui';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { DS } from '../styles/designSystem';
+
+const reveal = (isVisible: boolean) => ({
+  opacity: isVisible ? 1 : 0,
+  transform: isVisible ? 'translateY(0)' : `translateY(${DS.animation.scroll.translateY})`,
+  transition: `opacity ${DS.animation.duration.slow} ${DS.animation.ease.out}, transform ${DS.animation.duration.slow} ${DS.animation.ease.out}`,
+});
 
 const DAY_INDEX_MAP: Record<string, number> = {
   星期一: 1,
@@ -11,10 +19,11 @@ const DAY_INDEX_MAP: Record<string, number> = {
 };
 
 export function ScheduleTable({ schedule = SCHEDULE }: { schedule?: ScheduleRow[] }) {
+  const { ref, isVisible } = useScrollReveal();
   const todayIndex = new Date().getDay();
 
   return (
-    <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
+    <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-paper" style={reveal(isVisible)}>
       <div className="max-w-[1080px] mx-auto">
         <div className="mb-12">
           <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">

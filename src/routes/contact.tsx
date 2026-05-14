@@ -2,6 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle, CreditCard, ShieldCheck } from "lucide-react";
 import { CLINIC, SCHEDULE, UI_LABELS, type ContactRow } from "../content/wanTsui";
 import { PageHero } from "../components/PageHero";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import { DS } from "../styles/designSystem";
+
+const reveal = (isVisible: boolean) => ({
+  opacity: isVisible ? 1 : 0,
+  transform: isVisible ? 'translateY(0)' : `translateY(${DS.animation.scroll.translateY})`,
+  transition: `opacity ${DS.animation.duration.slow} ${DS.animation.ease.out}, transform ${DS.animation.duration.slow} ${DS.animation.ease.out}`,
+});
 
 export const Route = createFileRoute("/contact")({
   component: Contact,
@@ -20,6 +28,7 @@ const DAY_INDEX_MAP: Record<string, number> = {
 // ─── Contact Info ─────────────────────────────────────────────────────────────
 
 function ContactInfo() {
+  const { ref, isVisible } = useScrollReveal();
   const rows: ContactRow[] = [
     { label: '地址', value: CLINIC.address_tc },
     { label: '交通', value: `${CLINIC.mtr}\n${CLINIC.bus}`, whitespace: true },
@@ -39,7 +48,7 @@ function ContactInfo() {
   ];
 
   return (
-    <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
+    <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-paper" style={reveal(isVisible)}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <div
           className="text-brand-primary"
@@ -129,10 +138,11 @@ function ContactInfo() {
 // ─── Hours Table ─────────────────────────────────────────────────────────────
 
 function HoursTable() {
+  const { ref, isVisible } = useScrollReveal();
   const todayIndex = new Date().getDay();
 
   return (
-    <section className="py-16 px-6 md:px-10 bg-brand-surface border-t border-brand-border">
+    <section ref={ref} className="py-16 px-6 md:px-10 bg-brand-surface border-t border-brand-border" style={reveal(isVisible)}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <div
           className="text-brand-primary"
@@ -231,8 +241,9 @@ function HoursTable() {
 // ─── Payment Reminder ─────────────────────────────────────────────────────────
 
 function PaymentReminder() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="py-16 px-6 md:px-10 bg-brand-primary-light">
+    <section ref={ref} className="py-16 px-6 md:px-10 bg-brand-primary-light" style={reveal(isVisible)}>
       <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
         <div className="flex justify-center items-center flex-wrap" style={{ gap: '32px' }}>
           <div className="flex items-center" style={{ gap: '8px' }}>

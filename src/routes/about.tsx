@@ -3,6 +3,14 @@ import { CLINIC, DOCTORS, UI_LABELS, type Doctor } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import { DS } from "../styles/designSystem";
+
+const reveal = (isVisible: boolean) => ({
+  opacity: isVisible ? 1 : 0,
+  transform: isVisible ? 'translateY(0)' : `translateY(${DS.animation.scroll.translateY})`,
+  transition: `opacity ${DS.animation.duration.slow} ${DS.animation.ease.out}, transform ${DS.animation.duration.slow} ${DS.animation.ease.out}`,
+});
 
 export const Route = createFileRoute("/about")({
   component: About,
@@ -13,8 +21,9 @@ const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
 // ─── Clinic Intro ─────────────────────────────────────────────────────────────
 
 function ClinicIntro() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="py-[120px] px-6 md:px-10 bg-brand-paper">
+    <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-paper" style={reveal(isVisible)}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div
           className="text-brand-primary"
@@ -48,8 +57,9 @@ function ClinicIntro() {
 // ─── Doctor Profiles ─────────────────────────────────────────────────────────
 
 function DoctorProfiles() {
+  const { ref, isVisible } = useScrollReveal();
   return (
-    <section className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border">
+    <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border" style={reveal(isVisible)}>
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         {/* Section header */}
         <div style={{ marginBottom: '64px', maxWidth: '600px' }}>
