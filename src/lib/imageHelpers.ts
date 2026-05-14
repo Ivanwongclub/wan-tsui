@@ -16,19 +16,74 @@ export function placeholderSvg(label: string, color1 = '#065F46', color2 = '#044
   return `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svg)))}`;
 }
 
-export type ImageMeta = { src: string; width: number; height: number };
+// ─── Optimized image types ────────────────────────────────────────────────────
+
+export type OptimizedImage = {
+  src: string;        // largest JPEG fallback
+  srcSet: string;     // JPEG srcset
+  srcSetWebp: string; // WebP srcset
+  sizes: string;
+  width: number;
+  height: number;
+  lqip: string;       // base64 data URI blurred placeholder
+};
+
+// Legacy alias kept for component compatibility
+export type ImageMeta = OptimizedImage;
+
+// ─── getImage helper ──────────────────────────────────────────────────────────
+
+// Lazily import generated data so the file compiles before the script has run.
+// loadImageData() is eagerly called at module init so IMAGE_DATA is populated
+// before any component renders.
+let IMAGE_DATA: Record<string, { widths: number[]; aspectRatio: number; lqip: string }> | null =
+  null;
+
+async function loadImageData() {
+  if (IMAGE_DATA) return;
+  try {
+    const mod = await import('./generated-image-data');
+    IMAGE_DATA = mod.IMAGE_DATA as typeof IMAGE_DATA;
+  } catch {
+    IMAGE_DATA = {};
+  }
+}
+
+loadImageData();
+
+export function getImage(
+  key: string,
+  sizesAttr = '(max-width: 768px) 100vw, 50vw',
+): OptimizedImage {
+  const data = IMAGE_DATA?.[key];
+  const widths = data?.widths ?? [400, 800, 1200];
+  const largest = Math.max(...widths);
+  const height = data ? Math.round(largest / data.aspectRatio) : largest;
+
+  return {
+    src: `/images/${key}-${largest}.jpg`,
+    srcSet: widths.map((w) => `/images/${key}-${w}.jpg ${w}w`).join(', '),
+    srcSetWebp: widths.map((w) => `/images/${key}-${w}.webp ${w}w`).join(', '),
+    sizes: sizesAttr,
+    width: largest,
+    height,
+    lqip: data?.lqip ?? '',
+  };
+}
+
+// ─── IMAGES const ─────────────────────────────────────────────────────────────
 
 export const IMAGES = {
-  hero: { src: '/images/hero-clinic.jpg', width: 1920, height: 1080 },
-  doctor1: { src: '/images/doctor-mak.jpg', width: 1024, height: 1024 },
-  doctor2: { src: '/images/doctor-lam.jpg', width: 1024, height: 1024 },
-  location: { src: '/images/location-chai-wan.jpg', width: 1024, height: 1024 },
+  hero: getImage('hero-clinic', '100vw'),
+  doctor1: getImage('doctor-mak', '(max-width: 768px) 100vw, 600px'),
+  doctor2: getImage('doctor-lam', '(max-width: 768px) 100vw, 600px'),
+  location: getImage('location-chai-wan', '(max-width: 768px) 100vw, 50vw'),
   services: [
-    { src: '/images/service-general-practice.jpg', width: 1024, height: 1024 },
-    { src: '/images/service-dermatology.jpg', width: 1024, height: 1024 },
-    { src: '/images/service-colorectal-screening.jpg', width: 1024, height: 1024 },
-    { src: '/images/service-chronic-disease.jpg', width: 1024, height: 1024 },
-    { src: '/images/service-flu-vaccine.jpg', width: 1024, height: 1024 },
-    { src: '/images/service-voucher.jpg', width: 1024, height: 1024 },
+    getImage('service-general-practice', '(max-width: 768px) 100vw, 33vw'),
+    getImage('service-dermatology', '(max-width: 768px) 100vw, 33vw'),
+    getImage('service-colorectal-screening', '(max-width: 768px) 100vw, 33vw'),
+    getImage('service-chronic-disease', '(max-width: 768px) 100vw, 33vw'),
+    getImage('service-flu-vaccine', '(max-width: 768px) 100vw, 33vw'),
+    getImage('service-voucher', '(max-width: 768px) 100vw, 33vw'),
   ],
 };
