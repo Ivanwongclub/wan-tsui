@@ -538,14 +538,10 @@ function Location() {
 
         {/* Right — photo */}
         <div className="min-h-[320px] md:min-h-[600px] bg-brand-primary overflow-hidden relative">
-          <img
-            src={IMAGES.location.src}
-            width={IMAGES.location.width}
-            height={IMAGES.location.height}
+          <Image
+            image={IMAGES.location}
             alt="環翠邨位置"
             className="object-cover w-full h-full absolute inset-0"
-            loading="lazy"
-            decoding="async"
             onError={(e) => {
               (e.target as HTMLImageElement).src = placeholderSvg("柴灣・環翠邨");
             }}
