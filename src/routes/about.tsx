@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CLINIC, DOCTORS, UI_LABELS, type Doctor } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
+import { Image } from "../components/Image";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
