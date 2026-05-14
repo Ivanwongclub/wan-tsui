@@ -6,13 +6,27 @@ export function useScrollReveal() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) { setIsVisible(true); return; }
-
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
+
+    // Already in viewport at mount — reveal immediately (handles SSR hydration case)
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.unobserve(el); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
       { threshold: DS.animation.scroll.threshold, rootMargin: DS.animation.scroll.rootMargin }
     );
     observer.observe(el);
