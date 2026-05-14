@@ -6,7 +6,7 @@ export const ANNOUNCEMENT = {
 export const CLINIC = {
   name_tc: '環翠綜合醫務中心',
   name_en: 'Wan Tsui Integrated Medical Centre',
-  name_en_short: 'Wan Tsui Medical Centre',
+  name_en_short: 'Wan Tsui Integrated Medical Centre',
   address_tc: '香港柴灣環翠邨環翠商場1樓109號舖',
   address_en: 'Shop 109, 1/F, Wan Tsui Commercial Centre, Wan Tsui Estate, Chai Wan, Hong Kong',
   phone: '(852) 2337 8999',
