@@ -79,7 +79,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             className="text-brand-muted"
             style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
           >
-            {CLINIC.name_en_short.toUpperCase()} · CHAI WAN
+            {CLINIC.name_en_short.toUpperCase()}
           </div>
         </Link>
 
