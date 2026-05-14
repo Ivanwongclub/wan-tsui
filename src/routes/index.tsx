@@ -404,14 +404,10 @@ function Doctors() {
             >
               {/* Photo */}
               <div className="aspect-[4/5] bg-brand-primary overflow-hidden relative">
-                <img
-                  src={doctorImages[i].src}
-                  width={doctorImages[i].width}
-                  height={doctorImages[i].height}
+                <Image
+                  image={doctorImages[i]}
                   alt={doctor.name_en}
                   className="object-cover w-full h-full"
-                  loading="lazy"
-                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = placeholderSvg(doctor.name_en);
                   }}
