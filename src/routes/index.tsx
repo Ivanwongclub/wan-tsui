@@ -603,14 +603,14 @@ function PaymentCTA() {
             <span style={{ opacity: 0.7 }}>{UI_LABELS.home.paymentHeading[1]}</span>
           </h2>
         </div>
-        <a
-          href="/services"
+        <Link
+          to="/services"
           className="bg-brand-accent text-white rounded-full inline-flex items-center gap-3 font-semibold whitespace-nowrap"
           style={{ padding: "14px 28px", fontSize: "15px", textDecoration: "none" }}
         >
           {UI_LABELS.cta.viewCards}
           <ArrowRight size={16} />
-        </a>
+        </Link>
       </div>
     </section>
   );
