@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle } from "lucide-react";
 import { CLINIC, SERVICES, UI_LABELS, type Service } from "../content/wanTsui";
 import { IMAGES, ImageMeta, placeholderSvg } from "../lib/imageHelpers";
+import { Image } from "../components/Image";
 import { PageHero } from "../components/PageHero";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { DS } from "../styles/designSystem";
