@@ -20,15 +20,15 @@ export type ImageMeta = { src: string; width: number; height: number };
 
 export const IMAGES = {
   hero: { src: '/images/hero-clinic.jpg', width: 1920, height: 1080 },
-  doctor1: { src: '/images/doctor-mak.jpg', width: 800, height: 1000 },
-  doctor2: { src: '/images/doctor-lam.jpg', width: 800, height: 1000 },
-  location: { src: '/images/location-chai-wan.jpg', width: 1200, height: 900 },
+  doctor1: { src: '/images/doctor-mak.jpg', width: 1024, height: 1024 },
+  doctor2: { src: '/images/doctor-lam.jpg', width: 1024, height: 1024 },
+  location: { src: '/images/location-chai-wan.jpg', width: 1024, height: 1024 },
   services: [
-    { src: '/images/service-general-practice.jpg', width: 800, height: 600 },
-    { src: '/images/service-dermatology.jpg', width: 800, height: 600 },
-    { src: '/images/service-colorectal-screening.jpg', width: 800, height: 600 },
-    { src: '/images/service-chronic-disease.jpg', width: 800, height: 600 },
-    { src: '/images/service-flu-vaccine.jpg', width: 800, height: 600 },
-    { src: '/images/service-voucher.jpg', width: 800, height: 600 },
+    { src: '/images/service-general-practice.jpg', width: 1024, height: 1024 },
+    { src: '/images/service-dermatology.jpg', width: 1024, height: 1024 },
+    { src: '/images/service-colorectal-screening.jpg', width: 1024, height: 1024 },
+    { src: '/images/service-chronic-disease.jpg', width: 1024, height: 1024 },
+    { src: '/images/service-flu-vaccine.jpg', width: 1024, height: 1024 },
+    { src: '/images/service-voucher.jpg', width: 1024, height: 1024 },
   ],
 };
