@@ -182,7 +182,7 @@ export const UI_LABELS = {
     lunchLabel: '午膳：',
     lunchDetail: `每日 ${CLINIC.lunch_break}`,
     adjustNote: '如有調動，致電查詢為準',
-    footerNote: `午膳 ${CLINIC.lunch_break} 暫停服務・星期日及公眾假期休診`,
+    footerNote: `午膳 ${CLINIC.lunch_break}・星期六下午及星期日公眾假期休診`,
   },
   home: {
     aboutEyebrow: '關於環翠',
