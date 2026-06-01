@@ -165,7 +165,7 @@ export const UI_LABELS = {
     eyebrow: '醫生團隊',
     heading: '認識我們的醫生',
     headingAbout: '兩位普通科醫生',
-    tagline: '熟悉柴灣社區，與街坊建立長期醫患關係。',
+    tagline: '',
     fieldCreds: '學歷',
     fieldSpecialty: '專業範疇',
     fieldSchedule: '當值時段',
