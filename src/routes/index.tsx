@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CreditCard, ShieldCheck, ArrowRight, MapPin, Clock } from "lucide-react";
+import { CreditCard, ShieldCheck, ArrowRight, MapPin } from "lucide-react";
 import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, UI_LABELS, type Doctor, type Service, type ContactRow } from "../content/wanTsui";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { Image } from "../components/Image";
@@ -123,14 +123,10 @@ function Hero() {
             borderTop: "1px solid rgba(255,255,255,0.2)",
           }}
         >
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center items-start gap-2 md:gap-0 px-5 md:px-10 py-3.5 md:py-5 text-white text-[12px] md:text-[13px] tracking-[0.05em]">
+          <div className="flex flex-col md:flex-row md:items-center items-start gap-2 md:gap-0 px-5 md:px-10 py-3.5 md:py-5 text-white text-[12px] md:text-[13px] tracking-[0.05em]">
             <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
               <MapPin size={14} />
               {CLINIC.address_tc}
-            </span>
-            <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
-              <Clock size={14} />
-              {CLINIC.hours_short_tc}
             </span>
           </div>
         </div>

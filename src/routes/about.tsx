@@ -19,41 +19,6 @@ export const Route = createFileRoute("/about")({
 
 const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
 
-// ─── Clinic Intro ─────────────────────────────────────────────────────────────
-
-function ClinicIntro() {
-  const { ref, isVisible } = useScrollReveal();
-  return (
-    <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-paper" style={reveal(isVisible)}>
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <div
-          className="text-brand-primary"
-          style={{
-            fontSize: '12px',
-            fontWeight: 600,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase' as const,
-            marginBottom: '24px',
-          }}
-        >
-          {UI_LABELS.about.introEyebrow}
-        </div>
-        <h2
-          className="font-heading font-bold text-brand-ink leading-[1.2]"
-          style={{ fontSize: 'clamp(32px, 4vw, 44px)', marginBottom: '32px' }}
-        >
-          <span className="text-brand-accent">{CLINIC.tagline_tc}</span>
-        </h2>
-        <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8, marginBottom: '24px' }}>
-          {CLINIC.intro[0]}
-        </p>
-        <p className="text-brand-body" style={{ fontSize: '17px', lineHeight: 1.8 }}>
-          {CLINIC.intro[1]}
-        </p>
-      </div>
-    </section>
-  );
-}
 
 // ─── Doctor Profiles ─────────────────────────────────────────────────────────
 
@@ -221,7 +186,6 @@ function About() {
         title="關於我們"
         subtitle={`${CLINIC.tagline_tc}・服務社區`}
       />
-      <ClinicIntro />
       <DoctorProfiles />
       <ScheduleTable />
     </>
