@@ -72,7 +72,7 @@ export const SERVICES = [
     num: '03',
     title_tc: '大腸癌篩查計劃',
     title_en: 'Colorectal Cancer Screening',
-    desc: '政府資助大腸癌篩查計劃，50歲以上合資格人士可參與。',
+    desc: '政府資助大腸癌篩查計劃，50–75歲合資格人士可參與。',
     detail: '政府資助篩查計劃，目標群組：50–75歲無症狀香港居民。第一步：大便隱血測試 (FIT)・免費。如測試結果呈陽性，安排轉介進行大腸鏡檢查（政府資助）。早期發現可大幅提高治癒率。',
     tags: ['政府資助', '須預約'],
     govScheme: true,
