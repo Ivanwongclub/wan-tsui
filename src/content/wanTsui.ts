@@ -16,8 +16,8 @@ export const CLINIC = {
   mobile_tel: '+85268015968',
   email: 'reception@wt-medical.com',
   whatsapp: '85268015968',
-  hours_tc: '星期一至六 09:00–13:00, 15:00–19:00',
-  hours_short_tc: '星期一至六 09:00–19:00',
+  hours_tc: '星期一至五 09:00–13:00, 15:00–19:00・星期六 09:00–13:00',
+  hours_short_tc: '星期一至五 09:00–19:00・星期六 09:00–13:00',
   lunch_break: '13:00–15:00',
   mtr: '港鐵柴灣站 B 出口・步行3分鐘',
   mtr_exit: '港鐵柴灣站 B 出口',
@@ -38,7 +38,7 @@ export const DOCTORS = [
     name_en: 'Dr. MAK Chun Wai',
     creds: '香港大學內外全科醫學士 (MB BS HK)',
     specialty: '普通科 / General Practice',
-    schedule_tc: '星期一・三・五 全日',
+    schedule_tc: '星期四・五 全日',
     bio: '麥醫生畢業於香港大學醫學院，在公立醫院完成駐院訓練後投身社區家庭醫學。熟悉柴灣區居民的健康需要，擅長慢性病長期管理及長者健康諮詢。',
   },
   {
@@ -46,7 +46,7 @@ export const DOCTORS = [
     name_en: 'Dr. LAM Wai May Josephine',
     creds: '香港中文大學內外全科醫學士 (MB ChB CUHK)・卡迪夫大學皮膚科文憑 (PgDip Dermatology Cardiff)',
     specialty: '普通科 / General Practice (兼 皮膚科文憑)',
-    schedule_tc: '星期二・四 全日',
+    schedule_tc: '星期二・三 全日・星期六上午',
     bio: '林醫生畢業於香港中文大學醫學院，其後赴英國卡迪夫大學修讀皮膚科文憑課程。除普通科門診外，對濕疹、暗瘡等常見皮膚問題有豐富的診療經驗。',
   },
 ];
@@ -109,10 +109,10 @@ export const SERVICES = [
 export const INSURANCE_PARTNERS = ['Bupa', 'AXA', 'Cigna', 'BlueCross', 'AIA', 'Manulife', 'Prudential', 'Sun Life'];
 
 export const SCHEDULE = [
-  { day: '星期一', am: '麥振威醫生', pm: '麥振威醫生' },
+  { day: '星期一', am: '當值醫生', pm: '當值醫生' },
   { day: '星期二', am: '林慧美醫生', pm: '林慧美醫生' },
-  { day: '星期三', am: '麥振威醫生', pm: '林慧美醫生' },
-  { day: '星期四', am: '林慧美醫生', pm: '麥振威醫生' },
+  { day: '星期三', am: '林慧美醫生', pm: '林慧美醫生' },
+  { day: '星期四', am: '麥振威醫生', pm: '麥振威醫生' },
   { day: '星期五', am: '麥振威醫生', pm: '麥振威醫生' },
   { day: '星期六', am: '林慧美醫生', pm: '— 休診' },
   { day: '星期日及公眾假期', am: '— 休診', pm: '— 休診' },
@@ -180,9 +180,9 @@ export const UI_LABELS = {
     colPM: '下午 15:00–19:00',
     todayBadge: '今日',
     lunchLabel: '午膳：',
-    lunchDetail: `每日 ${CLINIC.lunch_break} 暫停服務`,
+    lunchDetail: `每日 ${CLINIC.lunch_break}`,
     adjustNote: '如有調動，致電查詢為準',
-    footerNote: `午膳 ${CLINIC.lunch_break} 暫停服務・星期日及公眾假期休診`,
+    footerNote: `午膳 ${CLINIC.lunch_break}・星期六下午及星期日公眾假期休診`,
   },
   home: {
     aboutEyebrow: '關於環翠',
