@@ -194,7 +194,7 @@ export const UI_LABELS = {
     ] as const,
     servicesEyebrow: '診所服務 / Services',
     servicesHeading: '我們提供的服務',
-    servicesSubtitle: '兩個專科服務・三項政府資助計劃・接受長者醫療券。',
+    servicesSubtitle: '三項政府資助計劃・接受長者醫療券。',
     locationEyebrow: '到訪我們',
     locationHeading: ['就在環翠邨', '港鐵站旁'] as const,
     paymentEyebrow: '付款方式',
