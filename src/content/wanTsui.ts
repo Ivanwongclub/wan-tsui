@@ -109,10 +109,10 @@ export const SERVICES = [
 export const INSURANCE_PARTNERS = ['Bupa', 'AXA', 'Cigna', 'BlueCross', 'AIA', 'Manulife', 'Prudential', 'Sun Life'];
 
 export const SCHEDULE = [
-  { day: '星期一', am: '麥振威醫生', pm: '麥振威醫生' },
+  { day: '星期一', am: '當值醫生', pm: '當值醫生' },
   { day: '星期二', am: '林慧美醫生', pm: '林慧美醫生' },
-  { day: '星期三', am: '麥振威醫生', pm: '林慧美醫生' },
-  { day: '星期四', am: '林慧美醫生', pm: '麥振威醫生' },
+  { day: '星期三', am: '林慧美醫生', pm: '林慧美醫生' },
+  { day: '星期四', am: '麥振威醫生', pm: '麥振威醫生' },
   { day: '星期五', am: '麥振威醫生', pm: '麥振威醫生' },
   { day: '星期六', am: '林慧美醫生', pm: '— 休診' },
   { day: '星期日及公眾假期', am: '— 休診', pm: '— 休診' },
