@@ -38,7 +38,7 @@ export const DOCTORS = [
     name_en: 'Dr. MAK Chun Wai',
     creds: '香港大學內外全科醫學士 (MB BS HK)',
     specialty: '普通科 / General Practice',
-    schedule_tc: '星期一・三・五 全日',
+    schedule_tc: '星期四・五 全日',
     bio: '麥醫生畢業於香港大學醫學院，在公立醫院完成駐院訓練後投身社區家庭醫學。熟悉柴灣區居民的健康需要，擅長慢性病長期管理及長者健康諮詢。',
   },
   {
