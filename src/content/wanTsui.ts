@@ -24,7 +24,7 @@ export const CLINIC = {
   bus: '巴士 8H, 8X, 82, 82X・小巴 56',
   tagline_tc: '植根柴灣',
   hero_headline: ['家庭醫療', '植根柴灣'] as const,
-  hero_subtitle: '由兩位註冊普通科醫生主理・三項政府資助計劃・接受多種醫療卡及長者醫療券。',
+  hero_subtitle: '',
   voucher_amount: 'HK$2,000',
   intro: [
     '環翠綜合醫務中心紮根柴灣近二十年，由兩位資深普通科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。',
