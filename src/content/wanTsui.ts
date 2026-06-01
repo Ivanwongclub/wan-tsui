@@ -146,7 +146,7 @@ export const UI_LABELS = {
   trustBar: {
     insuranceEyebrow: '醫療保險',
     insuranceHeading: '接受醫療卡直付',
-    insuranceDesc: '本診所接受多種私營醫療保險公司之醫療卡直付，免除你即場墊支麻煩。',
+    insuranceDesc: '本診所接受多種私營醫療保險公司之醫療卡直付。',
     insuranceTrail: '及其他公司・致電查詢',
     voucherEyebrow: '政府資助',
     voucherHeading: '長者醫療券抵扣',
