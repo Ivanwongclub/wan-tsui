@@ -46,7 +46,7 @@ export const DOCTORS = [
     name_en: 'Dr. LAM Wai May Josephine',
     creds: '香港中文大學內外全科醫學士 (MB ChB CUHK)・卡迪夫大學皮膚科文憑 (PgDip Dermatology Cardiff)',
     specialty: '普通科 / General Practice (兼 皮膚科文憑)',
-    schedule_tc: '星期二・四 全日',
+    schedule_tc: '星期二・三 全日・星期六上午',
     bio: '林醫生畢業於香港中文大學醫學院，其後赴英國卡迪夫大學修讀皮膚科文憑課程。除普通科門診外，對濕疹、暗瘡等常見皮膚問題有豐富的診療經驗。',
   },
 ];
