@@ -180,7 +180,7 @@ export const UI_LABELS = {
     colPM: '下午 15:00–19:00',
     todayBadge: '今日',
     lunchLabel: '午膳：',
-    lunchDetail: `每日 ${CLINIC.lunch_break} 暫停服務`,
+    lunchDetail: `每日 ${CLINIC.lunch_break}`,
     adjustNote: '如有調動，致電查詢為準',
     footerNote: `午膳 ${CLINIC.lunch_break} 暫停服務・星期日及公眾假期休診`,
   },
