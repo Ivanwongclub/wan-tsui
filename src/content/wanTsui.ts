@@ -149,7 +149,7 @@ export const UI_LABELS = {
     insuranceDesc: '本診所接受多種私營醫療保險公司之醫療卡直付。',
     insuranceTrail: '及其他公司・致電查詢',
     voucherEyebrow: '政府資助',
-    voucherHeading: '長者醫療券抵扣',
+    voucherHeading: '長者醫療券',
     voucherDescPre: '65歲或以上香港居民每年可獲',
     voucherDescPost: '醫療券資助，可用於本診所所有服務。',
     voucherCta: '了解使用方法',
