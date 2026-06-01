@@ -186,7 +186,6 @@ function About() {
         title="關於我們"
         subtitle={`${CLINIC.tagline_tc}・服務社區`}
       />
-      <ClinicIntro />
       <DoctorProfiles />
       <ScheduleTable />
     </>
