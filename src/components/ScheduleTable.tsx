@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { SCHEDULE, UI_LABELS, type ScheduleRow } from '../content/wanTsui';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { DS } from '../styles/designSystem';

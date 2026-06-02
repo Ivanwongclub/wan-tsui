@@ -1,35 +1,26 @@
-Generate 10 AI images for the Wan Tsui clinic website and save them to `public/images/`. No code changes.
+## Root cause
 
-## Images
+`src/components/ScheduleTable.tsx` calls `new Date().getDay()` during render (line 23). SSR runs in the Cloudflare Worker (UTC), so the server may compute a different weekday than the client's local timezone (HK = UTC+8). The server then renders one row with the "今日" badge + `bg-brand-accent-light`, the client renders a different row, React throws a hydration mismatch, the root error boundary catches it, and SSR returns 500 for `GET /`.
 
-Using `imagegen--generate_image` with the `standard` quality tier (better fidelity for editorial photography; `premium` reserved for text-heavy assets, none here). All saved as `.jpg` (no transparency needed).
+This matches the runtime error exactly — the diff in the hydration log shows the "星期二" row losing its `bg-brand-accent-light` class and 今日 badge on the client.
 
-Each prompt will be prefixed with strict style anchors to enforce the look:
-- "East Asian / Hong Kong Chinese people only"
-- "Hong Kong public housing estate neighbourhood clinic, modest and clean (NOT a luxury private hospital, NOT a western hospital)"
-- "Warm natural lighting, editorial photography"
-- "No text, no signage, no logos"
+## Fix
 
-| # | File (in `public/images/`) | Dimensions | Notes |
-|---|---|---|---|
-| 1 | `hero-clinic.jpg` | 1920×1088 | Wide reception interior. (1080 rounded to nearest /32 multiple → 1088) |
-| 2 | `service-general-practice.jpg` | 800×608 | Male GP + elderly patient |
-| 3 | `service-dermatology.jpg` | 800×608 | Female doctor + dermatoscope |
-| 4 | `service-colorectal-screening.jpg` | 800×608 | Lab corner, no people |
-| 5 | `service-chronic-disease.jpg` | 800×608 | BP measurement |
-| 6 | `service-flu-vaccine.jpg` | 800×608 | Vaccine injection |
-| 7 | `service-voucher.jpg` | 800×608 | Elderly couple at reception |
-| 8 | `doctor-mak.jpg` | 512×640 | Portrait 4:5, male doctor 40s-50s |
-| 9 | `doctor-lam.jpg` | 512×640 | Portrait 4:5, female doctor 30s-40s |
-| 10 | `location-chai-wan.jpg` | 1216×800 | HK public housing podium street view |
+Defer the "today" calculation until after mount so SSR renders no highlight, then the client paints the highlight post-hydration. No visual regression — the row simply transitions in on the client.
 
-Note on dimensions: imagegen requires multiples of 32 between 512–1920. The exact spec sizes (1080, 600, 400, 500) are rounded to the nearest valid multiple while preserving aspect ratio. The user can resize/crop downstream if needed.
+In `src/components/ScheduleTable.tsx`:
 
-## Execution
+1. Add `useEffect`, `useState` imports.
+2. Replace `const todayIndex = new Date().getDay();` with:
+   ```ts
+   const [todayIndex, setTodayIndex] = useState<number | null>(null);
+   useEffect(() => { setTodayIndex(new Date().getDay()); }, []);
+   ```
+3. Update the comparison: `const isToday = todayIndex !== null && DAY_INDEX_MAP[row.day] === todayIndex;`
 
-Generate all 10 in parallel batches via `imagegen--generate_image`. After generation, list `public/images/` to confirm all 10 files landed, then report back.
+That's the only change needed. Server and initial client render both produce identical HTML (no highlight), hydration succeeds, then the today highlight appears.
 
-## What I will NOT do
+## Verification
 
-- No edits to routes, components, content files, or `imageHelpers.ts`
-- No wiring of the new images into the UI (Claude Code will handle references)
+- Reload `/` — no 500, no hydration error in console.
+- Schedule table renders; correct weekday row highlights after hydration.
