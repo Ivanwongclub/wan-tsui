@@ -1,26 +1,38 @@
 ## Root cause
 
-`src/components/ScheduleTable.tsx` calls `new Date().getDay()` during render (line 23). SSR runs in the Cloudflare Worker (UTC), so the server may compute a different weekday than the client's local timezone (HK = UTC+8). The server then renders one row with the "今日" badge + `bg-brand-accent-light`, the client renders a different row, React throws a hydration mismatch, the root error boundary catches it, and SSR returns 500 for `GET /`.
+`ScrollToTop` in `src/layouts/MainLayout.tsx` runs `window.scrollTo({ top: 0 })` whenever `pathname` changes. When a footer link navigates from e.g. `/` to `/services#service-02`, the pathname changes, so:
 
-This matches the runtime error exactly — the diff in the hydration log shows the "星期二" row losing its `bg-brand-accent-light` class and 今日 badge on the client.
+1. Router navigates and scrolls to the `#service-02` anchor.
+2. `ScrollToTop`'s effect fires on the pathname change and yanks the page back to the top.
+3. The browser then resolves the hash again → page jumps back down.
+
+That's the "flash to top, then back to section" the user sees.
 
 ## Fix
 
-Defer the "today" calculation until after mount so SSR renders no highlight, then the client paints the highlight post-hydration. No visual regression — the row simply transitions in on the client.
+Make `ScrollToTop` skip the reset when the destination has a hash, and also subscribe to `hash` so same-page hash changes still behave correctly.
 
-In `src/components/ScheduleTable.tsx`:
+In `src/layouts/MainLayout.tsx`:
 
-1. Add `useEffect`, `useState` imports.
-2. Replace `const todayIndex = new Date().getDay();` with:
-   ```ts
-   const [todayIndex, setTodayIndex] = useState<number | null>(null);
-   useEffect(() => { setTodayIndex(new Date().getDay()); }, []);
-   ```
-3. Update the comparison: `const isToday = todayIndex !== null && DAY_INDEX_MAP[row.day] === todayIndex;`
+```tsx
+function ScrollToTop() {
+  const { pathname, hash } = useRouterState({
+    select: (s) => ({ pathname: s.location.pathname, hash: s.location.hash }),
+  });
 
-That's the only change needed. Server and initial client render both produce identical HTML (no highlight), hydration succeeds, then the today highlight appears.
+  useEffect(() => {
+    if (hash) return; // let the router scroll to the anchor
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [pathname, hash]);
+
+  return null;
+}
+```
+
+No other files need to change. `scroll-margin-top` and smooth scroll behavior already added previously remain intact.
 
 ## Verification
 
-- Reload `/` — no 500, no hydration error in console.
-- Schedule table renders; correct weekday row highlights after hydration.
+- Click a footer link with a hash (e.g. 服務 → 普通科) from `/` → page lands directly on `#service-01` with no flash to top.
+- Click a footer link without a hash → still scrolls to top of the new route.
+- In-page hash links and direct loads of `/services#service-03` continue to work.
