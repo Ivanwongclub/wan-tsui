@@ -337,7 +337,7 @@ function ServicesGrid() {
 
 function Doctors() {
   const { ref, isVisible } = useScrollReveal();
-  const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
+  
 
   return (
     <section
