@@ -74,7 +74,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             alt={`${CLINIC.name_tc} 標誌`}
             width={50}
             height={40}
-            style={{ height: '40px', width: 'auto', flexShrink: 0, display: 'block' }}
+            className="h-9 md:h-10 w-auto flex-shrink-0 block"
           />
           <div>
             <div
@@ -84,8 +84,8 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
               {CLINIC.name_tc}
             </div>
             <div
-              className="text-brand-muted"
-              style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
+              className="text-brand-muted text-[7px] tracking-[0.03em] sm:text-[8px] sm:tracking-[0.05em] md:text-[10.5px] md:tracking-[0.18em] font-medium whitespace-nowrap"
+              style={{ marginTop: '4px' }}
             >
               {CLINIC.name_en_short.toUpperCase()}
             </div>
