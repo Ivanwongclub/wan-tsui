@@ -243,7 +243,7 @@ function HoursTable() {
 function PaymentReminder() {
   const { ref, isVisible } = useScrollReveal();
   return (
-    <section ref={ref} className="py-16 px-6 md:px-10 bg-brand-primary-light" style={reveal(isVisible)}>
+    <section ref={ref} id="pricing" className="py-16 px-6 md:px-10 bg-brand-primary-light" style={{ ...reveal(isVisible), scrollMarginTop: '80px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
         <div className="flex justify-center items-center flex-wrap" style={{ gap: '32px' }}>
           <div className="flex items-center" style={{ gap: '8px' }}>
