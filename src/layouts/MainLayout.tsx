@@ -388,6 +388,24 @@ function Footer() {
             {UI_LABELS.footer.emergency} <strong className="text-brand-accent">{UI_LABELS.footer.emergencyNumber}</strong>
           </span>
         </div>
+
+        {/* Tune Bright credit */}
+        <div style={{ paddingTop: '16px', textAlign: 'center' }}>
+          <a
+            href="https://www.tunebrighthk.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-muted transition-colors hover:text-brand-body"
+            style={{
+              fontSize: '11px',
+              letterSpacing: '0.05em',
+              textDecoration: 'none',
+              opacity: 0.55,
+            }}
+          >
+            Designed &amp; Powered by Tune Bright Limited
+          </a>
+        </div>
       </div>
     </footer>
   );
