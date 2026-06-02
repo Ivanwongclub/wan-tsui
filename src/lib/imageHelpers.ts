@@ -64,7 +64,7 @@ export const IMAGES = {
   location: getImage('location-chai-wan', '(max-width: 768px) 100vw, 50vw'),
   services: [
     getImage('service-general-practice', '(max-width: 768px) 100vw, 33vw'),
-    getImage('service-dermatology', '(max-width: 768px) 100vw, 33vw'),
+    
     getImage('service-colorectal-screening', '(max-width: 768px) 100vw, 33vw'),
     getImage('service-chronic-disease', '(max-width: 768px) 100vw, 33vw'),
     getImage('service-flu-vaccine', '(max-width: 768px) 100vw, 33vw'),

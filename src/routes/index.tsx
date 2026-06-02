@@ -337,7 +337,7 @@ function ServicesGrid() {
 
 function Doctors() {
   const { ref, isVisible } = useScrollReveal();
-  const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
+  
 
   return (
     <section
@@ -367,21 +367,41 @@ function Doctors() {
               key={doctor.name_en}
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-start"
             >
-              {/* Photo */}
-              <div className="aspect-[4/5] bg-brand-primary overflow-hidden relative">
-                <Image
-                  image={doctorImages[i]}
-                  alt={doctor.name_en}
-                  className="object-cover w-full h-full"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = placeholderSvg(doctor.name_en);
+              {/* Doctor stamp (replaces photo) */}
+              <div className="aspect-[4/5] bg-brand-primary overflow-hidden relative flex flex-col items-center justify-center">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)',
+                    backgroundSize: '20px 20px',
                   }}
                 />
                 <div
-                  className="absolute bottom-4 left-4 font-heading font-bold italic leading-none select-none"
-                  style={{ fontSize: "36px" }}
+                  className="font-heading font-bold italic text-brand-terra-light leading-none relative z-10"
+                  style={{ fontSize: 'clamp(120px, 16vw, 180px)' }}
                 >
-                  <span className="text-brand-terra-light">0{i + 1}</span>
+                  0{i + 1}
+                </div>
+                <div
+                  className="relative z-10"
+                  style={{
+                    width: '48px',
+                    height: '1px',
+                    background: 'rgba(212, 143, 99, 0.5)',
+                    marginTop: '20px',
+                  }}
+                />
+                <div
+                  className="relative z-10 text-white font-semibold"
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '0.22em',
+                    opacity: 0.6,
+                    marginTop: '16px',
+                  }}
+                >
+                  MEDICAL DOCTOR
                 </div>
               </div>
 

@@ -62,14 +62,6 @@ export const SERVICES = [
   },
   {
     num: '02',
-    title_tc: '皮膚問題診治',
-    title_en: 'Skin Conditions (Dermatology Diploma)',
-    desc: '處理濕疹、暗瘡、皮疹、色素問題及一般皮膚不適，由持卡迪夫大學皮膚科文憑之林醫生主理。',
-    detail: '由林慧美醫生主理，持卡迪夫大學皮膚科文憑 (PgDip Dermatology Cardiff)。處理常見皮膚問題：濕疹、暗瘡、皮疹、蕁麻疹、真菌感染。色素問題評估：色斑、痣的初步檢查及轉介。須預約・建議初次求診預留30分鐘。',
-    tags: ['須預約', '林醫生主理'],
-  },
-  {
-    num: '03',
     title_tc: '大腸癌篩查計劃',
     title_en: 'Colorectal Cancer Screening',
     desc: '政府資助大腸癌篩查計劃，50–75歲合資格人士可參與。',
@@ -78,7 +70,7 @@ export const SERVICES = [
     govScheme: true,
   },
   {
-    num: '04',
+    num: '03',
     title_tc: '慢性病共治計劃',
     title_en: 'Chronic Disease Co-Care',
     desc: '糖尿病、高血壓共同治理先導計劃，獲政府資助。',
@@ -87,7 +79,7 @@ export const SERVICES = [
     govScheme: true,
   },
   {
-    num: '05',
+    num: '04',
     title_tc: '流感疫苗注射',
     title_en: 'Flu Vaccination',
     desc: '季節性流感疫苗接種，長者及合資格人士可獲政府資助。',
@@ -96,7 +88,7 @@ export const SERVICES = [
     govScheme: true,
   },
   {
-    num: '06',
+    num: '05',
     title_tc: '醫療券',
     title_en: 'Healthcare Voucher Acceptance',
     desc: '接受長者醫療券，65歲以上長者每年享$2,000資助。',
