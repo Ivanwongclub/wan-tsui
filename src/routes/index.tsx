@@ -211,38 +211,7 @@ function TrustBar() {
   );
 }
 
-// ─── Section 3: About Preview ────────────────────────────────────────────────
-
-function AboutPreview() {
-  const { ref, isVisible } = useScrollReveal();
-  return (
-    <section
-      ref={ref}
-      className="py-[120px] px-6 md:px-10 bg-brand-paper"
-      style={reveal(isVisible)}
-    >
-      <div className="max-w-[900px] mx-auto">
-        <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-6">
-          {UI_LABELS.home.aboutEyebrow}
-        </div>
-        <p
-          className="font-heading leading-[1.55] text-brand-ink font-medium"
-          style={{ fontSize: "clamp(24px, 3vw, 32px)", letterSpacing: "0.01em" }}
-        >
-          {UI_LABELS.home.pullQuote[0]}<span className="text-brand-accent font-bold">{UI_LABELS.home.pullQuote[1]}</span>。
-          <br />
-          {UI_LABELS.home.pullQuote[2]}
-          <br />
-          <span className="text-brand-primary">
-            {UI_LABELS.home.pullQuote[3]}
-          </span>
-        </p>
-      </div>
-    </section>
-  );
-}
-
-// ─── Section 4: Services Grid ────────────────────────────────────────────────
+// ─── Section 3: Services Grid ────────────────────────────────────────────────
 
 function ServicesGrid() {
   const { ref, isVisible } = useScrollReveal();
