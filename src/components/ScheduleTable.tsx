@@ -21,7 +21,10 @@ const DAY_INDEX_MAP: Record<string, number> = {
 
 export function ScheduleTable({ schedule = SCHEDULE }: { schedule?: ScheduleRow[] }) {
   const { ref, isVisible } = useScrollReveal();
-  const todayIndex = new Date().getDay();
+  const [todayIndex, setTodayIndex] = useState<number | null>(null);
+  useEffect(() => { setTodayIndex(new Date().getDay()); }, []);
+
+
 
   return (
     <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-paper" style={reveal(isVisible)}>
