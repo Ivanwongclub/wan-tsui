@@ -324,6 +324,13 @@ function Footer() {
         >
           {/* Col 1 — clinic info */}
           <div>
+            <img
+              src="/images/wtimc-logo.png"
+              alt={`${CLINIC.name_tc} 標誌`}
+              width={72}
+              height={80}
+              style={{ height: '80px', width: 'auto', marginBottom: '16px', display: 'block' }}
+            />
             <div
               className="font-heading font-bold text-brand-ink"
               style={{ fontSize: '18px', marginBottom: '4px' }}
