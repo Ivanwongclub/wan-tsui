@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CLINIC, DOCTORS, UI_LABELS, type Doctor } from "../content/wanTsui";
-import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
-import { Image } from "../components/Image";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -17,7 +15,7 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
-const doctorImages = [IMAGES.doctor1, IMAGES.doctor2] as const;
+
 
 
 // ─── Doctor Profiles ─────────────────────────────────────────────────────────
