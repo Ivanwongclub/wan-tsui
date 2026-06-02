@@ -13,9 +13,9 @@ import { CLINIC } from "../content/wanTsui";
 
 import appCss from "../styles.css?url";
 
-const META_TITLE = `${CLINIC.name_tc} | 柴灣家庭醫療`;
-const META_DESC = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
-const META_DESC_SHORT = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_TITLE = `${CLINIC.name_tc} WTIMC｜柴灣家庭醫療診所｜接受醫療券`;
+const META_DESC = `柴灣港鐵站旁綜合醫務中心，由兩位註冊普通科醫生主理。提供普通科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_DESC_SHORT = `柴灣港鐵站旁綜合醫務中心，由兩位註冊醫生主理，提供普通科及政府資助計劃，接受醫療券。電話：${CLINIC.phone_short}`;
 
 function NotFoundComponent() {
   return (
