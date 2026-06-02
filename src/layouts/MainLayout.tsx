@@ -112,9 +112,8 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <a
             href={`tel:${CLINIC.phone_tel}`}
-            className="bg-brand-primary text-white rounded-button"
+            className="bg-brand-primary text-white rounded-button hidden md:inline-flex"
             style={{
-              display: 'inline-flex',
               alignItems: 'center',
               gap: '10px',
               padding: '10px 20px',
