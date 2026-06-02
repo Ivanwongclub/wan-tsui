@@ -271,13 +271,25 @@ function FooterColumnTitle({ children }: { children: ReactNode }) {
   );
 }
 
-function FooterLinks({ items }: { items: string[] }) {
+type FooterLinkItem = {
+  label: string;
+  to: '/services' | '/about' | '/contact';
+  hash?: string;
+};
+
+function FooterLinks({ items }: { items: ReadonlyArray<FooterLinkItem> }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       {items.map((item) => (
-        <span key={item} className="text-brand-body" style={{ fontSize: '14px' }}>
-          {item}
-        </span>
+        <Link
+          key={`${item.to}#${item.hash ?? ''}-${item.label}`}
+          to={item.to}
+          hash={item.hash}
+          className="text-brand-body hover:text-brand-primary transition-colors"
+          style={{ fontSize: '14px', textDecoration: 'none' }}
+        >
+          {item.label}
+        </Link>
       ))}
     </div>
   );
