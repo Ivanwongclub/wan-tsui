@@ -471,11 +471,14 @@ function MobileStickyBar() {
 // ─── ScrollToTop ──────────────────────────────────────────────────────────────
 
 function ScrollToTop() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { pathname, hash } = useRouterState({
+    select: (s) => ({ pathname: s.location.pathname, hash: s.location.hash }),
+  });
 
   useEffect(() => {
+    if (hash) return;
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }
