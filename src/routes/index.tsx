@@ -196,14 +196,14 @@ function TrustBar() {
               <strong className="text-brand-accent">{CLINIC.voucher_amount}</strong>
               {UI_LABELS.trustBar.voucherDescPost}
             </p>
-            <a
-              href="#"
+            <Link
+              to="/services"
               className="inline-flex items-center gap-2 text-[13px] text-brand-primary font-semibold border-b border-brand-primary pb-1"
               style={{ textDecoration: "none" }}
             >
               {UI_LABELS.trustBar.voucherCta}
               <ArrowRight size={14} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

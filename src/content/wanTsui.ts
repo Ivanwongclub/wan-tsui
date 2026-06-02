@@ -113,7 +113,7 @@ export const SCHEDULE = [
 export const FOOTER_NAV = {
   services: ['普通科', '大腸癌篩查', '慢性病共治', '流感疫苗', '醫療券'],
   payment: ['醫療卡列表', '長者醫療券', '收費表', '政府資助'],
-  info: ['醫生團隊', '預約須知', '私隱政策', '使用條款'],
+  info: ['醫生團隊'],
 };
 
 export type Doctor = typeof DOCTORS[number];
