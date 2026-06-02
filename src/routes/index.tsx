@@ -368,7 +368,7 @@ function Doctors() {
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-start"
             >
               {/* Doctor stamp (replaces photo) */}
-              <div className="aspect-[4/5] bg-brand-primary overflow-hidden relative flex flex-col items-center justify-center">
+              <div className="aspect-[16/9] md:aspect-[4/5] bg-brand-primary overflow-hidden relative flex flex-col items-center justify-center">
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 pointer-events-none"
