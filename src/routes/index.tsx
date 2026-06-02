@@ -604,7 +604,6 @@ function Home() {
     <>
       <Hero />
       <TrustBar />
-      <AboutPreview />
       <ServicesGrid />
       <Doctors />
       <ScheduleTable />
