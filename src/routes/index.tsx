@@ -378,31 +378,27 @@ function Doctors() {
                   }}
                 />
                 <div
-                  className="font-heading font-bold italic text-brand-terra-light leading-none relative z-10"
-                  style={{ fontSize: 'clamp(120px, 16vw, 180px)' }}
+                  className="font-heading font-bold text-white relative z-10"
+                  style={{
+                    writingMode: 'vertical-rl',
+                    fontSize: 'clamp(28px, 4.8vw, 56px)',
+                    letterSpacing: '0.18em',
+                    lineHeight: 1.1,
+                  }}
                 >
-                  0{i + 1}
+                  {doctor.name_tc}
                 </div>
                 <div
-                  className="relative z-10"
+                  aria-hidden="true"
+                  className="absolute z-10"
                   style={{
-                    width: '48px',
-                    height: '1px',
+                    left: '18%',
+                    top: '20%',
+                    bottom: '20%',
+                    width: '1px',
                     background: 'rgba(212, 143, 99, 0.5)',
-                    marginTop: '20px',
                   }}
                 />
-                <div
-                  className="relative z-10 text-white font-semibold"
-                  style={{
-                    fontSize: '11px',
-                    letterSpacing: '0.22em',
-                    opacity: 0.6,
-                    marginTop: '16px',
-                  }}
-                >
-                  MEDICAL DOCTOR
-                </div>
               </div>
 
               {/* Bio */}
