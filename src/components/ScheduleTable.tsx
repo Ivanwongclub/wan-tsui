@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { SCHEDULE, UI_LABELS, type ScheduleRow } from '../content/wanTsui';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { DS } from '../styles/designSystem';
@@ -20,7 +21,10 @@ const DAY_INDEX_MAP: Record<string, number> = {
 
 export function ScheduleTable({ schedule = SCHEDULE }: { schedule?: ScheduleRow[] }) {
   const { ref, isVisible } = useScrollReveal();
-  const todayIndex = new Date().getDay();
+  const [todayIndex, setTodayIndex] = useState<number | null>(null);
+  useEffect(() => { setTodayIndex(new Date().getDay()); }, []);
+
+
 
   return (
     <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-paper" style={reveal(isVisible)}>
@@ -56,7 +60,7 @@ export function ScheduleTable({ schedule = SCHEDULE }: { schedule?: ScheduleRow[
             </thead>
             <tbody>
               {schedule.map((row) => {
-                const isToday = DAY_INDEX_MAP[row.day] === todayIndex;
+                const isToday = todayIndex !== null && DAY_INDEX_MAP[row.day] === todayIndex;
                 return (
                   <tr
                     key={row.day}
