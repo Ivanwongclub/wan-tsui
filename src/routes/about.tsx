@@ -167,18 +167,6 @@ function DoctorProfiles() {
                   </div>
                 </div>
 
-                {/* Bio paragraph — About page only */}
-                <p
-                  className="text-brand-body"
-                  style={{
-                    marginTop: '24px',
-                    fontSize: '14px',
-                    lineHeight: 1.7,
-                    fontStyle: 'italic',
-                  }}
-                >
-                  {doctor.bio}
-                </p>
               </div>
             </div>
           ))}
