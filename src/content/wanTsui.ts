@@ -111,9 +111,22 @@ export const SCHEDULE = [
 ];
 
 export const FOOTER_NAV = {
-  services: ['普通科', '大腸癌篩查', '慢性病共治', '流感疫苗', '醫療券'],
-  payment: ['醫療卡列表', '長者醫療券', '收費表', '政府資助'],
-  info: ['醫生團隊'],
+  services: [
+    { label: '普通科', to: '/services' as const, hash: 'service-01' },
+    { label: '大腸癌篩查', to: '/services' as const, hash: 'service-02' },
+    { label: '慢性病共治', to: '/services' as const, hash: 'service-03' },
+    { label: '流感疫苗', to: '/services' as const, hash: 'service-04' },
+    { label: '醫療券', to: '/services' as const, hash: 'service-05' },
+  ],
+  payment: [
+    { label: '醫療卡列表', to: '/services' as const },
+    { label: '長者醫療券', to: '/services' as const, hash: 'service-05' },
+    { label: '收費表', to: '/contact' as const, hash: 'pricing' },
+    { label: '政府資助', to: '/services' as const, hash: 'service-02' },
+  ],
+  info: [
+    { label: '醫生團隊', to: '/about' as const, hash: 'doctors' },
+  ],
 };
 
 export type Doctor = typeof DOCTORS[number];
