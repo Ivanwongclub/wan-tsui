@@ -23,7 +23,7 @@ export const Route = createFileRoute("/about")({
 function DoctorProfiles() {
   const { ref, isVisible } = useScrollReveal();
   return (
-    <section ref={ref} className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border" style={reveal(isVisible)}>
+    <section ref={ref} id="doctors" className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border" style={{ ...reveal(isVisible), scrollMarginTop: '80px' }}>
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         {/* Section header */}
         <div style={{ marginBottom: '64px', maxWidth: '600px' }}>

@@ -149,8 +149,9 @@ function ServiceSection({
   return (
     <section
       ref={ref}
+      id={`service-${service.num}`}
       className={`py-16 md:py-20 px-6 md:px-10${isLast ? '' : ' border-b border-brand-border'}`}
-      style={reveal(isVisible)}
+      style={{ ...reveal(isVisible), scrollMarginTop: '80px' }}
     >
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         <div
