@@ -13,9 +13,9 @@ import { CLINIC } from "../content/wanTsui";
 
 import appCss from "../styles.css?url";
 
-const META_TITLE = `${CLINIC.name_tc} | 柴灣家庭醫療`;
-const META_DESC = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
-const META_DESC_SHORT = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_TITLE = `${CLINIC.name_tc} WTIMC｜柴灣家庭醫療診所｜接受醫療券`;
+const META_DESC = `柴灣港鐵站旁綜合醫務中心，由兩位註冊普通科醫生主理。提供普通科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_DESC_SHORT = `柴灣港鐵站旁綜合醫務中心，由兩位註冊醫生主理，提供普通科及政府資助計劃，接受醫療券。電話：${CLINIC.phone_short}`;
 
 function NotFoundComponent() {
   return (
@@ -79,6 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#065F46" },
       { title: META_TITLE },
       { name: "description", content: META_DESC },
       { name: "author", content: CLINIC.name_tc },
@@ -92,6 +93,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
     ],
     links: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
