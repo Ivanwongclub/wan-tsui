@@ -60,7 +60,7 @@ export function ScheduleTable({ schedule = SCHEDULE }: { schedule?: ScheduleRow[
             </thead>
             <tbody>
               {schedule.map((row) => {
-                const isToday = DAY_INDEX_MAP[row.day] === todayIndex;
+                const isToday = todayIndex !== null && DAY_INDEX_MAP[row.day] === todayIndex;
                 return (
                   <tr
                     key={row.day}
