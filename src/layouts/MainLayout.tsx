@@ -68,18 +68,27 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         }}
       >
         {/* Left — clinic name */}
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <div
-            className="font-heading font-bold text-brand-ink"
-            style={{ fontSize: '20px', lineHeight: 1, letterSpacing: '0.02em' }}
-          >
-            {CLINIC.name_tc}
-          </div>
-          <div
-            className="text-brand-muted"
-            style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
-          >
-            {CLINIC.name_en_short.toUpperCase()}
+        <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img
+            src="/images/wtimc-logo-icon.png"
+            alt={`${CLINIC.name_tc} 標誌`}
+            width={50}
+            height={40}
+            style={{ height: '40px', width: 'auto', flexShrink: 0, display: 'block' }}
+          />
+          <div>
+            <div
+              className="font-heading font-bold text-brand-ink"
+              style={{ fontSize: '20px', lineHeight: 1, letterSpacing: '0.02em' }}
+            >
+              {CLINIC.name_tc}
+            </div>
+            <div
+              className="text-brand-muted"
+              style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginTop: '4px' }}
+            >
+              {CLINIC.name_en_short.toUpperCase()}
+            </div>
           </div>
         </Link>
 
@@ -315,6 +324,13 @@ function Footer() {
         >
           {/* Col 1 — clinic info */}
           <div>
+            <img
+              src="/images/wtimc-logo.png"
+              alt={`${CLINIC.name_tc} 標誌`}
+              width={72}
+              height={80}
+              style={{ height: '80px', width: 'auto', marginBottom: '16px', display: 'block' }}
+            />
             <div
               className="font-heading font-bold text-brand-ink"
               style={{ fontSize: '18px', marginBottom: '4px' }}
