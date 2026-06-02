@@ -368,7 +368,7 @@ function Doctors() {
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-start"
             >
               {/* Doctor stamp (replaces photo) */}
-              <div className="aspect-[16/9] md:aspect-[4/5] bg-brand-primary overflow-hidden relative flex flex-col items-center justify-center">
+              <div className="hidden md:flex aspect-[4/5] bg-brand-primary overflow-hidden relative items-center justify-center">
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 pointer-events-none"
@@ -381,7 +381,8 @@ function Doctors() {
                   className="font-heading font-bold text-white relative z-10"
                   style={{
                     writingMode: 'vertical-rl',
-                    fontSize: 'clamp(28px, 4.8vw, 56px)',
+                    whiteSpace: 'nowrap',
+                    fontSize: 'clamp(24px, 3.5vw, 42px)',
                     letterSpacing: '0.18em',
                     lineHeight: 1.1,
                   }}
