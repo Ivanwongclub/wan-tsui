@@ -121,7 +121,6 @@ export const FOOTER_NAV = {
   payment: [
     { label: '醫療卡列表', to: '/services' as const },
     { label: '長者醫療券', to: '/services' as const, hash: 'service-05' },
-    { label: '收費表', to: '/contact' as const, hash: 'pricing' },
     { label: '政府資助', to: '/services' as const, hash: 'service-02' },
   ],
   info: [
