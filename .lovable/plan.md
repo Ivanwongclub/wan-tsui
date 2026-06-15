@@ -1,38 +1,27 @@
-## Root cause
+## Goal
+Replace every Chinese occurrence of `普通科` with `全科` across the live site. English label "General Practice" stays unchanged (per your selection). Reference spec files under `reference/` are not shipped — leave them alone.
 
-`ScrollToTop` in `src/layouts/MainLayout.tsx` runs `window.scrollTo({ top: 0 })` whenever `pathname` changes. When a footer link navigates from e.g. `/` to `/services#service-02`, the pathname changes, so:
+## Files & edits
 
-1. Router navigates and scrolls to the `#service-02` anchor.
-2. `ScrollToTop`'s effect fires on the pathname change and yanks the page back to the top.
-3. The browser then resolves the hash again → page jumps back down.
+**1. `src/content/wanTsui.ts`** (8 occurrences)
+- L30 intro: `兩位資深普通科醫生` → `兩位資深全科醫生`
+- L40, L48 doctor specialty: `普通科 / General Practice` → `全科 / General Practice`
+- L50 林醫生 bio: `除普通科門診外` → `除全科門診外`
+- L57 SERVICES[0] `title_tc`: `普通科門診` → `全科門診`
+- L115 FOOTER_NAV.services[0] label: `普通科` → `全科`
+- L171 UI_LABELS.doctors.headingAbout: `兩位普通科醫生` → `兩位全科醫生`
+- L196 UI_LABELS.home.pullQuote: `由兩位註冊普通科醫生主理…` → `由兩位註冊全科醫生主理…`
 
-That's the "flash to top, then back to section" the user sees.
+**2. `src/routes/__root.tsx`** (5 occurrences, in SEO meta strings)
+- L17 META_DESC: `兩位資深普通科醫生駐診，提供普通科、…` → `兩位資深全科醫生駐診，提供全科、…`
+- L18 META_DESC_SHORT: `兩位資深普通科醫生駐診` → `兩位資深全科醫生駐診`
+- L96–98 description / og:description / twitter:description: `兩位註冊普通科醫生主理。提供普通科門診…` → `兩位註冊全科醫生主理。提供全科門診…`
 
-## Fix
+`title_en: 'General Practice'`, doctor `specialty` English half, and any other English copy remain unchanged.
 
-Make `ScrollToTop` skip the reset when the destination has a hash, and also subscribe to `hash` so same-page hash changes still behave correctly.
-
-In `src/layouts/MainLayout.tsx`:
-
-```tsx
-function ScrollToTop() {
-  const { pathname, hash } = useRouterState({
-    select: (s) => ({ pathname: s.location.pathname, hash: s.location.hash }),
-  });
-
-  useEffect(() => {
-    if (hash) return; // let the router scroll to the anchor
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [pathname, hash]);
-
-  return null;
-}
-```
-
-No other files need to change. `scroll-margin-top` and smooth scroll behavior already added previously remain intact.
+## Out of scope
+- `reference/*.jsx` (design specs, not used at runtime)
+- No layout, routing, or component logic changes
 
 ## Verification
-
-- Click a footer link with a hash (e.g. 服務 → 普通科) from `/` → page lands directly on `#service-01` with no flash to top.
-- Click a footer link without a hash → still scrolls to top of the new route.
-- In-page hash links and direct loads of `/services#service-03` continue to work.
+After edits, `rg "普通科" src/` should return 0 matches; build passes.

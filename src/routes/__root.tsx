@@ -14,8 +14,8 @@ import { CLINIC } from "../content/wanTsui";
 import appCss from "../styles.css?url";
 
 const META_TITLE = `${CLINIC.name_tc} | 柴灣家庭醫療`;
-const META_DESC = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，提供普通科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
-const META_DESC_SHORT = `${CLINIC.address_tc}，由兩位資深普通科醫生駐診，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_DESC = `${CLINIC.address_tc}，由兩位資深全科醫生駐診，提供全科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const META_DESC_SHORT = `${CLINIC.address_tc}，由兩位資深全科醫生駐診，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
 
 function NotFoundComponent() {
   return (
@@ -93,9 +93,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Wan Tsui 環翠綜合醫務中心｜柴灣家庭醫療診所｜接受醫療券" },
       { property: "og:title", content: "Wan Tsui 環翠綜合醫務中心｜柴灣家庭醫療診所｜接受醫療券" },
       { name: "twitter:title", content: "Wan Tsui 環翠綜合醫務中心｜柴灣家庭醫療診所｜接受醫療券" },
-      { name: "description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊普通科醫生主理。提供普通科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
-      { property: "og:description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊普通科醫生主理。提供普通科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
-      { name: "twitter:description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊普通科醫生主理。提供普通科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
+      { name: "description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊全科醫生主理。提供全科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
+      { property: "og:description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊全科醫生主理。提供全科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
+      { name: "twitter:description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊全科醫生主理。提供全科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

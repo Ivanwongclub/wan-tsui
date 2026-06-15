@@ -27,7 +27,7 @@ export const CLINIC = {
   hero_subtitle: '',
   voucher_amount: 'HK$2,000',
   intro: [
-    '環翠綜合醫務中心紮根柴灣近二十年，由兩位資深普通科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。',
+    '環翠綜合醫務中心紮根柴灣近二十年，由兩位資深全科醫生駐診，為環翠邨及鄰近屋苑的街坊提供全面的基層醫療服務。',
     '本診所致力以專業、親切的態度服務社區，並積極參與政府各項醫療資助計劃，讓街坊能以可負擔的費用獲得優質醫療照顧。',
   ] as const,
 };
@@ -37,7 +37,7 @@ export const DOCTORS = [
     name_tc: '麥振威醫生',
     name_en: 'Dr. MAK Chun Wai',
     creds: '香港大學內外全科醫學士 (MB BS HK)',
-    specialty: '普通科 / General Practice',
+    specialty: '全科 / General Practice',
     schedule_tc: '星期四・五 全日',
     bio: '麥醫生畢業於香港大學醫學院，在公立醫院完成駐院訓練後投身社區家庭醫學。熟悉柴灣區居民的健康需要，擅長慢性病長期管理及長者健康諮詢。',
   },
@@ -45,16 +45,16 @@ export const DOCTORS = [
     name_tc: '林慧美醫生',
     name_en: 'Dr. Lam Josephine Wai May',
     creds: '香港中文大學內外全科醫學士 (MB ChB CUHK)・卡迪夫大學皮膚科文憑 (PgDip Dermatology Cardiff)',
-    specialty: '普通科 / General Practice',
+    specialty: '全科 / General Practice',
     schedule_tc: '星期二・三 全日・星期六上午',
-    bio: '林醫生畢業於香港中文大學醫學院，其後赴英國卡迪夫大學修讀皮膚科文憑課程。除普通科門診外，對濕疹、暗瘡等常見皮膚問題有豐富的診療經驗。',
+    bio: '林醫生畢業於香港中文大學醫學院，其後赴英國卡迪夫大學修讀皮膚科文憑課程。除全科門診外，對濕疹、暗瘡等常見皮膚問題有豐富的診療經驗。',
   },
 ];
 
 export const SERVICES = [
   {
     num: '01',
-    title_tc: '普通科門診',
+    title_tc: '全科門診',
     title_en: 'General Practice',
     desc: '日常疾病診治、慢性病管理、健康諮詢及預防保健。',
     detail: '提供日常疾病診斷及治療，包括感冒、發燒、腸胃不適等常見病症。慢性病管理：定期覆診、藥物調整、健康監測。預防保健：身體檢查建議、健康諮詢、轉介服務。即日加號服務，方便街坊臨時求診。',
@@ -112,7 +112,7 @@ export const SCHEDULE = [
 
 export const FOOTER_NAV = {
   services: [
-    { label: '普通科', to: '/services' as const, hash: 'service-01' },
+    { label: '全科', to: '/services' as const, hash: 'service-01' },
     { label: '大腸癌篩查', to: '/services' as const, hash: 'service-02' },
     { label: '慢性病共治', to: '/services' as const, hash: 'service-03' },
     { label: '流感疫苗', to: '/services' as const, hash: 'service-04' },
@@ -168,7 +168,7 @@ export const UI_LABELS = {
   doctors: {
     eyebrow: '醫生團隊',
     heading: '認識我們的醫生',
-    headingAbout: '兩位普通科醫生',
+    headingAbout: '兩位全科醫生',
     tagline: '',
     fieldCreds: '學歷',
     fieldSpecialty: '專業範疇',
@@ -193,7 +193,7 @@ export const UI_LABELS = {
     pullQuote: [
       '服務柴灣街坊近',
       '二十年',
-      '由兩位註冊普通科醫生主理日常診症及皮膚問題診治，',
+      '由兩位註冊全科醫生主理日常診症及皮膚問題診治，',
       '並提供三項政府資助計劃，讓街坊安心就醫。',
     ] as const,
     servicesEyebrow: '診所服務 / Services',
