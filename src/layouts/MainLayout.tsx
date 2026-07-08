@@ -231,6 +231,8 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         </a>
         <a
           href={`https://wa.me/${CLINIC.whatsapp}`}
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-brand-surface text-brand-ink rounded-button border border-brand-border"
           style={{
             display: 'flex',
@@ -449,6 +451,8 @@ function MobileStickyBar() {
       </a>
       <a
         href={`https://wa.me/${CLINIC.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className="bg-brand-surface text-brand-ink border-l border-brand-border"
         style={{
           flex: 1,
