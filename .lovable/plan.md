@@ -1,18 +1,6 @@
-## Audit result
+Update `src/content/wanTsui.ts`:
 
-All URLs in the site resolve correctly. WhatsApp links already use `https://wa.me/85268015968` (from `CLINIC.whatsapp` in `src/content/wanTsui.ts`). Tel/mailto/internal routes all valid. No broken URLs found.
+1. `SCHEDULE` — 星期一 row: change `am` and `pm` from `'當值醫生'` to `'林慧美醫生'`.
+2. `DOCTORS[1]` (林慧美醫生) — change `schedule_tc` from `'星期二・三 全日・星期六上午'` to `'星期一・二・三 全日・星期六上午'`.
 
-The only issue: WhatsApp links currently open in the same tab. Only one external link (`tunebrighthk.com` in footer) uses `target="_blank"`.
-
-## Fix — open all WhatsApp links in a new window
-
-Add `target="_blank" rel="noopener noreferrer"` to every `wa.me` anchor:
-
-1. `src/layouts/MainLayout.tsx` — desktop nav CTA (line ~233) and mobile floating CTA (line ~451)
-2. `src/routes/index.tsx` — hero CTA (line ~101)
-3. `src/routes/services.tsx` — CTA band (line ~204)
-4. `src/routes/contact.tsx` — WhatsApp row (rendered at line ~91 via `row.href`) and CTA button (line ~120)
-
-For the contact page row rendering, since only WhatsApp among the rows is external, add a conditional: if `row.href` starts with `https://`, add `target="_blank" rel="noopener noreferrer"`.
-
-No content or URL string changes — the number `85268015968` is already correct.
+Both Home page (schedule table + doctor card) and About page read from this file, so both update automatically. No other files need changes.
