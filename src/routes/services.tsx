@@ -202,6 +202,8 @@ function CTABand() {
           </a>
           <a
             href={`https://wa.me/${CLINIC.whatsapp}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center rounded-full text-white font-semibold border border-white"
             style={{
               gap: '10px',

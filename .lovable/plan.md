@@ -1,27 +1,18 @@
-## Goal
-Replace every Chinese occurrence of `普通科` with `全科` across the live site. English label "General Practice" stays unchanged (per your selection). Reference spec files under `reference/` are not shipped — leave them alone.
+## Audit result
 
-## Files & edits
+All URLs in the site resolve correctly. WhatsApp links already use `https://wa.me/85268015968` (from `CLINIC.whatsapp` in `src/content/wanTsui.ts`). Tel/mailto/internal routes all valid. No broken URLs found.
 
-**1. `src/content/wanTsui.ts`** (8 occurrences)
-- L30 intro: `兩位資深普通科醫生` → `兩位資深全科醫生`
-- L40, L48 doctor specialty: `普通科 / General Practice` → `全科 / General Practice`
-- L50 林醫生 bio: `除普通科門診外` → `除全科門診外`
-- L57 SERVICES[0] `title_tc`: `普通科門診` → `全科門診`
-- L115 FOOTER_NAV.services[0] label: `普通科` → `全科`
-- L171 UI_LABELS.doctors.headingAbout: `兩位普通科醫生` → `兩位全科醫生`
-- L196 UI_LABELS.home.pullQuote: `由兩位註冊普通科醫生主理…` → `由兩位註冊全科醫生主理…`
+The only issue: WhatsApp links currently open in the same tab. Only one external link (`tunebrighthk.com` in footer) uses `target="_blank"`.
 
-**2. `src/routes/__root.tsx`** (5 occurrences, in SEO meta strings)
-- L17 META_DESC: `兩位資深普通科醫生駐診，提供普通科、…` → `兩位資深全科醫生駐診，提供全科、…`
-- L18 META_DESC_SHORT: `兩位資深普通科醫生駐診` → `兩位資深全科醫生駐診`
-- L96–98 description / og:description / twitter:description: `兩位註冊普通科醫生主理。提供普通科門診…` → `兩位註冊全科醫生主理。提供全科門診…`
+## Fix — open all WhatsApp links in a new window
 
-`title_en: 'General Practice'`, doctor `specialty` English half, and any other English copy remain unchanged.
+Add `target="_blank" rel="noopener noreferrer"` to every `wa.me` anchor:
 
-## Out of scope
-- `reference/*.jsx` (design specs, not used at runtime)
-- No layout, routing, or component logic changes
+1. `src/layouts/MainLayout.tsx` — desktop nav CTA (line ~233) and mobile floating CTA (line ~451)
+2. `src/routes/index.tsx` — hero CTA (line ~101)
+3. `src/routes/services.tsx` — CTA band (line ~204)
+4. `src/routes/contact.tsx` — WhatsApp row (rendered at line ~91 via `row.href`) and CTA button (line ~120)
 
-## Verification
-After edits, `rg "普通科" src/` should return 0 matches; build passes.
+For the contact page row rendering, since only WhatsApp among the rows is external, add a conditional: if `row.href` starts with `https://`, add `target="_blank" rel="noopener noreferrer"`.
+
+No content or URL string changes — the number `85268015968` is already correct.

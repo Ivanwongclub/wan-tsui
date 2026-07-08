@@ -99,6 +99,8 @@ function Hero() {
               </a>
               <a
                 href={`https://wa.me/${CLINIC.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center text-white font-medium"
                 style={{
                   fontSize: "15px",

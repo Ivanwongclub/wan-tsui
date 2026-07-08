@@ -91,6 +91,7 @@ function ContactInfo() {
                   href={row.href}
                   className="text-brand-ink font-medium leading-[1.7]"
                   style={{ textDecoration: 'none' }}
+                  {...(row.href.startsWith('https://') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
                   {row.value}
                 </a>
@@ -118,6 +119,8 @@ function ContactInfo() {
           </a>
           <a
             href={`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent('你好，我想預約診症')}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center rounded-full bg-brand-surface text-brand-ink font-semibold border border-brand-border"
             style={{
               gap: '10px',
