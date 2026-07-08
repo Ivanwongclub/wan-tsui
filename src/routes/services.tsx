@@ -227,7 +227,7 @@ function Services() {
       <PageHero
         eyebrow="OUR SERVICES"
         title="診所服務"
-        subtitle="六項專業醫療服務・三項政府資助計劃"
+        subtitle="多項醫療服務・三項政府資助計劃"
       />
       {SERVICES.map((service, i) => (
         <ServiceSection

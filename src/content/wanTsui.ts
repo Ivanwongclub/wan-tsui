@@ -23,7 +23,7 @@ export const CLINIC = {
   mtr_exit: '港鐵柴灣站 B 出口',
   bus: '巴士 8H, 8X, 82, 82X・小巴 56',
   tagline_tc: '植根柴灣',
-  hero_headline: ['家庭醫療', '植根柴灣'] as const,
+  hero_headline: ['家庭醫療', '位於柴灣'] as const,
   hero_subtitle: '',
   voucher_amount: 'HK$2,000',
   intro: [
