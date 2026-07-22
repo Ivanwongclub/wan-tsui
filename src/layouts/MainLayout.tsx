@@ -85,16 +85,10 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
           />
           <div className="min-w-0">
             <div
-              className="font-heading font-bold text-brand-ink"
-              style={{ fontSize: '20px', lineHeight: 1, letterSpacing: '0.02em' }}
+              className="font-heading font-bold text-brand-ink leading-tight text-[13px] md:text-[20px]"
+              style={{ letterSpacing: '0.02em' }}
             >
               {clinic.name}
-            </div>
-            <div
-              className="text-brand-muted text-[7px] tracking-[0.03em] sm:text-[8px] sm:tracking-[0.05em] md:text-[10.5px] md:tracking-[0.18em] font-medium whitespace-nowrap"
-              style={{ marginTop: '4px' }}
-            >
-              {clinic.name_short.toUpperCase()}
             </div>
           </div>
         </Link>
