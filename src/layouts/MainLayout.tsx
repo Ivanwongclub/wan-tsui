@@ -85,8 +85,8 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
           />
           <div className="min-w-0">
             <div
-              className="font-heading font-bold text-brand-ink leading-tight"
-              style={{ fontSize: '13px', letterSpacing: '0.02em' }}
+              className="font-heading font-bold text-brand-ink leading-tight text-[13px] md:text-[20px]"
+              style={{ letterSpacing: '0.02em' }}
             >
               {clinic.name}
             </div>
