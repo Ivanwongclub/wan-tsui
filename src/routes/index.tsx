@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CreditCard, ShieldCheck, ArrowRight, MapPin } from "lucide-react";
-import { CLINIC, DOCTORS, SERVICES, INSURANCE_PARTNERS, UI_LABELS, type Doctor, type Service, type ContactRow } from "../content/wanTsui";
+import { CLINIC_SHARED, INSURANCE_PARTNERS, SERVICE_IDS, DOCTOR_IDS } from "../content";
+import type { ContactRow } from "../types/content";
+import { useContent } from "../hooks/useContent";
 import { IMAGES, placeholderSvg } from "../lib/imageHelpers";
 import { Image } from "../components/Image";
 import { ScheduleTable } from "../components/ScheduleTable";
@@ -20,6 +22,7 @@ const reveal = (isVisible: boolean) => ({
 // ─── Section 1: Hero ──────────────────────────────────────────────────────────
 
 function Hero() {
+  const { clinic, ui, a11y } = useContent();
   return (
     <section className="relative overflow-hidden">
       <div
@@ -27,11 +30,11 @@ function Hero() {
       >
         <Image
           image={IMAGES.hero}
-          alt="環翠醫務中心診所實景"
+          alt={a11y.heroImageAlt}
           className="absolute inset-0 object-cover w-full h-full"
           priority={true}
           onError={(e) => {
-            (e.target as HTMLImageElement).src = placeholderSvg("診所實景");
+            (e.target as HTMLImageElement).src = placeholderSvg(a11y.locationImageAlt);
           }}
         />
 
@@ -50,8 +53,8 @@ function Hero() {
             {/* Trust badges */}
             <div className="flex gap-2.5 mb-8 flex-wrap">
               {[
-                { icon: <CreditCard size={14} />, label: UI_LABELS.trust.insurance },
-                { icon: <ShieldCheck size={14} />, label: UI_LABELS.trust.voucher },
+                { icon: <CreditCard size={14} />, label: ui.trust.insurance },
+                { icon: <ShieldCheck size={14} />, label: ui.trust.voucher },
               ].map(({ icon, label }) => (
                 <span
                   key={label}
@@ -74,9 +77,9 @@ function Hero() {
               className="font-heading font-bold text-white mb-6"
               style={{ fontSize: "clamp(38px, 5.5vw, 64px)", lineHeight: 1.15, letterSpacing: "-0.01em" }}
             >
-              {CLINIC.hero_headline[0]}
+              {clinic.hero_headline[0]}
               <br />
-              {CLINIC.hero_headline[1]}
+              {clinic.hero_headline[1]}
             </h1>
 
             {/* Subtitle */}
@@ -84,21 +87,21 @@ function Hero() {
               className="mb-10 max-w-[480px]"
               style={{ fontSize: "17px", lineHeight: 1.75, opacity: 0.92 }}
             >
-              {CLINIC.hero_subtitle}
+              {clinic.hero_subtitle}
             </p>
 
             {/* CTAs */}
             <div className="flex gap-4 items-center flex-wrap">
               <a
-                href={`tel:${CLINIC.phone_tel}`}
+                href={`tel:${CLINIC_SHARED.phone_tel}`}
                 className="bg-brand-primary text-white rounded-full inline-flex items-center gap-2.5 font-semibold"
                 style={{ padding: "16px 32px", fontSize: "15px", textDecoration: "none" }}
               >
-                {UI_LABELS.cta.call}
+                {ui.cta.call}
                 <ArrowRight size={16} />
               </a>
               <a
-                href={`https://wa.me/${CLINIC.whatsapp}`}
+                href={`https://wa.me/${CLINIC_SHARED.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-white font-medium"
@@ -109,7 +112,7 @@ function Hero() {
                   borderBottom: "1px solid white",
                 }}
               >
-                WhatsApp {CLINIC.mobile}
+                WhatsApp {CLINIC_SHARED.mobile}
               </a>
             </div>
           </div>
@@ -128,7 +131,7 @@ function Hero() {
           <div className="flex flex-col md:flex-row md:items-center items-start gap-2 md:gap-0 px-5 md:px-10 py-3.5 md:py-5 text-white text-[12px] md:text-[13px] tracking-[0.05em]">
             <span className="inline-flex items-center gap-2.5" style={{ opacity: 0.92 }}>
               <MapPin size={14} />
-              {CLINIC.address_tc}
+              {clinic.address}
             </span>
           </div>
         </div>
@@ -141,6 +144,7 @@ function Hero() {
 
 function TrustBar() {
   const { ref, isVisible } = useScrollReveal();
+  const { ui } = useContent();
   return (
     <section
       ref={ref}
@@ -155,15 +159,15 @@ function TrustBar() {
               <CreditCard size={28} className="text-brand-primary flex-shrink-0" />
               <div>
                 <div className="text-[11px] text-brand-primary tracking-[0.22em] uppercase font-semibold">
-                  {UI_LABELS.trustBar.insuranceEyebrow}
+                  {ui.trustBar.insuranceEyebrow}
                 </div>
                 <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1 leading-[1.2]">
-                  {UI_LABELS.trustBar.insuranceHeading}
+                  {ui.trustBar.insuranceHeading}
                 </h3>
               </div>
             </div>
             <p className="text-[15px] text-brand-body leading-[1.7] mb-5">
-              {UI_LABELS.trustBar.insuranceDesc}
+              {ui.trustBar.insuranceDesc}
             </p>
             <div className="flex flex-wrap gap-2">
               {INSURANCE_PARTNERS.map((name) => (
@@ -175,7 +179,7 @@ function TrustBar() {
                 </span>
               ))}
               <span className="text-[12px] text-brand-muted py-1.5 px-1 italic">
-                {UI_LABELS.trustBar.insuranceTrail}
+                {ui.trustBar.insuranceTrail}
               </span>
             </div>
           </div>
@@ -186,24 +190,24 @@ function TrustBar() {
               <ShieldCheck size={28} className="text-brand-accent flex-shrink-0" />
               <div>
                 <div className="text-[11px] text-brand-accent tracking-[0.22em] uppercase font-semibold">
-                  {UI_LABELS.trustBar.voucherEyebrow}
+                  {ui.trustBar.voucherEyebrow}
                 </div>
                 <h3 className="font-heading text-[24px] font-bold text-brand-ink mt-1 leading-[1.2]">
-                  {UI_LABELS.trustBar.voucherHeading}
+                  {ui.trustBar.voucherHeading}
                 </h3>
               </div>
             </div>
             <p className="text-[15px] text-brand-body leading-[1.7] mb-5">
-              {UI_LABELS.trustBar.voucherDescPre}
-              <strong className="text-brand-accent">{CLINIC.voucher_amount}</strong>
-              {UI_LABELS.trustBar.voucherDescPost}
+              {ui.trustBar.voucherDescPre}
+              <strong className="text-brand-accent">{CLINIC_SHARED.voucher_amount}</strong>
+              {ui.trustBar.voucherDescPost}
             </p>
             <Link
               to="/services"
               className="inline-flex items-center gap-2 text-[13px] text-brand-primary font-semibold border-b border-brand-primary pb-1"
               style={{ textDecoration: "none" }}
             >
-              {UI_LABELS.trustBar.voucherCta}
+              {ui.trustBar.voucherCta}
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -217,6 +221,7 @@ function TrustBar() {
 
 function ServicesGrid() {
   const { ref, isVisible } = useScrollReveal();
+  const { services, ui } = useContent();
   return (
     <section
       ref={ref}
@@ -228,16 +233,16 @@ function ServicesGrid() {
         <div className="flex justify-between items-end flex-wrap gap-6 mb-16">
           <div>
             <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
-              {UI_LABELS.home.servicesEyebrow}
+              {ui.home.servicesEyebrow}
             </div>
             <h2
               className="font-heading font-bold text-brand-ink leading-[1.2]"
               style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
             >
-              {UI_LABELS.home.servicesHeading}
+              {ui.home.servicesHeading}
             </h2>
             <p className="text-[15px] text-brand-body leading-[1.75] mt-4 max-w-[520px]">
-              {UI_LABELS.home.servicesSubtitle}
+              {ui.home.servicesSubtitle}
             </p>
           </div>
           <Link
@@ -245,15 +250,17 @@ function ServicesGrid() {
             className="text-[14px] font-medium text-brand-ink border-b border-brand-ink pb-1"
             style={{ textDecoration: "none" }}
           >
-            {UI_LABELS.cta.viewDetails}
+            {ui.cta.viewDetails}
           </Link>
         </div>
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {(SERVICES as Service[]).map((service, i) => (
+          {SERVICE_IDS.map((id, i) => {
+            const service = services[id];
+            return (
             <Link
-              key={service.num}
+              key={id}
               to="/services"
               preload="intent"
               className={`group block${isVisible ? ` animate-fade-in-up animate-stagger-${(i % 5) + 1}` : ' opacity-0'}`}
@@ -263,10 +270,10 @@ function ServicesGrid() {
               <div className="aspect-[4/3] mb-6 overflow-hidden relative bg-brand-primary">
                 <Image
                   image={IMAGES.services[i]}
-                  alt={service.title_tc}
+                  alt={service.title}
                   className="object-cover w-full h-full transition-transform duration-[var(--duration-image)] ease-in-out group-hover:scale-[1.04]"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
+                    (e.target as HTMLImageElement).src = placeholderSvg(service.title);
                   }}
                 />
 
@@ -275,7 +282,7 @@ function ServicesGrid() {
                     className="absolute bg-brand-primary text-white text-[10px] font-semibold tracking-[0.15em] uppercase"
                     style={{ top: "14px", left: "14px", padding: "5px 10px" }}
                   >
-                    {UI_LABELS.trust.govScheme}
+                    {ui.trust.govScheme}
                   </span>
                 )}
                 {service.voucher && (
@@ -283,7 +290,7 @@ function ServicesGrid() {
                     className="absolute bg-brand-accent text-white text-[10px] font-semibold tracking-[0.15em] uppercase"
                     style={{ top: "14px", left: "14px", padding: "5px 10px" }}
                   >
-                    {UI_LABELS.trust.seniorOnly}
+                    {ui.trust.seniorOnly}
                   </span>
                 )}
 
@@ -301,15 +308,12 @@ function ServicesGrid() {
                 <span className="text-[11px] text-brand-accent font-bold tracking-[0.18em]">
                   {service.num}
                 </span>
-                <span className="text-[11px] text-brand-muted tracking-[0.12em] uppercase">
-                  {service.title_en}
-                </span>
               </div>
               <h3
                 className="font-heading font-semibold text-brand-ink mb-2.5 leading-[1.3]"
                 style={{ fontSize: "22px", letterSpacing: 0 }}
               >
-                {service.title_tc}
+                {service.title}
               </h3>
               <p
                 className="leading-[1.7] text-brand-body mb-3.5"
@@ -328,7 +332,8 @@ function ServicesGrid() {
                 ))}
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -339,7 +344,7 @@ function ServicesGrid() {
 
 function Doctors() {
   const { ref, isVisible } = useScrollReveal();
-  
+  const { doctors, ui } = useContent();
 
   return (
     <section
@@ -350,23 +355,25 @@ function Doctors() {
       <div className="max-w-[1320px] mx-auto">
         <div className="mb-16 max-w-[600px]">
           <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
-            {UI_LABELS.doctors.eyebrow}
+            {ui.doctors.eyebrow}
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2] mb-4"
             style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
           >
-            {UI_LABELS.doctors.heading}
+            {ui.doctors.heading}
           </h2>
           <p className="text-[16px] text-brand-body leading-[1.75]">
-            {UI_LABELS.doctors.tagline}
+            {ui.doctors.tagline}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {(DOCTORS as Doctor[]).map((doctor, i) => (
+          {DOCTOR_IDS.map((id) => {
+            const doctor = doctors[id];
+            return (
             <div
-              key={doctor.name_en}
+              key={id}
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-start"
             >
               {/* Doctor stamp (replaces photo) */}
@@ -389,7 +396,7 @@ function Doctors() {
                     lineHeight: 1.1,
                   }}
                 >
-                  {doctor.name_tc}
+                  {doctor.name}
                 </div>
                 <div
                   aria-hidden="true"
@@ -407,38 +414,36 @@ function Doctors() {
               {/* Bio */}
               <div className="pt-2">
                 <div
-                  className="font-heading font-bold text-brand-ink mb-1"
+                  className="font-heading font-bold text-brand-ink mb-6"
                   style={{ fontSize: "28px", letterSpacing: "0.01em" }}
                 >
-                  {doctor.name_tc}
-                </div>
-                <div className="text-[12px] text-brand-muted tracking-[0.1em] mb-6">
-                  {doctor.name_en}
+                  {doctor.name}
                 </div>
 
                 <div className="flex flex-col gap-4 text-[14px] text-brand-body leading-[1.7]">
                   <div className="border-b border-brand-border pb-3.5">
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
-                      {UI_LABELS.doctors.fieldCreds}
+                      {ui.doctors.fieldCreds}
                     </div>
                     <div>{doctor.creds}</div>
                   </div>
                   <div className="border-b border-brand-border pb-3.5">
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
-                      {UI_LABELS.doctors.fieldSpecialty}
+                      {ui.doctors.fieldSpecialty}
                     </div>
                     <div>{doctor.specialty}</div>
                   </div>
                   <div>
                     <div className="text-[11px] text-brand-primary tracking-[0.15em] uppercase font-semibold mb-1">
-                      {UI_LABELS.doctors.fieldSchedule}
+                      {ui.doctors.fieldSchedule}
                     </div>
-                    <div>{doctor.schedule_tc}</div>
+                    <div>{doctor.schedule}</div>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -451,17 +456,18 @@ function Doctors() {
 
 function Location() {
   const { ref, isVisible } = useScrollReveal();
+  const { clinic, contactRows: rowLabels, ui, a11y } = useContent();
 
   const contactRows: ContactRow[] = [
-    { label: "地址", value: CLINIC.address_tc },
+    { label: rowLabels.address, value: clinic.address },
     {
-      label: "交通",
-      value: `${CLINIC.mtr}\n${CLINIC.bus}`,
+      label: rowLabels.transport,
+      value: `${clinic.mtr}\n${clinic.bus}`,
       whitespace: true,
     },
-    { label: "電話", value: CLINIC.phone, href: `tel:${CLINIC.phone_tel}` },
-    { label: "手機", value: CLINIC.mobile, href: `tel:${CLINIC.mobile_tel}` },
-    { label: "電郵", value: CLINIC.email, href: `mailto:${CLINIC.email}` },
+    { label: rowLabels.phone, value: CLINIC_SHARED.phone, href: `tel:${CLINIC_SHARED.phone_tel}` },
+    { label: rowLabels.mobile, value: CLINIC_SHARED.mobile, href: `tel:${CLINIC_SHARED.mobile_tel}` },
+    { label: rowLabels.email, value: CLINIC_SHARED.email, href: `mailto:${CLINIC_SHARED.email}` },
   ];
 
   return (
@@ -474,15 +480,15 @@ function Location() {
         {/* Left — contact */}
         <div className="py-[120px] px-6 md:px-10 w-full md:max-w-[600px] md:justify-self-end">
           <div className="text-[12px] font-semibold text-brand-primary tracking-[0.22em] uppercase mb-4">
-            {UI_LABELS.home.locationEyebrow}
+            {ui.home.locationEyebrow}
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2] mb-8"
             style={{ fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "-0.01em" }}
           >
-            <span className="text-brand-accent">{UI_LABELS.home.locationHeading[0]}</span>
+            <span className="text-brand-accent">{ui.home.locationHeading[0]}</span>
             <br />
-            {UI_LABELS.home.locationHeading[1]}
+            {ui.home.locationHeading[1]}
           </h2>
 
           <div className="flex flex-col gap-6 text-[15px]">
@@ -524,10 +530,10 @@ function Location() {
         <div className="min-h-[320px] md:min-h-[600px] bg-brand-primary overflow-hidden relative">
           <Image
             image={IMAGES.location}
-            alt="環翠邨位置"
+            alt={a11y.locationImageAlt}
             className="object-cover w-full h-full absolute inset-0"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = placeholderSvg("柴灣・環翠邨");
+              (e.target as HTMLImageElement).src = placeholderSvg(a11y.locationImageAlt);
             }}
           />
           <div className="absolute top-8 right-8">
@@ -536,7 +542,7 @@ function Location() {
               style={{ padding: "14px 20px" }}
             >
               <MapPin size={14} />
-              {CLINIC.mtr_exit}
+              {clinic.mtr_exit}
             </span>
           </div>
         </div>
@@ -549,6 +555,7 @@ function Location() {
 
 function PaymentCTA() {
   const { ref, isVisible } = useScrollReveal();
+  const { ui } = useContent();
   return (
     <section
       ref={ref}
@@ -561,15 +568,15 @@ function PaymentCTA() {
             className="text-[12px] tracking-[0.22em] uppercase mb-5 inline-flex items-center gap-2.5 font-medium text-white/70"
           >
             <span className="text-brand-terra-light">●</span>
-            {UI_LABELS.home.paymentEyebrow}
+            {ui.home.paymentEyebrow}
           </div>
           <h2
             className="font-heading font-bold text-white leading-[1.3]"
             style={{ fontSize: "clamp(28px, 3.5vw, 40px)", letterSpacing: "-0.01em" }}
           >
-            {UI_LABELS.home.paymentHeading[0]}
+            {ui.home.paymentHeading[0]}
             <br />
-            <span style={{ opacity: 0.7 }}>{UI_LABELS.home.paymentHeading[1]}</span>
+            <span style={{ opacity: 0.7 }}>{ui.home.paymentHeading[1]}</span>
           </h2>
         </div>
         <Link
@@ -577,7 +584,7 @@ function PaymentCTA() {
           className="bg-brand-accent text-white rounded-full inline-flex items-center gap-3 font-semibold whitespace-nowrap"
           style={{ padding: "14px 28px", fontSize: "15px", textDecoration: "none" }}
         >
-          {UI_LABELS.cta.viewCards}
+          {ui.cta.viewCards}
           <ArrowRight size={16} />
         </Link>
       </div>

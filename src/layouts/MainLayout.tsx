@@ -8,34 +8,41 @@ import {
   CreditCard,
   ShieldCheck,
 } from 'lucide-react';
-import { CLINIC, ANNOUNCEMENT, FOOTER_NAV, UI_LABELS } from '../content/wanTsui';
+import { CLINIC_SHARED } from '../content';
+import type { ContentBundle, FooterLinkItem } from '../types/content';
+import { useContent } from '../hooks/useContent';
+import { LocaleToggle } from '../components/LocaleToggle';
 import { DS } from '../styles/designSystem';
 
 // ─── TopStrip ────────────────────────────────────────────────────────────────
 
 function TopStrip() {
+  const { announcement } = useContent();
   return (
     <div
       className="bg-brand-accent text-white text-center"
       style={{ padding: '9px 16px', fontSize: '12.5px', fontWeight: 500, letterSpacing: '0.08em' }}
     >
-      <span className="text-brand-accent-light mr-2">{ANNOUNCEMENT.badge}</span>
-      {ANNOUNCEMENT.text}
+      <span className="text-brand-accent-light mr-2">{announcement.badge}</span>
+      {announcement.text}
     </div>
   );
 }
 
 // ─── Header ──────────────────────────────────────────────────────────────────
 
-const NAV_LINKS = [
-  { to: '/' as const, label: '主頁' },
-  { to: '/services' as const, label: '診所服務' },
-  { to: '/about' as const, label: '關於我們' },
-  { to: '/contact' as const, label: '聯絡我們' },
-];
+function navLinks(nav: ContentBundle['nav']) {
+  return [
+    { to: '/' as const, label: nav.home },
+    { to: '/services' as const, label: nav.services },
+    { to: '/about' as const, label: nav.about },
+    { to: '/contact' as const, label: nav.contact },
+  ];
+}
 
 function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const [scrolled, setScrolled] = useState(false);
+  const { clinic, nav, a11y } = useContent();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 100);
@@ -71,7 +78,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img
             src="/images/wtimc-logo-icon.png"
-            alt={`${CLINIC.name_tc} 標誌`}
+            alt={clinic.logo_alt}
             width={50}
             height={40}
             className="h-9 md:h-10 w-auto flex-shrink-0 block"
@@ -81,20 +88,20 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
               className="font-heading font-bold text-brand-ink"
               style={{ fontSize: '20px', lineHeight: 1, letterSpacing: '0.02em' }}
             >
-              {CLINIC.name_tc}
+              {clinic.name}
             </div>
             <div
               className="text-brand-muted text-[7px] tracking-[0.03em] sm:text-[8px] sm:tracking-[0.05em] md:text-[10.5px] md:tracking-[0.18em] font-medium whitespace-nowrap"
               style={{ marginTop: '4px' }}
             >
-              {CLINIC.name_en_short.toUpperCase()}
+              {clinic.name_short.toUpperCase()}
             </div>
           </div>
         </Link>
 
         {/* Center nav — desktop only */}
         <nav className="hidden md:flex" style={{ gap: '40px' }}>
-          {NAV_LINKS.map(({ to, label }) => (
+          {navLinks(nav).map(({ to, label }) => (
             <Link
               key={to}
               to={to}
@@ -117,10 +124,11 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
           ))}
         </nav>
 
-        {/* Right — phone CTA + hamburger */}
+        {/* Right — locale toggle + phone CTA + hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <LocaleToggle />
           <a
-            href={`tel:${CLINIC.phone_tel}`}
+            href={`tel:${CLINIC_SHARED.phone_tel}`}
             className="bg-brand-primary text-white rounded-button hidden md:inline-flex"
             style={{
               alignItems: 'center',
@@ -133,12 +141,12 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             }}
           >
             <Phone size={14} />
-            {CLINIC.phone_short}
+            {CLINIC_SHARED.phone_short}
           </a>
           <button
             className="md:hidden text-brand-ink"
             onClick={onMenuClick}
-            aria-label="開啟選單"
+            aria-label={a11y.menuOpen}
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
           >
             <Menu size={24} />
@@ -152,6 +160,8 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
 // ─── MobileMenu ───────────────────────────────────────────────────────────────
 
 function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { nav, a11y, ui } = useContent();
+
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => {
@@ -176,7 +186,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
       {/* Close button */}
       <button
         onClick={onClose}
-        aria-label="關閉選單"
+        aria-label={a11y.menuClose}
         className="text-brand-ink"
         style={{
           alignSelf: 'flex-end',
@@ -191,7 +201,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
 
       {/* Nav links */}
       <nav style={{ marginTop: '48px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {NAV_LINKS.map(({ to, label }) => (
+        {navLinks(nav).map(({ to, label }) => (
           <Link
             key={to}
             to={to}
@@ -213,7 +223,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
       {/* Bottom CTAs */}
       <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <a
-          href={`tel:${CLINIC.phone_tel}`}
+          href={`tel:${CLINIC_SHARED.phone_tel}`}
           className="bg-brand-primary text-white rounded-button"
           style={{
             display: 'flex',
@@ -227,10 +237,10 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           }}
         >
           <Phone size={18} />
-          致電
+          {ui.cta.callNow}
         </a>
         <a
-          href={`https://wa.me/${CLINIC.whatsapp}`}
+          href={`https://wa.me/${CLINIC_SHARED.whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
           className="bg-brand-surface text-brand-ink rounded-button border border-brand-border"
@@ -273,12 +283,6 @@ function FooterColumnTitle({ children }: { children: ReactNode }) {
   );
 }
 
-type FooterLinkItem = {
-  label: string;
-  to: '/services' | '/about' | '/contact';
-  hash?: string;
-};
-
 function FooterLinks({ items }: { items: ReadonlyArray<FooterLinkItem> }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -298,6 +302,9 @@ function FooterLinks({ items }: { items: ReadonlyArray<FooterLinkItem> }) {
 }
 
 function Footer() {
+  const { clinic, ui } = useContent();
+  const { columnTitles, footerLinks } = ui.footer;
+
   return (
     <footer className="bg-brand-paper" style={{ padding: '80px 40px 40px' }}>
       {/* Trust badge row */}
@@ -315,19 +322,19 @@ function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <CreditCard size={20} className="text-brand-primary" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
-            {UI_LABELS.trust.insurance}
+            {ui.trust.insurance}
           </span>
         </div>
         <div className="h-5 w-px bg-brand-border" />
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <ShieldCheck size={20} className="text-brand-accent" />
           <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
-            {UI_LABELS.trust.voucher}
+            {ui.trust.voucher}
           </span>
         </div>
         <div className="h-5 w-px bg-brand-border" />
         <span className="text-brand-body" style={{ fontSize: '13px' }}>
-          {UI_LABELS.trust.footerText}
+          {ui.trust.footerText}
         </span>
       </div>
 
@@ -340,7 +347,7 @@ function Footer() {
           <div>
             <img
               src="/images/wtimc-logo.png"
-              alt={`${CLINIC.name_tc} 標誌`}
+              alt={clinic.logo_alt}
               width={72}
               height={80}
               style={{ height: '80px', width: 'auto', marginBottom: '16px', display: 'block' }}
@@ -349,38 +356,38 @@ function Footer() {
               className="font-heading font-bold text-brand-ink"
               style={{ fontSize: '18px', marginBottom: '4px' }}
             >
-              {CLINIC.name_tc}
+              {clinic.name}
             </div>
             <div
               className="text-brand-muted"
               style={{ fontSize: '10.5px', letterSpacing: '0.18em', fontWeight: 500, marginBottom: '20px' }}
             >
-              {CLINIC.name_en_short.toUpperCase()}
+              {clinic.name_short.toUpperCase()}
             </div>
             <div className="text-brand-body" style={{ fontSize: '14px', lineHeight: 1.75 }}>
-              {CLINIC.address_tc}
+              {clinic.address}
             </div>
             <div className="text-brand-body" style={{ fontSize: '14px', lineHeight: 1.75 }}>
-              {CLINIC.hours_tc}
+              {clinic.hours}
             </div>
           </div>
 
           {/* Col 2 — services */}
           <div>
-            <FooterColumnTitle>服務</FooterColumnTitle>
-            <FooterLinks items={FOOTER_NAV.services} />
+            <FooterColumnTitle>{columnTitles.services}</FooterColumnTitle>
+            <FooterLinks items={footerLinks.services} />
           </div>
 
           {/* Col 3 — payment */}
           <div>
-            <FooterColumnTitle>付款</FooterColumnTitle>
-            <FooterLinks items={FOOTER_NAV.payment} />
+            <FooterColumnTitle>{columnTitles.payment}</FooterColumnTitle>
+            <FooterLinks items={footerLinks.payment} />
           </div>
 
           {/* Col 4 — info */}
           <div>
-            <FooterColumnTitle>資訊</FooterColumnTitle>
-            <FooterLinks items={FOOTER_NAV.info} />
+            <FooterColumnTitle>{columnTitles.info}</FooterColumnTitle>
+            <FooterLinks items={footerLinks.info} />
           </div>
         </div>
 
@@ -396,10 +403,10 @@ function Footer() {
           }}
         >
           <span className="text-brand-muted" style={{ fontSize: '12.5px' }}>
-            © {new Date().getFullYear()} {CLINIC.name_tc} {CLINIC.name_en}
+            © {new Date().getFullYear()} {clinic.name}
           </span>
           <span className="text-brand-muted" style={{ fontSize: '12.5px' }}>
-            {UI_LABELS.footer.emergency} <strong className="text-brand-accent">{UI_LABELS.footer.emergencyNumber}</strong>
+            {ui.footer.emergency} <strong className="text-brand-accent">{ui.footer.emergencyNumber}</strong>
           </span>
         </div>
 
@@ -428,12 +435,13 @@ function Footer() {
 // ─── MobileStickyBar ──────────────────────────────────────────────────────────
 
 function MobileStickyBar() {
+  const { ui } = useContent();
   return (
     <div
       className="flex md:hidden fixed bottom-0 left-0 right-0 z-50 h-16 border-t border-brand-border"
     >
       <a
-        href={`tel:${CLINIC.phone_tel}`}
+        href={`tel:${CLINIC_SHARED.phone_tel}`}
         className="bg-brand-primary text-white"
         style={{
           flex: 1,
@@ -447,10 +455,10 @@ function MobileStickyBar() {
         }}
       >
         <Phone size={18} />
-        致電
+        {ui.cta.callNow}
       </a>
       <a
-        href={`https://wa.me/${CLINIC.whatsapp}`}
+        href={`https://wa.me/${CLINIC_SHARED.whatsapp}`}
         target="_blank"
         rel="noopener noreferrer"
         className="bg-brand-surface text-brand-ink border-l border-brand-border"

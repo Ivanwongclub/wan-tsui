@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -8,14 +9,33 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { MainLayout } from "../layouts/MainLayout";
-import { CLINIC } from "../content/wanTsui";
+import { CONTENT } from "../content";
+import type { Locale } from "../types/content";
+import { I18nProvider, useI18n } from "../hooks/useI18n";
 
 import appCss from "../styles.css?url";
 
-const META_TITLE = `${CLINIC.name_tc} | 柴灣家庭醫療`;
-const META_DESC = `${CLINIC.address_tc}，由兩位資深全科醫生駐診，提供全科、皮膚科及政府資助計劃服務。接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
-const META_DESC_SHORT = `${CLINIC.address_tc}，由兩位資深全科醫生駐診，接受醫療卡及長者醫療券。電話：${CLINIC.phone_short}`;
+const OG_IMAGE =
+  "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png";
+
+const getInitialLocale = createServerFn({ method: "GET" }).handler(async () => {
+  const request = getRequest();
+  const cookieHeader = request.headers.get("cookie") ?? "";
+  const match = cookieHeader.match(/(?:^|;\s*)wt_locale=(tc|en)/);
+  return (match?.[1] as Locale | undefined) ?? "tc";
+});
+
+function readClientLocale(): Locale {
+  const match = document.cookie.match(/(?:^|;\s*)wt_locale=(tc|en)/);
+  return (match?.[1] as Locale | undefined) ?? "tc";
+}
+
+function htmlLang(locale: Locale) {
+  return locale === "tc" ? "zh-HK" : "en";
+}
 
 function NotFoundComponent() {
   return (
@@ -75,52 +95,83 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: META_TITLE },
-      { name: "description", content: META_DESC },
-      { name: "author", content: CLINIC.name_tc },
-      { property: "og:title", content: META_TITLE },
-      { property: "og:description", content: META_DESC },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: META_TITLE },
-      { name: "twitter:description", content: META_DESC_SHORT },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png" },
-      { title: "Wan Tsui 環翠綜合醫務中心｜柴灣家庭醫療診所｜接受醫療券" },
-      { property: "og:title", content: "Wan Tsui 環翠綜合醫務中心｜柴灣家庭醫療診所｜接受醫療券" },
-      { name: "twitter:title", content: "Wan Tsui 環翠綜合醫務中心｜柴灣家庭醫療診所｜接受醫療券" },
-      { name: "description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊全科醫生主理。提供全科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
-      { property: "og:description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊全科醫生主理。提供全科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
-      { name: "twitter:description", content: "柴灣港鐵站旁綜合醫務中心，由兩位註冊全科醫生主理。提供全科門診、大腸癌篩查、慢性病共治、流感疫苗等政府資助計劃，接受醫療卡及長者醫療券。電話：2337 8999" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;700&display=swap",
-      },
-    ],
-  }),
+  beforeLoad: async () => {
+    const locale: Locale =
+      typeof document === "undefined" ? await getInitialLocale() : readClientLocale();
+    return { locale };
+  },
+  loader: ({ context }) => ({ locale: context.locale }),
+  head: ({ loaderData }) => {
+    const locale: Locale = loaderData?.locale ?? "tc";
+    const meta = CONTENT[locale].meta;
+    return {
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { title: meta.title },
+        { name: "description", content: meta.desc },
+        { name: "author", content: CONTENT[locale].clinic.name },
+        { property: "og:title", content: meta.title },
+        { property: "og:description", content: meta.desc },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: OG_IMAGE },
+        { name: "twitter:card", content: "summary" },
+        { name: "twitter:title", content: meta.title },
+        { name: "twitter:description", content: meta.desc_short },
+        { name: "twitter:image", content: OG_IMAGE },
+      ],
+      links: [
+        { rel: "stylesheet", href: appCss },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;700&display=swap",
+        },
+      ],
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
+// Keeps <title>, meta tags and <html lang> in sync after a client-side locale toggle.
+function LocaleMeta() {
+  const { locale } = useI18n();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    const { meta } = CONTENT[locale];
+    document.title = meta.title;
+    document.documentElement.lang = htmlLang(locale);
+    const set = (selector: string, value: string) => {
+      document.head.querySelector(selector)?.setAttribute("content", value);
+    };
+    set('meta[name="description"]', meta.desc);
+    set('meta[property="og:title"]', meta.title);
+    set('meta[property="og:description"]', meta.desc);
+    set('meta[name="twitter:title"]', meta.title);
+    set('meta[name="twitter:description"]', meta.desc_short);
+  }, [locale, pathname]);
+
+  return null;
+}
+
 function RootShell({ children }: { children: React.ReactNode }) {
+  const locale = Route.useLoaderData({ select: (d) => d?.locale ?? "tc" });
+
   return (
-    <html lang="zh-HK">
+    <html lang={htmlLang(locale)}>
       <head>
         <HeadContent />
       </head>
       <body>
-        {children}
+        <I18nProvider initialLocale={locale}>
+          <LocaleMeta />
+          {children}
+        </I18nProvider>
         <Scripts />
       </body>
     </html>

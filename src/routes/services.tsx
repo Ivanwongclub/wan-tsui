@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle } from "lucide-react";
-import { CLINIC, SERVICES, UI_LABELS, type Service } from "../content/wanTsui";
+import { CLINIC_SHARED, SERVICE_IDS, type ServiceId } from "../content";
+import type { Service } from "../types/content";
+import { useContent } from "../hooks/useContent";
 import { IMAGES, ImageMeta, placeholderSvg } from "../lib/imageHelpers";
 import { Image } from "../components/Image";
 import { PageHero } from "../components/PageHero";
@@ -29,8 +31,9 @@ function ServiceSection({
   image: ImageMeta;
 }) {
   const { ref, isVisible } = useScrollReveal();
+  const { ui } = useContent();
   const isOdd = index % 2 === 0; // 0-indexed: 0,2,4 → image LEFT; 1,3,5 → image RIGHT
-  const isLast = index === SERVICES.length - 1;
+  const isLast = index === SERVICE_IDS.length - 1;
 
   const ImageSide = (
     <div
@@ -39,10 +42,10 @@ function ServiceSection({
     >
       <Image
         image={image}
-        alt={service.title_tc}
+        alt={service.title}
         className="w-full h-full object-cover block"
         onError={(e) => {
-          (e.target as HTMLImageElement).src = placeholderSvg(service.title_tc);
+          (e.target as HTMLImageElement).src = placeholderSvg(service.title);
         }}
       />
       {service.govScheme && (
@@ -58,7 +61,7 @@ function ServiceSection({
             textTransform: 'uppercase',
           }}
         >
-          {UI_LABELS.trust.govScheme}
+          {ui.trust.govScheme}
         </span>
       )}
       {service.voucher && (
@@ -74,7 +77,7 @@ function ServiceSection({
             textTransform: 'uppercase',
           }}
         >
-          {UI_LABELS.trust.seniorOnly}
+          {ui.trust.seniorOnly}
         </span>
       )}
       <div
@@ -105,22 +108,12 @@ function ServiceSection({
         >
           {service.num}
         </span>
-        <span
-          className="text-brand-muted"
-          style={{
-            fontSize: '11px',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-          }}
-        >
-          {service.title_en}
-        </span>
       </div>
       <h2
         className="font-heading font-bold text-brand-ink"
         style={{ fontSize: '28px', lineHeight: 1.3, marginBottom: '16px' }}
       >
-        {service.title_tc}
+        {service.title}
       </h2>
       <p className="text-brand-body" style={{ fontSize: '15px', lineHeight: 1.7, marginBottom: '16px' }}>
         {service.desc}
@@ -179,6 +172,7 @@ function ServiceSection({
 
 function CTABand() {
   const { ref, isVisible } = useScrollReveal();
+  const { ui } = useContent();
   return (
     <section ref={ref} className="bg-brand-primary text-white text-center py-16 px-6 md:px-10" style={reveal(isVisible)}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
@@ -186,22 +180,22 @@ function CTABand() {
           className="font-heading font-bold text-white"
           style={{ fontSize: '24px', marginBottom: '16px' }}
         >
-          {UI_LABELS.services.ctaHeading}
+          {ui.services.ctaHeading}
         </h2>
         <p style={{ fontSize: '15px', opacity: 0.8, marginBottom: '32px' }}>
-          {UI_LABELS.services.ctaBody}
+          {ui.services.ctaBody}
         </p>
         <div className="flex justify-center flex-wrap" style={{ gap: '16px' }}>
           <a
-            href={`tel:${CLINIC.phone_tel}`}
+            href={`tel:${CLINIC_SHARED.phone_tel}`}
             className="inline-flex items-center rounded-full bg-white text-brand-primary font-semibold"
             style={{ gap: '10px', padding: '16px 32px', fontSize: '15px', textDecoration: 'none' }}
           >
             <Phone size={16} />
-            {CLINIC.phone}
+            {CLINIC_SHARED.phone}
           </a>
           <a
-            href={`https://wa.me/${CLINIC.whatsapp}`}
+            href={`https://wa.me/${CLINIC_SHARED.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center rounded-full text-white font-semibold border border-white"
@@ -213,7 +207,7 @@ function CTABand() {
             }}
           >
             <MessageCircle size={16} />
-            {UI_LABELS.cta.whatsapp}
+            {ui.cta.whatsapp}
           </a>
         </div>
       </div>
@@ -224,17 +218,18 @@ function CTABand() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function Services() {
+  const { pageHeros, services } = useContent();
   return (
     <>
       <PageHero
-        eyebrow="OUR SERVICES"
-        title="診所服務"
-        subtitle="多項醫療服務・三項政府資助計劃"
+        eyebrow={pageHeros.services.eyebrow}
+        title={pageHeros.services.title}
+        subtitle={pageHeros.services.subtitle}
       />
-      {SERVICES.map((service, i) => (
+      {SERVICE_IDS.map((id: ServiceId, i) => (
         <ServiceSection
-          key={service.num}
-          service={service}
+          key={id}
+          service={services[id]}
           index={i}
           image={IMAGES.services[i]}
         />

@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone, MessageCircle, CreditCard, ShieldCheck } from "lucide-react";
-import { CLINIC, SCHEDULE, UI_LABELS, type ContactRow } from "../content/wanTsui";
+import { CLINIC_SHARED, DAY_IDS, DAY_ID_TO_JS_DAY } from "../content";
+import type { ContactRow } from "../types/content";
+import { useContent } from "../hooks/useContent";
 import { PageHero } from "../components/PageHero";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { DS } from "../styles/designSystem";
@@ -15,34 +18,26 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const DAY_INDEX_MAP: Record<string, number> = {
-  星期一: 1,
-  星期二: 2,
-  星期三: 3,
-  星期四: 4,
-  星期五: 5,
-  星期六: 6,
-  星期日及公眾假期: 0,
-};
-
 // ─── Contact Info ─────────────────────────────────────────────────────────────
 
 function ContactInfo() {
   const { ref, isVisible } = useScrollReveal();
+  const { clinic, contactRows: rowLabels, whatsappPrefill, ui } = useContent();
+  const whatsappUrl = `https://wa.me/${CLINIC_SHARED.whatsapp}?text=${encodeURIComponent(whatsappPrefill)}`;
   const rows: ContactRow[] = [
-    { label: '地址', value: CLINIC.address_tc },
-    { label: '交通', value: `${CLINIC.mtr}\n${CLINIC.bus}`, whitespace: true },
-    { label: '電話', value: CLINIC.phone, href: `tel:${CLINIC.phone_tel}` },
-    { label: '手機', value: CLINIC.mobile, href: `tel:${CLINIC.mobile_tel}` },
+    { label: rowLabels.address, value: clinic.address },
+    { label: rowLabels.transport, value: `${clinic.mtr}\n${clinic.bus}`, whitespace: true },
+    { label: rowLabels.phone, value: CLINIC_SHARED.phone, href: `tel:${CLINIC_SHARED.phone_tel}` },
+    { label: rowLabels.mobile, value: CLINIC_SHARED.mobile, href: `tel:${CLINIC_SHARED.mobile_tel}` },
     {
       label: 'WhatsApp',
-      value: CLINIC.mobile,
-      href: `https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent('你好，我想預約診症')}`,
+      value: CLINIC_SHARED.mobile,
+      href: whatsappUrl,
     },
-    { label: '電郵', value: CLINIC.email, href: `mailto:${CLINIC.email}` },
+    { label: rowLabels.email, value: CLINIC_SHARED.email, href: `mailto:${CLINIC_SHARED.email}` },
     {
-      label: '營業時間',
-      value: `${CLINIC.hours_tc}\n午膳 ${CLINIC.lunch_break} 暫停服務`,
+      label: rowLabels.hours,
+      value: `${clinic.hours}\n${ui.schedule.lunchLabel}${ui.schedule.lunchDetail}`,
       whitespace: true,
     },
   ];
@@ -60,7 +55,7 @@ function ContactInfo() {
             marginBottom: '32px',
           }}
         >
-          {UI_LABELS.contact.infoEyebrow}
+          {ui.contact.infoEyebrow}
         </div>
 
         <div className="flex flex-col" style={{ gap: '24px', fontSize: '15px' }}>
@@ -110,15 +105,15 @@ function ContactInfo() {
         {/* CTA buttons */}
         <div className="flex flex-wrap" style={{ gap: '16px', marginTop: '40px' }}>
           <a
-            href={`tel:${CLINIC.phone_tel}`}
+            href={`tel:${CLINIC_SHARED.phone_tel}`}
             className="inline-flex items-center rounded-full bg-brand-primary text-white font-semibold"
             style={{ gap: '10px', padding: '16px 32px', fontSize: '15px', textDecoration: 'none' }}
           >
             <Phone size={16} />
-            {UI_LABELS.cta.callNow}
+            {ui.cta.callNow}
           </a>
           <a
-            href={`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent('你好，我想預約診症')}`}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center rounded-full bg-brand-surface text-brand-ink font-semibold border border-brand-border"
@@ -130,7 +125,7 @@ function ContactInfo() {
             }}
           >
             <MessageCircle size={16} />
-            {UI_LABELS.cta.whatsapp}
+            {ui.cta.whatsapp}
           </a>
         </div>
       </div>
@@ -142,7 +137,9 @@ function ContactInfo() {
 
 function HoursTable() {
   const { ref, isVisible } = useScrollReveal();
-  const todayIndex = new Date().getDay();
+  const { schedule, ui } = useContent();
+  const [todayIndex, setTodayIndex] = useState<number | null>(null);
+  useEffect(() => { setTodayIndex(new Date().getDay()); }, []);
 
   return (
     <section ref={ref} className="py-16 px-6 md:px-10 bg-brand-surface border-t border-brand-border" style={reveal(isVisible)}>
@@ -157,13 +154,13 @@ function HoursTable() {
             marginBottom: '24px',
           }}
         >
-          {UI_LABELS.schedule.hoursEyebrow}
+          {ui.schedule.hoursEyebrow}
         </div>
         <h2
           className="font-heading font-bold text-brand-ink"
           style={{ fontSize: '24px', marginBottom: '32px' }}
         >
-          {UI_LABELS.schedule.hoursHeading}
+          {ui.schedule.hoursHeading}
         </h2>
 
         <div className="overflow-x-auto">
@@ -173,7 +170,7 @@ function HoursTable() {
           >
             <thead>
               <tr className="bg-brand-primary-light">
-                {[UI_LABELS.schedule.colDate, UI_LABELS.schedule.colAM, UI_LABELS.schedule.colPM].map((col) => (
+                {[ui.schedule.colDate, ui.schedule.colAM, ui.schedule.colPM].map((col) => (
                   <th
                     key={col}
                     className="text-left text-[11px] font-semibold text-brand-primary tracking-[0.15em] uppercase border-b border-brand-primary"
@@ -185,13 +182,12 @@ function HoursTable() {
               </tr>
             </thead>
             <tbody>
-              {SCHEDULE.map((row) => {
-                const isToday = DAY_INDEX_MAP[row.day] === todayIndex;
-                const amIsOff = row.am.includes('休');
-                const pmIsOff = row.pm.includes('休');
+              {DAY_IDS.map((id) => {
+                const row = schedule[id];
+                const isToday = todayIndex !== null && DAY_ID_TO_JS_DAY[id] === todayIndex;
                 return (
                   <tr
-                    key={row.day}
+                    key={id}
                     className={`border-b border-brand-border${isToday ? ' bg-brand-accent-light' : ''}`}
                   >
                     <td
@@ -209,22 +205,22 @@ function HoursTable() {
                             verticalAlign: 'middle',
                           }}
                         >
-                          {UI_LABELS.schedule.todayBadge}
+                          {ui.schedule.todayBadge}
                         </span>
                       )}
                       {row.day}
                     </td>
                     <td
-                      className={`text-[15px]${amIsOff ? ' text-brand-muted' : ' text-brand-primary font-medium'}`}
+                      className={`text-[15px]${row.is_closed_am ? ' text-brand-muted' : ' text-brand-primary font-medium'}`}
                       style={{ padding: '18px 24px' }}
                     >
-                      {amIsOff ? row.am : '應診'}
+                      {row.am}
                     </td>
                     <td
-                      className={`text-[15px]${pmIsOff ? ' text-brand-muted' : ' text-brand-primary font-medium'}`}
+                      className={`text-[15px]${row.is_closed_pm ? ' text-brand-muted' : ' text-brand-primary font-medium'}`}
                       style={{ padding: '18px 24px' }}
                     >
-                      {pmIsOff ? row.pm : '應診'}
+                      {row.pm}
                     </td>
                   </tr>
                 );
@@ -234,7 +230,7 @@ function HoursTable() {
         </div>
 
         <p className="text-brand-body" style={{ marginTop: '16px', fontSize: '13px' }}>
-          {UI_LABELS.schedule.footerNote}
+          {ui.schedule.footerNote}
         </p>
       </div>
     </section>
@@ -245,6 +241,7 @@ function HoursTable() {
 
 function PaymentReminder() {
   const { ref, isVisible } = useScrollReveal();
+  const { ui } = useContent();
   return (
     <section ref={ref} id="pricing" className="py-16 px-6 md:px-10 bg-brand-primary-light" style={{ ...reveal(isVisible), scrollMarginTop: '80px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
@@ -252,18 +249,18 @@ function PaymentReminder() {
           <div className="flex items-center" style={{ gap: '8px' }}>
             <CreditCard size={20} className="text-brand-primary" />
             <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
-              {UI_LABELS.trust.insurance}
+              {ui.trust.insurance}
             </span>
           </div>
           <div className="flex items-center" style={{ gap: '8px' }}>
             <ShieldCheck size={20} className="text-brand-accent" />
             <span className="text-brand-ink" style={{ fontSize: '14px', fontWeight: 600 }}>
-              {UI_LABELS.trust.voucher}
+              {ui.trust.voucher}
             </span>
           </div>
         </div>
         <p className="text-brand-body" style={{ marginTop: '16px', fontSize: '15px' }}>
-          {UI_LABELS.contact.paymentDesc}
+          {ui.contact.paymentDesc}
         </p>
       </div>
     </section>
@@ -273,12 +270,13 @@ function PaymentReminder() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function Contact() {
+  const { pageHeros } = useContent();
   return (
     <>
       <PageHero
-        eyebrow="CONTACT US"
-        title="聯絡我們"
-        subtitle="歡迎致電或 WhatsApp 預約"
+        eyebrow={pageHeros.contact.eyebrow}
+        title={pageHeros.contact.title}
+        subtitle={pageHeros.contact.subtitle}
       />
       <ContactInfo />
       <HoursTable />

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CLINIC, DOCTORS, UI_LABELS, type Doctor } from "../content/wanTsui";
+import { DOCTOR_IDS } from "../content";
+import { useContent } from "../hooks/useContent";
 import { PageHero } from "../components/PageHero";
 import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/about")({
 
 function DoctorProfiles() {
   const { ref, isVisible } = useScrollReveal();
+  const { doctors, ui } = useContent();
   return (
     <section ref={ref} id="doctors" className="py-[120px] px-6 md:px-10 bg-brand-surface border-t border-b border-brand-border" style={{ ...reveal(isVisible), scrollMarginTop: '80px' }}>
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
@@ -37,7 +39,7 @@ function DoctorProfiles() {
               marginBottom: '16px',
             }}
           >
-            {UI_LABELS.doctors.eyebrow}
+            {ui.doctors.eyebrow}
           </div>
           <h2
             className="font-heading font-bold text-brand-ink leading-[1.2]"
@@ -47,18 +49,20 @@ function DoctorProfiles() {
               marginBottom: '16px',
             }}
           >
-            {UI_LABELS.doctors.headingAbout}
+            {ui.doctors.headingAbout}
           </h2>
           <p className="text-brand-body" style={{ fontSize: '16px', lineHeight: 1.75 }}>
-            {UI_LABELS.doctors.tagline}
+            {ui.doctors.tagline}
           </p>
         </div>
 
         {/* Doctor cards */}
         <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '64px' }}>
-          {(DOCTORS as Doctor[]).map((doctor, i) => (
+          {DOCTOR_IDS.map((id) => {
+            const doctor = doctors[id];
+            return (
             <div
-              key={doctor.name_en}
+              key={id}
               className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] items-start"
               style={{ gap: '32px' }}
             >
@@ -82,7 +86,7 @@ function DoctorProfiles() {
                     lineHeight: 1.1,
                   }}
                 >
-                  {doctor.name_tc}
+                  {doctor.name}
                 </div>
                 <div
                   aria-hidden="true"
@@ -101,19 +105,9 @@ function DoctorProfiles() {
               <div style={{ paddingTop: '8px' }}>
                 <div
                   className="font-heading font-bold text-brand-ink"
-                  style={{ fontSize: '28px', marginBottom: '4px', letterSpacing: '0.01em' }}
+                  style={{ fontSize: '28px', marginBottom: '24px', letterSpacing: '0.01em' }}
                 >
-                  {doctor.name_tc}
-                </div>
-                <div
-                  className="text-brand-muted"
-                  style={{
-                    fontSize: '12px',
-                    letterSpacing: '0.1em',
-                    marginBottom: '24px',
-                  }}
-                >
-                  {doctor.name_en}
+                  {doctor.name}
                 </div>
 
                 <div
@@ -131,7 +125,7 @@ function DoctorProfiles() {
                         marginBottom: '4px',
                       }}
                     >
-                      {UI_LABELS.doctors.fieldCreds}
+                      {ui.doctors.fieldCreds}
                     </div>
                     <div>{doctor.creds}</div>
                   </div>
@@ -146,7 +140,7 @@ function DoctorProfiles() {
                         marginBottom: '4px',
                       }}
                     >
-                      {UI_LABELS.doctors.fieldSpecialty}
+                      {ui.doctors.fieldSpecialty}
                     </div>
                     <div>{doctor.specialty}</div>
                   </div>
@@ -161,15 +155,16 @@ function DoctorProfiles() {
                         marginBottom: '4px',
                       }}
                     >
-                      {UI_LABELS.doctors.fieldSchedule}
+                      {ui.doctors.fieldSchedule}
                     </div>
-                    <div>{doctor.schedule_tc}</div>
+                    <div>{doctor.schedule}</div>
                   </div>
                 </div>
 
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -179,12 +174,13 @@ function DoctorProfiles() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function About() {
+  const { pageHeros } = useContent();
   return (
     <>
       <PageHero
-        eyebrow="ABOUT US"
-        title="關於我們"
-        subtitle={`${CLINIC.tagline_tc}・服務社區`}
+        eyebrow={pageHeros.about.eyebrow}
+        title={pageHeros.about.title}
+        subtitle={pageHeros.about.subtitle}
       />
       <DoctorProfiles />
       <ScheduleTable />
