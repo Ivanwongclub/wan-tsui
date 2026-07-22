@@ -9,7 +9,7 @@ export function LocaleToggle() {
       type="button"
       onClick={toggle}
       aria-label={content.ui.locale.toggleAriaLabel}
-      className="border text-brand-body hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors"
+      className="border text-brand-body hover:bg-brand-primary-light hover:text-brand-primary hover:border-brand-primary transition-colors"
       style={{
         borderColor: 'var(--color-brand-border, rgba(0,0,0,0.12))',
         fontSize: '11px',
