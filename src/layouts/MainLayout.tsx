@@ -75,7 +75,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         }}
       >
         {/* Left — clinic name */}
-        <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <Link to="/" className="flex items-center min-w-0 flex-1" style={{ textDecoration: 'none', gap: '12px' }}>
           <img
             src="/images/wtimc-logo-icon.png"
             alt={clinic.logo_alt}
@@ -83,7 +83,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             height={40}
             className="h-9 md:h-10 w-auto flex-shrink-0 block"
           />
-          <div>
+          <div className="min-w-0">
             <div
               className="font-heading font-bold text-brand-ink"
               style={{ fontSize: '20px', lineHeight: 1, letterSpacing: '0.02em' }}
@@ -99,37 +99,43 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
           </div>
         </Link>
 
-        {/* Center nav — desktop only */}
-        <nav className="hidden md:flex" style={{ gap: '40px' }}>
-          {navLinks(nav).map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              preload="intent"
-              className="text-brand-ink"
-              style={{ fontSize: '14.5px', fontWeight: 500, textDecoration: 'none', paddingBottom: '4px' }}
-              activeProps={{
-                style: {
-                  fontSize: '14.5px',
-                  fontWeight: 500,
-                  textDecoration: 'none',
-                  paddingBottom: '4px',
-                  borderBottom: `1px solid ${DS.colors.accent}`,
-                },
-              }}
-              activeOptions={{ exact: to === '/' }}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Right — locale toggle + phone CTA + hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Desktop: nav + divider + locale toggle + CTA */}
+        <div className="hidden md:flex items-center" style={{ gap: '24px' }}>
+          <nav className="flex" style={{ gap: '40px' }}>
+            {navLinks(nav).map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                preload="intent"
+                className="text-brand-ink"
+                style={{ fontSize: '14.5px', fontWeight: 500, textDecoration: 'none', paddingBottom: '4px' }}
+                activeProps={{
+                  style: {
+                    fontSize: '14.5px',
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    paddingBottom: '4px',
+                    borderBottom: `1px solid ${DS.colors.accent}`,
+                  },
+                }}
+                activeOptions={{ exact: to === '/' }}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div
+            aria-hidden="true"
+            style={{
+              width: '1px',
+              height: '16px',
+              background: 'var(--color-brand-border, rgba(0,0,0,0.12))',
+            }}
+          />
           <LocaleToggle />
           <a
             href={`tel:${CLINIC_SHARED.phone_tel}`}
-            className="bg-brand-primary text-white rounded-button hidden md:inline-flex"
+            className="bg-brand-primary text-white rounded-button inline-flex"
             style={{
               alignItems: 'center',
               gap: '10px',
@@ -143,8 +149,14 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
             <Phone size={14} />
             {CLINIC_SHARED.phone_short}
           </a>
+        </div>
+
+        {/* Mobile: locale toggle + hamburger */}
+        <div className="flex md:hidden items-center" style={{ gap: '10px' }}>
+          <LocaleToggle />
           <button
-            className="md:hidden text-brand-ink"
+            type="button"
+            className="text-brand-ink"
             onClick={onMenuClick}
             aria-label={a11y.menuOpen}
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}

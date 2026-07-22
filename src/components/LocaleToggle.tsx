@@ -9,16 +9,20 @@ export function LocaleToggle() {
       type="button"
       onClick={toggle}
       aria-label={content.ui.locale.toggleAriaLabel}
-      className="border border-brand-border text-brand-body hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors"
+      className="border text-brand-body hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors"
       style={{
+        borderColor: 'var(--color-brand-border, rgba(0,0,0,0.12))',
         fontSize: '11px',
         fontWeight: 600,
-        letterSpacing: '0.1em',
-        padding: '5px 10px',
+        letterSpacing: '0.12em',
+        padding: '6px 10px',
         borderRadius: '4px',
-        minWidth: '36px',
+        minWidth: '38px',
+        minHeight: '28px',
         lineHeight: 1,
         cursor: 'pointer',
+        background: 'transparent',
+        fontFamily: 'inherit',
       }}
     >
       {content.ui.locale.toggleToEn}
