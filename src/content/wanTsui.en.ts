@@ -91,9 +91,9 @@ const bundle: ContentBundle = {
     tue: { day: 'Tuesday', am: 'Dr. Lam', pm: 'Dr. Lam', is_closed_am: false, is_closed_pm: false },
     wed: { day: 'Wednesday', am: 'Dr. Lam', pm: 'Dr. Lam', is_closed_am: false, is_closed_pm: false },
     thu: { day: 'Thursday', am: '— Closed', pm: 'Dr. Mak', is_closed_am: true, is_closed_pm: false },
-    fri: { day: 'Friday', am: 'Dr. Mak', pm: 'Dr. Mak', is_closed_am: false, is_closed_pm: false },
+    fri: { day: 'Friday', am: '— Closed', pm: 'Dr. Mak', is_closed_am: true, is_closed_pm: false },
     sat: { day: 'Saturday', am: 'Dr. Lam', pm: '— Closed', is_closed_am: false, is_closed_pm: true },
-    sun: { day: 'Sunday & Public Holidays', am: '— Closed', pm: '— Closed', is_closed_am: true, is_closed_pm: true },
+    sun: { day: 'Sunday & Public Holidays', am: 'Duty doctor', pm: '— Closed', is_closed_am: false, is_closed_pm: true },
   },
   nav: {
     home: 'Home',
