@@ -9,8 +9,8 @@ const bundle: ContentBundle = {
     name: 'Wan Tsui Integrated Medical Centre',
     name_short: 'WTIMC',
     address: 'Shop 109, 1/F, Wan Tsui Commercial Centre, Wan Tsui Estate, Chai Wan, Hong Kong',
-    hours: 'Mon–Fri 09:00–13:00, 15:00–19:00 · Sat 09:00–13:00',
-    hours_short: 'Mon–Fri 09:00–19:00 · Sat 09:00–13:00',
+    hours: 'Mon–Wed 09:00–13:00, 15:00–19:00 · Thu–Fri 15:00–19:00 · Sat–Sun 09:00–13:00',
+    hours_short: 'Mon–Wed 09:00–19:00 · Thu–Fri 15:00–19:00 · Sat–Sun 09:00–13:00',
     mtr: 'MTR Chai Wan Station Exit B · 3-minute walk',
     mtr_exit: 'MTR Chai Wan Station Exit B',
     bus: 'Bus 8H, 8X, 82, 82X · Minibus 56',
@@ -28,7 +28,7 @@ const bundle: ContentBundle = {
       name: 'Dr. Mak Chun Wai',
       creds: 'MB BS (HK) — Bachelor of Medicine and Bachelor of Surgery, University of Hong Kong',
       specialty: 'General Practice',
-      schedule: 'Thu · Fri (all day)',
+      schedule: 'Thu · Fri (PM only)',
       bio: 'Dr. Mak graduated from the Faculty of Medicine of the University of Hong Kong and completed residency training in public hospitals before moving into community family medicine. Familiar with the health needs of Chai Wan residents, Dr. Mak has particular experience in long-term chronic disease management and elderly health consultations.',
     },
     lam: {
@@ -173,7 +173,7 @@ const bundle: ContentBundle = {
       lunchLabel: 'Lunch break: ',
       lunchDetail: 'daily 13:00–15:00',
       adjustNote: 'Schedules may change — please call to confirm',
-      footerNote: 'Lunch break 13:00–15:00 · Closed on Saturday afternoons, Sundays and public holidays',
+      footerNote: 'Lunch break 13:00–15:00 · Closed on Thu–Fri mornings and Sat afternoons',
     },
     home: {
       aboutEyebrow: 'About Wan Tsui',
