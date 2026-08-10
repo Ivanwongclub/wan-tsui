@@ -93,7 +93,7 @@ const bundle: ContentBundle = {
     thu: { day: 'Thursday', am: '— Closed', pm: 'Dr. Mak', is_closed_am: true, is_closed_pm: false },
     fri: { day: 'Friday', am: '— Closed', pm: 'Dr. Mak', is_closed_am: true, is_closed_pm: false },
     sat: { day: 'Saturday', am: 'Dr. Lam', pm: '— Closed', is_closed_am: false, is_closed_pm: true },
-    sun: { day: 'Sunday & Public Holidays', am: 'Duty doctor', pm: '— Closed', is_closed_am: false, is_closed_pm: true },
+    sun: { day: 'Sunday & Public Holidays', am: 'Dr. Mak', pm: '— Closed', is_closed_am: false, is_closed_pm: true },
   },
   nav: {
     home: 'Home',
@@ -102,7 +102,7 @@ const bundle: ContentBundle = {
     contact: 'Contact Us',
   },
   pageHeros: {
-    about: { eyebrow: 'ABOUT US', title: 'About Us', subtitle: 'Rooted in Chai Wan · Serving the community' },
+    about: { eyebrow: 'ABOUT US', title: 'About Us', subtitle: 'Chai Wan · Serving the community' },
     services: { eyebrow: 'OUR SERVICES', title: 'Our Services', subtitle: 'Five clinical services · Three Government-subsidised schemes' },
     contact: { eyebrow: 'CONTACT US', title: 'Contact Us', subtitle: 'Book by phone or WhatsApp' },
   },
