@@ -93,7 +93,7 @@ const bundle: ContentBundle = {
     thu: { day: '星期四', am: '— 休診', pm: '麥振威醫生', is_closed_am: true, is_closed_pm: false },
     fri: { day: '星期五', am: '— 休診', pm: '麥振威醫生', is_closed_am: true, is_closed_pm: false },
     sat: { day: '星期六', am: '林慧美醫生', pm: '— 休診', is_closed_am: false, is_closed_pm: true },
-    sun: { day: '星期日及公眾假期', am: '當值醫生', pm: '— 休診', is_closed_am: false, is_closed_pm: true },
+    sun: { day: '星期日及公眾假期', am: '麥振威醫生', pm: '— 休診', is_closed_am: false, is_closed_pm: true },
   },
   nav: {
     home: '主頁',
@@ -102,7 +102,7 @@ const bundle: ContentBundle = {
     contact: '聯絡我們',
   },
   pageHeros: {
-    about: { eyebrow: 'ABOUT US', title: '關於我們', subtitle: '植根柴灣・服務社區' },
+    about: { eyebrow: 'ABOUT US', title: '關於我們', subtitle: '柴灣・服務社區' },
     services: { eyebrow: 'OUR SERVICES', title: '診所服務', subtitle: '五項專業醫療服務・三項政府資助計劃' },
     contact: { eyebrow: 'CONTACT US', title: '聯絡我們', subtitle: '歡迎致電或 WhatsApp 預約' },
   },
