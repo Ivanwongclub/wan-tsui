@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react';
-import { EMPTY_OVERRIDES, type SiteOverrides } from '../lib/siteContent.server';
+import { EMPTY_OVERRIDES, type SiteOverrides } from '../lib/siteOverrides';
 
 const OverridesContext = createContext<SiteOverrides | null>(null);
 
