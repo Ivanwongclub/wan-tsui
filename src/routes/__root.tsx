@@ -15,6 +15,8 @@ import { MainLayout } from "../layouts/MainLayout";
 import { CONTENT } from "../content";
 import type { Locale } from "../types/content";
 import { I18nProvider, useI18n } from "../hooks/useI18n";
+import { OverridesProvider } from "../hooks/useOverrides";
+import { fetchSiteOverrides } from "../lib/siteContent.server";
 
 import appCss from "../styles.css?url";
 
@@ -100,7 +102,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       typeof document === "undefined" ? await getInitialLocale() : readClientLocale();
     return { locale };
   },
-  loader: ({ context }) => ({ locale: context.locale }),
+  loader: async ({ context }) => ({
+    locale: context.locale,
+    overrides: await fetchSiteOverrides(),
+  }),
   head: ({ loaderData }) => {
     const locale: Locale = loaderData?.locale ?? "tc";
     const meta = CONTENT[locale].meta;
@@ -161,6 +166,7 @@ function LocaleMeta() {
 
 function RootShell({ children }: { children: React.ReactNode }) {
   const locale = Route.useLoaderData({ select: (d) => d?.locale ?? "tc" });
+  const overrides = Route.useLoaderData({ select: (d) => d?.overrides });
 
   return (
     <html lang={htmlLang(locale)}>
@@ -168,10 +174,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <I18nProvider initialLocale={locale}>
-          <LocaleMeta />
-          {children}
-        </I18nProvider>
+        <OverridesProvider overrides={overrides}>
+          <I18nProvider initialLocale={locale}>
+            <LocaleMeta />
+            {children}
+          </I18nProvider>
+        </OverridesProvider>
         <Scripts />
       </body>
     </html>

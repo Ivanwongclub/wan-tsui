@@ -9,6 +9,14 @@ import { ScheduleTable } from "../components/ScheduleTable";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { DS } from "../styles/designSystem";
 
+const SERVICE_IMAGE_KEYS = [
+  "service-general-practice",
+  "service-colorectal-screening",
+  "service-chronic-disease",
+  "service-flu-vaccine",
+  "service-voucher",
+] as const;
+
 export const Route = createFileRoute("/")({
   component: Home,
 });
@@ -30,6 +38,7 @@ function Hero() {
       >
         <Image
           image={IMAGES.hero}
+          slotKey="hero-clinic"
           alt={a11y.heroImageAlt}
           className="absolute inset-0 object-cover w-full h-full"
           priority={true}
@@ -270,6 +279,7 @@ function ServicesGrid() {
               <div className="aspect-[4/3] mb-6 overflow-hidden relative bg-brand-primary">
                 <Image
                   image={IMAGES.services[i]}
+                  slotKey={SERVICE_IMAGE_KEYS[i]}
                   alt={service.title}
                   className="object-cover w-full h-full transition-transform duration-[var(--duration-image)] ease-in-out group-hover:scale-[1.04]"
                   onError={(e) => {
@@ -530,6 +540,7 @@ function Location() {
         <div className="min-h-[320px] md:min-h-[600px] bg-brand-primary overflow-hidden relative">
           <Image
             image={IMAGES.location}
+            slotKey="location-chai-wan"
             alt={a11y.locationImageAlt}
             className="object-cover w-full h-full absolute inset-0"
             onError={(e) => {
