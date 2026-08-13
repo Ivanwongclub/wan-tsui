@@ -15,6 +15,14 @@ const reveal = (isVisible: boolean) => ({
   transition: `opacity ${DS.animation.duration.slow} ${DS.animation.ease.out}, transform ${DS.animation.duration.slow} ${DS.animation.ease.out}`,
 });
 
+const SERVICE_IMAGE_KEYS = [
+  "service-general-practice",
+  "service-colorectal-screening",
+  "service-chronic-disease",
+  "service-flu-vaccine",
+  "service-voucher",
+] as const;
+
 export const Route = createFileRoute("/services")({
   component: Services,
 });
@@ -25,10 +33,12 @@ function ServiceSection({
   service,
   index,
   image,
+  slotKey,
 }: {
   service: Service;
   index: number;
   image: ImageMeta;
+  slotKey?: string;
 }) {
   const { ref, isVisible } = useScrollReveal();
   const { ui } = useContent();
@@ -42,6 +52,7 @@ function ServiceSection({
     >
       <Image
         image={image}
+        slotKey={slotKey}
         alt={service.title}
         className="w-full h-full object-cover block"
         onError={(e) => {
@@ -232,6 +243,7 @@ function Services() {
           service={services[id]}
           index={i}
           image={IMAGES.services[i]}
+          slotKey={SERVICE_IMAGE_KEYS[i]}
         />
       ))}
       <CTABand />

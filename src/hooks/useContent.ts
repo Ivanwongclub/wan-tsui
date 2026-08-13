@@ -1,9 +1,14 @@
+import { useMemo } from 'react';
 import { CONTENT } from '../content';
+import type { ContentBundle } from '../types/content';
+import { applyOverrides } from '../lib/applyOverrides';
 import { useI18n } from './useI18n';
+import { useOverrides } from './useOverrides';
 
-export function useContent() {
+export function useContent(): ContentBundle {
   const { locale } = useI18n();
-  return CONTENT[locale];
+  const overrides = useOverrides();
+  return useMemo(() => applyOverrides(CONTENT[locale], overrides, locale), [locale, overrides]);
 }
 
 // Also export locale-invariant shared data for convenience
