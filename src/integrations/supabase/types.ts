@@ -14,13 +14,114 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_users: {
+        Row: {
+          active: boolean
+          created_at: string
+          email: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          email: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          email?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      doctor_schedule: {
+        Row: {
+          am_en: string | null
+          am_tc: string | null
+          day_id: string
+          is_closed_am: boolean
+          is_closed_pm: boolean
+          pm_en: string | null
+          pm_tc: string | null
+          sort: number
+          updated_at: string
+        }
+        Insert: {
+          am_en?: string | null
+          am_tc?: string | null
+          day_id: string
+          is_closed_am?: boolean
+          is_closed_pm?: boolean
+          pm_en?: string | null
+          pm_tc?: string | null
+          sort: number
+          updated_at?: string
+        }
+        Update: {
+          am_en?: string | null
+          am_tc?: string | null
+          day_id?: string
+          is_closed_am?: boolean
+          is_closed_pm?: boolean
+          pm_en?: string | null
+          pm_tc?: string | null
+          sort?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          key: string
+          updated_at: string
+          value_en: string | null
+          value_tc: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value_en?: string | null
+          value_tc?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value_en?: string | null
+          value_tc?: string | null
+        }
+        Relationships: []
+      }
+      site_images: {
+        Row: {
+          alt_en: string | null
+          alt_tc: string | null
+          key: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          alt_en?: string | null
+          alt_tc?: string | null
+          key: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          alt_en?: string | null
+          alt_tc?: string | null
+          key?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_wt_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
