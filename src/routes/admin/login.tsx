@@ -5,11 +5,22 @@ import { supabase } from '@/integrations/supabase/client';
 
 export const Route = createFileRoute('/admin/login')({
   ssr: false,
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: typeof s.next === 'string' ? s.next : undefined,
+  }),
   component: AdminLoginPage,
 });
 
+/** Only same-origin relative paths are accepted as a post-login redirect. */
+function safeNext(next: string | undefined): string | null {
+  if (!next) return null;
+  if (!next.startsWith('/') || next.startsWith('//')) return null;
+  return next;
+}
+
 function AdminLoginPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values: { email: string; password: string }) => {
@@ -21,6 +32,11 @@ function AdminLoginPage() {
       });
       if (error) {
         message.error(error.message);
+        return;
+      }
+      const target = safeNext(next);
+      if (target) {
+        window.location.href = target;
         return;
       }
       navigate({ to: '/admin/content', replace: true });
