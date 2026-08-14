@@ -20,8 +20,8 @@ import { fetchSiteOverrides } from "../lib/siteContent.server";
 
 import appCss from "../styles.css?url";
 
-const OG_IMAGE =
-  "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png";
+const SITE_URL = "https://www.wt-medical.com";
+const OG_IMAGE = `${SITE_URL}/images/og-wan-tsui.jpg`;
 
 const getInitialLocale = createServerFn({ method: "GET" }).handler(async () => {
   const request = getRequest();
