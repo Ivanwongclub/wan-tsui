@@ -74,7 +74,7 @@ export function ChatWindow({
 
   const busy = status === 'submitted' || status === 'streaming';
 
-  async function submit(e: React.FormEvent) {
+  async function submit(_message: unknown, e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const text = input.trim();
     if (!text || busy) return;
@@ -132,7 +132,7 @@ export function ChatWindow({
                       {label}
                     </Tag>
                   ) : (
-                    <Shimmer key={index}>{label}…</Shimmer>
+                    <Shimmer key={index}>{`${label}…`}</Shimmer>
                   );
                 })}
               </MessageContent>
