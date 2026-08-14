@@ -132,8 +132,10 @@ function AdminSchedulePage() {
     mutationFn: async () => {
       const upserts = changedDayIds.map((dayId) => {
         const d = drafts[dayId];
+        const row = dataMap.get(dayId);
         return {
           day_id: dayId,
+          sort: row?.sort ?? 0,
           am_tc: d.am_tc === '' ? null : d.am_tc,
           am_en: d.am_en === '' ? null : d.am_en,
           pm_tc: d.pm_tc === '' ? null : d.pm_tc,
