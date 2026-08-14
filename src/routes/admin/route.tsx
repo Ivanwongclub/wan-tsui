@@ -7,7 +7,7 @@ import {
   Link,
 } from '@tanstack/react-router';
 import { ConfigProvider, Layout, Menu, Spin, Button, Typography, message } from 'antd';
-import { FileTextOutlined, CalendarOutlined, PictureOutlined } from '@ant-design/icons';
+import { FileTextOutlined, CalendarOutlined, PictureOutlined, MessageOutlined } from '@ant-design/icons';
 import { supabase } from '@/integrations/supabase/client';
 
 export const Route = createFileRoute('/admin')({
@@ -24,6 +24,7 @@ const THEME = {
 };
 
 const MENU = [
+  { key: '/admin/assistant', icon: <MessageOutlined />, label: <Link to="/admin/assistant">AI 助理</Link>, title: 'AI Assistant' },
   { key: '/admin/content', icon: <FileTextOutlined />, label: <Link to="/admin/content">Content</Link>, title: 'Content' },
   { key: '/admin/schedule', icon: <CalendarOutlined />, label: <Link to="/admin/schedule">Schedule</Link>, title: 'Schedule' },
   { key: '/admin/images', icon: <PictureOutlined />, label: <Link to="/admin/images">Images</Link>, title: 'Images' },
