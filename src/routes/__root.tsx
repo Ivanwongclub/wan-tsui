@@ -191,6 +191,15 @@ function RootComponent() {
 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  // Admin routes render their own (antd) shell — no public layout, no page transition.
+  if (pathname.startsWith("/admin")) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
+    );
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <MainLayout>
