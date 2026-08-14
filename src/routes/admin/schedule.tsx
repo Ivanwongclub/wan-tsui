@@ -166,7 +166,7 @@ function AdminSchedulePage() {
     },
   });
 
-  const columns: TableColumnsType<ScheduleRow> = [
+  const columns: ColumnsType<ScheduleRow> = [
     {
       title: 'Day 星期',
       dataIndex: 'day_id',
