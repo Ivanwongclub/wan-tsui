@@ -16,12 +16,15 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminScheduleRouteImport } from './routes/admin/schedule'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminImagesRouteImport } from './routes/admin/images'
 import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as AdminAssistantIndexRouteImport } from './routes/admin/assistant.index'
+import { Route as AdminAssistantThreadIdRouteImport } from './routes/admin/assistant.$threadId'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
@@ -60,6 +63,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminScheduleRoute = AdminScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
@@ -92,6 +100,16 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminAssistantIndexRoute = AdminAssistantIndexRouteImport.update({
+  id: '/assistant/',
+  path: '/assistant/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAssistantThreadIdRoute = AdminAssistantThreadIdRouteImport.update({
+  id: '/assistant/$threadId',
+  path: '/assistant/$threadId',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -117,9 +135,12 @@ export interface FileRoutesByFullPath {
   '/admin/images': typeof AdminImagesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/schedule': typeof AdminScheduleRoute
+  '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/assistant/$threadId': typeof AdminAssistantThreadIdRoute
+  '/admin/assistant/': typeof AdminAssistantIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -133,9 +154,12 @@ export interface FileRoutesByTo {
   '/admin/images': typeof AdminImagesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/schedule': typeof AdminScheduleRoute
+  '/api/chat': typeof ApiChatRoute
   '/admin': typeof AdminIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/assistant/$threadId': typeof AdminAssistantThreadIdRoute
+  '/admin/assistant': typeof AdminAssistantIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -151,9 +175,12 @@ export interface FileRoutesById {
   '/admin/images': typeof AdminImagesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/schedule': typeof AdminScheduleRoute
+  '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/assistant/$threadId': typeof AdminAssistantThreadIdRoute
+  '/admin/assistant/': typeof AdminAssistantIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -170,9 +197,12 @@ export interface FileRouteTypes {
     | '/admin/images'
     | '/admin/login'
     | '/admin/schedule'
+    | '/api/chat'
     | '/admin/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/assistant/$threadId'
+    | '/admin/assistant/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -186,9 +216,12 @@ export interface FileRouteTypes {
     | '/admin/images'
     | '/admin/login'
     | '/admin/schedule'
+    | '/api/chat'
     | '/admin'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/assistant/$threadId'
+    | '/admin/assistant'
   id:
     | '__root__'
     | '/'
@@ -203,9 +236,12 @@ export interface FileRouteTypes {
     | '/admin/images'
     | '/admin/login'
     | '/admin/schedule'
+    | '/api/chat'
     | '/admin/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/assistant/$threadId'
+    | '/admin/assistant/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -217,6 +253,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  ApiChatRoute: typeof ApiChatRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -272,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/schedule': {
       id: '/admin/schedule'
       path: '/schedule'
@@ -314,6 +358,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/assistant/': {
+      id: '/admin/assistant/'
+      path: '/assistant'
+      fullPath: '/admin/assistant/'
+      preLoaderRoute: typeof AdminAssistantIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/assistant/$threadId': {
+      id: '/admin/assistant/$threadId'
+      path: '/assistant/$threadId'
+      fullPath: '/admin/assistant/$threadId'
+      preLoaderRoute: typeof AdminAssistantThreadIdRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -337,6 +395,8 @@ interface AdminRouteRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdminScheduleRoute: typeof AdminScheduleRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminAssistantThreadIdRoute: typeof AdminAssistantThreadIdRoute
+  AdminAssistantIndexRoute: typeof AdminAssistantIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
@@ -345,6 +405,8 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdminScheduleRoute: AdminScheduleRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminAssistantThreadIdRoute: AdminAssistantThreadIdRoute,
+  AdminAssistantIndexRoute: AdminAssistantIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
@@ -361,6 +423,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  ApiChatRoute: ApiChatRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
