@@ -112,17 +112,38 @@ function AdminContentPage() {
 
   const saveMutation = useMutation({
     mutationFn: async (keys: string[]) => {
-      const payload = keys.map((key) => {
+      const deleteKeys: string[] = [];
+      const upserts: { key: string; value_tc: string | null; value_en: string | null; updated_at: string }[] = [];
+
+      for (const key of keys) {
         const draft = valueOf(key);
-        return {
-          key,
-          value_tc: draft.tc,
-          value_en: draft.en,
-          updated_at: new Date().toISOString(),
-        };
-      });
-      const { error } = await supabase.from('site_content').upsert(payload, { onConflict: 'key' });
-      if (error) throw error;
+        const staticTc = readPath(CONTENT.tc, key) ?? '';
+        const staticEn = readPath(CONTENT.en, key) ?? '';
+        const nextTc = draft.tc === staticTc || draft.tc === '' ? null : draft.tc;
+        const nextEn = draft.en === staticEn || draft.en === '' ? null : draft.en;
+
+        if (nextTc === null && nextEn === null) {
+          deleteKeys.push(key);
+        } else {
+          upserts.push({
+            key,
+            value_tc: nextTc,
+            value_en: nextEn,
+            updated_at: new Date().toISOString(),
+          });
+        }
+      }
+
+      if (deleteKeys.length > 0) {
+        const { error } = await supabase.from('site_content').delete().in('key', deleteKeys);
+        if (error) throw error;
+      }
+
+      if (upserts.length > 0) {
+        const { error } = await supabase.from('site_content').upsert(upserts, { onConflict: 'key' });
+        if (error) throw error;
+      }
+
       return keys;
     },
     onSuccess: (keys) => {
