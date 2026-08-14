@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { createFileRoute, useBlocker } from '@tanstack/react-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button, Input, Modal, Spin, Switch, Table, Tag, Typography, message } from 'antd';
-import type { TableColumnsType } from 'antd/es/table';
+import type { ColumnsType } from 'antd/es/table';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 
