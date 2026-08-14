@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://rfcxdednlmlwngdqrzui.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "wan-tsui-starter",
+      "version": "0.1.0",
+      "title": "Wan Tsui Starter"
+    },
+    "tools": [
+      {
+        "name": "list_content_keys",
+        "title": "List editable content keys",
+        "description": "List every editable website text key, grouped by section, with its human label. Use this to find the key needed by get_site_content and update_site_content.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_site_content",
+        "title": "Get website text overrides",
+        "description": "Read the saved website text overrides. Optionally filter by key. Keys with no saved override still show the original wording on the site.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Optional content key to read.",
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_site_content",
+        "title": "Update website text",
+        "description": "Save Traditional Chinese and/or English wording for one editable text key. Pass an empty string to restore the original wording for that language.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Content key from list_content_keys."
+            },
+            "value_tc": {
+              "description": "Traditional Chinese wording; empty string restores the original.",
+              "type": "string"
+            },
+            "value_en": {
+              "description": "English wording; empty string restores the original.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "key"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_doctor_schedule",
+        "title": "Get doctor rota",
+        "description": "Read the seven-day doctor duty rota (morning and afternoon, Chinese and English).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_doctor_schedule",
+        "title": "Update doctor rota for one day",
+        "description": "Update the morning and/or afternoon doctor rota for a single weekday. Only the fields you pass are changed.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "day_id": {
+              "type": "string",
+              "enum": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun"
+              ],
+              "description": "Weekday to update."
+            },
+            "am_tc": {
+              "description": "Morning doctor, Traditional Chinese.",
+              "type": "string"
+            },
+            "am_en": {
+              "description": "Morning doctor, English.",
+              "type": "string"
+            },
+            "pm_tc": {
+              "description": "Afternoon doctor, Traditional Chinese.",
+              "type": "string"
+            },
+            "pm_en": {
+              "description": "Afternoon doctor, English.",
+              "type": "string"
+            },
+            "is_closed_am": {
+              "description": "Closed in the morning.",
+              "type": "boolean"
+            },
+            "is_closed_pm": {
+              "description": "Closed in the afternoon.",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "day_id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_site_images",
+        "title": "List website picture slots",
+        "description": "List the website picture slots with their replacement image (if any) and their short Chinese/English picture descriptions.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

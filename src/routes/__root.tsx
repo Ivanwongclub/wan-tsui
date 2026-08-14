@@ -200,8 +200,13 @@ function RootComponent() {
 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  // Admin routes render their own (antd) shell — no public layout, no page transition.
-  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+  // Admin routes (and the OAuth consent screen) render their own shell —
+  // no public layout, no page transition.
+  if (
+    pathname === "/admin" ||
+    pathname.startsWith("/admin/") ||
+    pathname.startsWith("/.lovable/oauth/")
+  ) {
     return (
       <QueryClientProvider client={queryClient}>
         <Outlet />
