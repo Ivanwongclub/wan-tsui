@@ -20,8 +20,8 @@ import { fetchSiteOverrides } from "../lib/siteContent.server";
 
 import appCss from "../styles.css?url";
 
-const OG_IMAGE =
-  "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/29d5035e-4f77-4083-b404-cdfa464254e6/id-preview-1479ad98--3cd1a002-a29b-4129-9174-273f1d8d5e78.lovable.app-1778660380777.png";
+const SITE_URL = "https://www.wt-medical.com";
+const OG_IMAGE = `${SITE_URL}/images/og-wan-tsui.jpg`;
 
 const getInitialLocale = createServerFn({ method: "GET" }).handler(async () => {
   const request = getRequest();
@@ -119,14 +119,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { property: "og:title", content: meta.title },
         { property: "og:description", content: meta.desc },
         { property: "og:type", content: "website" },
+        { property: "og:url", content: SITE_URL },
+        { property: "og:site_name", content: CONTENT[locale].clinic.name },
+        { property: "og:locale", content: locale === "tc" ? "zh-HK" : "en" },
         { property: "og:image", content: OG_IMAGE },
-        { name: "twitter:card", content: "summary" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { property: "og:image:alt", content: CONTENT[locale].clinic.name },
+        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: meta.title },
         { name: "twitter:description", content: meta.desc_short },
         { name: "twitter:image", content: OG_IMAGE },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
+        { rel: "icon", href: "/favicon.ico", sizes: "any" },
+        { rel: "icon", type: "image/png", href: "/favicon-96x96.png", sizes: "96x96" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
         {
