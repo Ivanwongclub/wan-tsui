@@ -24,6 +24,7 @@ import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as AdminAssistantIndexRouteImport } from './routes/admin/assistant.index'
+import { Route as AdminAssistantThreadIdRouteImport } from './routes/admin/assistant.$threadId'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
@@ -104,6 +105,11 @@ const AdminAssistantIndexRoute = AdminAssistantIndexRouteImport.update({
   path: '/assistant/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminAssistantThreadIdRoute = AdminAssistantThreadIdRouteImport.update({
+  id: '/assistant/$threadId',
+  path: '/assistant/$threadId',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -133,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/assistant/$threadId': typeof AdminAssistantThreadIdRoute
   '/admin/assistant/': typeof AdminAssistantIndexRoute
 }
 export interface FileRoutesByTo {
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/assistant/$threadId': typeof AdminAssistantThreadIdRoute
   '/admin/assistant': typeof AdminAssistantIndexRoute
 }
 export interface FileRoutesById {
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/assistant/$threadId': typeof AdminAssistantThreadIdRoute
   '/admin/assistant/': typeof AdminAssistantIndexRoute
 }
 export interface FileRouteTypes {
@@ -192,6 +201,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/assistant/$threadId'
     | '/admin/assistant/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -210,6 +220,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/assistant/$threadId'
     | '/admin/assistant'
   id:
     | '__root__'
@@ -229,6 +240,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/assistant/$threadId'
     | '/admin/assistant/'
   fileRoutesById: FileRoutesById
 }
@@ -353,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAssistantIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/assistant/$threadId': {
+      id: '/admin/assistant/$threadId'
+      path: '/assistant/$threadId'
+      fullPath: '/admin/assistant/$threadId'
+      preLoaderRoute: typeof AdminAssistantThreadIdRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -376,6 +395,7 @@ interface AdminRouteRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdminScheduleRoute: typeof AdminScheduleRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminAssistantThreadIdRoute: typeof AdminAssistantThreadIdRoute
   AdminAssistantIndexRoute: typeof AdminAssistantIndexRoute
 }
 
@@ -385,6 +405,7 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdminScheduleRoute: AdminScheduleRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminAssistantThreadIdRoute: AdminAssistantThreadIdRoute,
   AdminAssistantIndexRoute: AdminAssistantIndexRoute,
 }
 
